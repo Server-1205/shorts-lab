@@ -43,7 +43,45 @@ body {
   height: 1920px;
   position: relative;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 20%, #151833 0%, #0a0b16 55%, #05060b 100%);
+  background-color: var(--bg-deep);
+}
+
+/* Dynamic Scene Backdrops (Color Scripting) */
+.scene-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transform-origin: center center;
+}
+
+/* Scene 1: Cozy night & phone glow */
+.bg-scene-1 {
+  background: radial-gradient(circle at 35% 65%, #251052 0%, #12072B 45%, #060212 100%);
+  opacity: 1;
+}
+
+/* Scene 2: Menacing ominous mountain & anxiety */
+.bg-scene-2 {
+  background: radial-gradient(circle at 50% 30%, #2A0914 0%, #150309 45%, #070104 100%);
+}
+
+/* Scene 3: Eureka warm golden amber illumination */
+.bg-scene-3 {
+  background: radial-gradient(circle at 50% 25%, #442F06 0%, #241903 50%, #0D0901 100%);
+}
+
+/* Scene 4: Cyber emerald & mint flow state */
+.bg-scene-4 {
+  background: radial-gradient(circle at 50% 40%, #064E3B 0%, #022C22 50%, #01140E 100%);
+}
+
+/* Scene 5: Sunset festival triumph (royal violet & coral) */
+.bg-scene-5 {
+  background: radial-gradient(circle at 50% 35%, #4C1D95 0%, #2A0845 50%, #0C031A 100%);
 }
 
 /* Ambient glow orbs */

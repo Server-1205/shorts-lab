@@ -17,10 +17,17 @@
       data-height="1920"
       data-motion-blur="on"
     >
+      <!-- Dynamic Color Scripting Backdrops -->
+      <div id="backdrop-1" class="scene-backdrop bg-scene-1"></div>
+      <div id="backdrop-2" class="scene-backdrop bg-scene-2"></div>
+      <div id="backdrop-3" class="scene-backdrop bg-scene-3"></div>
+      <div id="backdrop-4" class="scene-backdrop bg-scene-4"></div>
+      <div id="backdrop-5" class="scene-backdrop bg-scene-5"></div>
+
       <!-- Ambient Background Glows -->
-      <div class="ambient-glow glow-1"></div>
-      <div class="ambient-glow glow-2"></div>
-      <div class="ambient-glow glow-3"></div>
+      <div id="glow-left" class="ambient-glow glow-1"></div>
+      <div id="glow-right" class="ambient-glow glow-2"></div>
+      <div id="glow-center" class="ambient-glow glow-3"></div>
 
       <!-- Top Progress Bar -->
       <div id="progress-host" class="clip" data-start="0" data-duration="37">
@@ -579,14 +586,13 @@
       // Brain agitated eyebrows and talking mouth
       tl.to("#brain-brow-left", { rotation: -12, y: -6, duration: 0.3, repeat: 5, yoyo: true }, 2.8);
       tl.to("#brain-brow-right", { rotation: 12, y: -6, duration: 0.3, repeat: 5, yoyo: true }, 2.8);
-      // Mouth talking morph
-      tl.to("#brain-mouth", {
-        attr: { d: "M 175 248 Q 200 242 225 248 Q 200 270 175 248 Z" },
-        duration: 0.2,
-        repeat: 12,
-        yoyo: true,
-        ease: "power1.inOut"
-      }, 2.8);
+      // Syllable-synchronized Lip-sync for Brainy
+      tl.to("#brain-mouth", { attr: { d: "M 175 244 Q 200 240 225 244 Q 200 274 175 244 Z" }, duration: 0.18, yoyo: true, repeat: 1 }, 2.8);
+      tl.to("#brain-mouth", { attr: { d: "M 175 250 Q 200 246 225 250 Q 200 264 175 250 Z" }, duration: 0.16, yoyo: true, repeat: 1 }, 3.3);
+      tl.to("#brain-mouth", { attr: { d: "M 175 242 Q 200 238 225 242 Q 200 276 175 242 Z" }, duration: 0.20, yoyo: true, repeat: 1 }, 3.7);
+      tl.to("#brain-mouth", { attr: { d: "M 178 245 Q 200 242 222 245 Q 200 272 178 245 Z" }, duration: 0.14, yoyo: true, repeat: 3 }, 4.2);
+      tl.to("#brain-mouth", { attr: { d: "M 175 245 Q 200 242 225 245 Q 200 270 175 245 Z" }, duration: 0.15, yoyo: true, repeat: 3 }, 5.0);
+      tl.to("#brain-mouth", { attr: { d: "M 175 255 Q 200 248 225 255 Q 200 252 175 255 Z" }, duration: 0.25 }, 5.8);
 
       // Captions 1
       tl.set("#cap-1-1", { display: "inline-block" }, 0.1);
@@ -604,6 +610,11 @@
 
 
       // ================= SCENE 2 (7.5s – 14.8s) =================
+      // Color Scripting: Scene 2 Ominous Dark Burgundy & Crimson Glow
+      tl.to("#backdrop-1", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 7.4);
+      tl.to("#backdrop-2", { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 7.4);
+      tl.to("#glow-left", { backgroundColor: "rgba(239, 68, 68, 0.4)", duration: 0.8 }, 7.5);
+      tl.to("#glow-right", { backgroundColor: "rgba(127, 29, 29, 0.35)", duration: 0.8 }, 7.5);
       // Camera zoom punch-in and shake
       tl.fromTo("#camera-rig",
         { scale: 1.0, y: 0 },
@@ -722,6 +733,11 @@
 
 
       // ================= SCENE 3 (14.8s – 22.8s) =================
+      // Color Scripting: Scene 3 Warm Golden Amber Sunrise
+      tl.to("#backdrop-2", { opacity: 0, duration: 0.4, ease: "power2.out" }, 14.7);
+      tl.to("#backdrop-3", { opacity: 1, duration: 0.4, ease: "power2.out" }, 14.7);
+      tl.to("#glow-left", { backgroundColor: "rgba(245, 158, 11, 0.5)", duration: 0.6 }, 14.8);
+      tl.to("#glow-right", { backgroundColor: "rgba(0, 240, 255, 0.35)", duration: 0.6 }, 14.8);
       // Camera recenters
       tl.to("#camera-rig", {
         scale: 1.0,
@@ -865,6 +881,11 @@
 
 
       // ================= SCENE 4 (22.8s – 30.2s) =================
+      // Color Scripting: Scene 4 Cyber Emerald Flow State
+      tl.to("#backdrop-3", { opacity: 0, duration: 0.4, ease: "power2.out" }, 22.7);
+      tl.to("#backdrop-4", { opacity: 1, duration: 0.4, ease: "power2.out" }, 22.7);
+      tl.to("#glow-left", { backgroundColor: "rgba(16, 185, 129, 0.45)", duration: 0.6 }, 22.8);
+      tl.to("#glow-right", { backgroundColor: "rgba(52, 211, 153, 0.35)", duration: 0.6 }, 22.8);
       // Scene 4 Header
       tl.fromTo("#s4-badge",
         { opacity: 0, scale: 0.6, y: -30 },
@@ -957,6 +978,11 @@
 
 
       // ================= SCENE 5: HIGH FIVE & OUTRO (30.2s – 37.0s) =================
+      // Color Scripting: Scene 5 Sunset Triumph & Royal Violet
+      tl.to("#backdrop-4", { opacity: 0, duration: 0.4, ease: "power2.out" }, 30.1);
+      tl.to("#backdrop-5", { opacity: 1, duration: 0.4, ease: "power2.out" }, 30.1);
+      tl.to("#glow-left", { backgroundColor: "rgba(255, 77, 121, 0.5)", duration: 0.6 }, 30.2);
+      tl.to("#glow-right", { backgroundColor: "rgba(255, 210, 30, 0.45)", duration: 0.6 }, 30.2);
       // Scene 5 Header
       tl.fromTo("#s5-badge",
         { opacity: 0, scale: 0.6, y: -30 },
