@@ -1,0 +1,813 @@
+/* ==========================================================================
+   ОКЕАН 11 000 МЕТРОВ — HYPERFRAMES MASTER STYLESHEET
+   Format: 1080x1920 (9:16 Vertical Shorts)
+   ========================================================================== */
+
+:root {
+  --font-main: "Roboto", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  /* Color Palette */
+  --c-cyan: #06b6d4;
+  --c-cyan-glow: rgba(6, 182, 212, 0.45);
+  --c-blue: #3b82f6;
+  --c-blue-glow: rgba(59, 130, 246, 0.4);
+  --c-gold: #f59e0b;
+  --c-gold-glow: rgba(245, 158, 11, 0.45);
+  --c-red: #ef4444;
+  --c-red-glow: rgba(239, 68, 68, 0.45);
+  --c-green: #10b981;
+  --c-emerald: #34d399;
+  
+  /* Depth Gradients */
+  --bg-sunlight: linear-gradient(180deg, #38bdf8 0%, #0284c7 40%, #0369a1 100%);
+  --bg-twilight: linear-gradient(180deg, #0369a1 0%, #1e1b4b 60%, #0f172a 100%);
+  --bg-midnight: linear-gradient(180deg, #0f172a 0%, #090d16 50%, #020617 100%);
+  --bg-abyss: linear-gradient(180deg, #090d16 0%, #030712 60%, #000000 100%);
+  --bg-hadal: linear-gradient(180deg, #030712 0%, #000000 40%, #05020a 100%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-main);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Master Composition Container */
+#root {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: #000000;
+}
+
+/* HyperFrames Clip Base */
+.clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   CAMERA RIG & PARALLAX WORLD
+   ========================================================================== */
+#camera-rig {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  transform-origin: 540px 960px;
+  will-change: transform;
+}
+
+/* Fullscreen Background Layers */
+.ocean-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+}
+
+#bg-sunlight { background: var(--bg-sunlight); }
+#bg-twilight { background: var(--bg-twilight); opacity: 0; }
+#bg-midnight { background: var(--bg-midnight); opacity: 0; }
+#bg-abyss    { background: var(--bg-abyss); opacity: 0; }
+#bg-hadal    { background: var(--bg-hadal); opacity: 0; }
+
+/* Vignette Overlay */
+.vignette-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.7) 100%);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Top Progress Bar */
+#progress-host {
+  z-index: 999;
+}
+
+.progress-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #06b6d4, #10b981);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.8);
+}
+
+/* ==========================================================================
+   BATHYSCAPHE HUD (TOP HUD OVERLAY)
+   Safe Zone: Y: 180px - 360px
+   ========================================================================== */
+#hud-host {
+  position: absolute;
+  top: 175px;
+  left: 48px;
+  width: 984px;
+  z-index: 900;
+}
+
+.hud-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(10, 20, 35, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(6, 182, 212, 0.1);
+}
+
+.hud-depth-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--c-cyan);
+  text-transform: uppercase;
+}
+
+.hud-depth-display {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.hud-depth-number {
+  font-family: var(--font-mono);
+  font-size: 52px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 20px var(--c-cyan-glow);
+  letter-spacing: -1px;
+}
+
+.hud-unit {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--c-cyan);
+}
+
+.hud-metrics-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.hud-pressure-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 12px;
+}
+
+.hud-pressure-icon {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c-red);
+  box-shadow: 0 0 10px var(--c-red);
+  animation: pulse-dot 1.5s infinite;
+}
+
+.hud-pressure-text {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: #fca5a5;
+  letter-spacing: 1px;
+}
+
+.hud-zone-pill {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 8px;
+  border-left: 3px solid var(--c-cyan);
+  margin-top: 4px;
+}
+
+/* Vertical Depth Tape (Left Edge) */
+.depth-tape-host {
+  position: absolute;
+  top: 360px;
+  left: 48px;
+  width: 8px;
+  height: 900px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  z-index: 850;
+}
+
+.depth-tape-fill {
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #38bdf8, #06b6d4, #ef4444);
+  border-radius: 4px;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
+}
+
+.depth-tape-marker {
+  position: absolute;
+  left: 16px;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  background: rgba(10, 20, 35, 0.85);
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   SCENE HEADERS & TITLES
+   Safe Band: Y: 360px - 580px
+   ========================================================================== */
+.scene-header {
+  position: absolute;
+  top: 360px;
+  left: 60px;
+  width: 960px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 600;
+}
+
+.badge {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 30px;
+  background: rgba(10, 20, 35, 0.85);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(6, 182, 212, 0.25);
+}
+
+.badge-gold {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25);
+}
+
+.badge-red {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.4);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.18);
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.4);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+}
+
+.scene-title {
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.8);
+}
+
+.highlight-cyan {
+  color: #38bdf8;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9), 0 0 24px rgba(56, 189, 248, 0.6);
+}
+
+.highlight-gold {
+  color: #fbbf24;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9), 0 0 24px rgba(251, 191, 36, 0.6);
+}
+
+.highlight-red {
+  color: #f87171;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9), 0 0 24px rgba(248, 113, 113, 0.6);
+}
+
+/* ==========================================================================
+   SCENE 1: 0 - 200 M (СОЛНЕЧНАЯ ЗОНА)
+   ========================================================================== */
+.god-rays-container {
+  position: absolute;
+  top: 0;
+  left: -200px;
+  width: 1480px;
+  height: 1400px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.god-ray {
+  position: absolute;
+  top: -100px;
+  width: 120px;
+  height: 1500px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(56, 189, 248, 0.2) 60%, rgba(0,0,0,0) 100%);
+  transform-origin: top center;
+  filter: blur(20px);
+}
+
+.ray-1 { left: 250px; transform: rotate(18deg); }
+.ray-2 { left: 500px; transform: rotate(24deg); width: 160px; }
+.ray-3 { left: 750px; transform: rotate(30deg); width: 100px; }
+.ray-4 { left: 950px; transform: rotate(36deg); width: 140px; }
+
+/* Sun surface glitter */
+.surface-glitter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 120px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 100%);
+  filter: blur(8px);
+}
+
+/* Dolphins & Fish */
+.dolphin-wrap {
+  position: absolute;
+  top: 760px;
+  left: 1100px;
+  width: 480px;
+  height: 240px;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4));
+}
+
+.fish-school {
+  position: absolute;
+  top: 1050px;
+  left: -400px;
+  width: 360px;
+  height: 180px;
+}
+
+/* ==========================================================================
+   SCENE 2: 200 - 1000 M (СУМЕРЕЧНАЯ ЗОНА & КАЛЬМАР)
+   ========================================================================== */
+.giant-squid-wrap {
+  position: absolute;
+  top: 680px;
+  left: 1100px;
+  width: 720px;
+  height: 480px;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8));
+}
+
+.comb-jelly {
+  position: absolute;
+  filter: drop-shadow(0 0 16px rgba(6, 182, 212, 0.8));
+}
+
+.jelly-1 { top: 620px; left: 120px; width: 140px; }
+.jelly-2 { top: 1150px; left: 820px; width: 110px; }
+
+/* 1000m Darkness Alert */
+.darkness-alert {
+  position: absolute;
+  top: 980px;
+  left: 140px;
+  width: 800px;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid var(--c-gold);
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(245, 158, 11, 0.4);
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  z-index: 700;
+}
+
+.darkness-alert-title {
+  font-size: 38px;
+  font-weight: 900;
+  color: #fbbf24;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.darkness-alert-sub {
+  font-size: 28px;
+  color: #e2e8f0;
+}
+
+/* ==========================================================================
+   SCENE 3: 1000 - 4000 M (БАТИПЕЛАГИАЛЬ, УДИЛЬЩИК & ТИТАНИК)
+   ========================================================================== */
+/* Volumetric Floodlights */
+.floodlight-cone {
+  position: absolute;
+  top: 480px;
+  left: 540px;
+  width: 900px;
+  height: 1100px;
+  background: conic-gradient(from 120deg at 0% 0%, rgba(255, 255, 255, 0.35) 0deg, rgba(6, 182, 212, 0.2) 25deg, rgba(0,0,0,0) 45deg);
+  transform-origin: top left;
+  transform: rotate(45deg);
+  filter: blur(35px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 200;
+  opacity: 0;
+}
+
+.floodlight-cone-left {
+  position: absolute;
+  top: 480px;
+  right: 540px;
+  width: 900px;
+  height: 1100px;
+  background: conic-gradient(from 20deg at 100% 0%, rgba(255, 255, 255, 0.35) 0deg, rgba(6, 182, 212, 0.2) 25deg, rgba(0,0,0,0) 45deg);
+  transform-origin: top right;
+  transform: rotate(-45deg);
+  filter: blur(35px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 200;
+  opacity: 0;
+}
+
+/* Deep-sea Anglerfish */
+.anglerfish-wrap {
+  position: absolute;
+  top: 680px;
+  left: -600px;
+  width: 540px;
+  height: 380px;
+  z-index: 400;
+}
+
+.angler-bulb-glow {
+  animation: pulse-bulb 2s infinite ease-in-out;
+}
+
+/* Titanic Wreck */
+.titanic-wrap {
+  position: absolute;
+  top: 1080px;
+  left: 100px;
+  width: 880px;
+  height: 480px;
+  opacity: 0;
+  transform: translateY(60px);
+  z-index: 350;
+}
+
+.wreck-badge {
+  position: absolute;
+  top: -40px;
+  left: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 28px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   SCENE 4: 4000 - 6000 M (АБИССАЛЬ & МОРСКОЙ СНЕГ)
+   ========================================================================== */
+.marine-snow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+  z-index: 250;
+  opacity: 0;
+}
+
+.snow-flake {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  filter: blur(1.5px);
+}
+
+.giant-isopod-wrap {
+  position: absolute;
+  top: 860px;
+  left: 540px;
+  width: 480px;
+  height: 320px;
+  transform: translate(-50%, 0) scale(0.9);
+  opacity: 0;
+  z-index: 300;
+}
+
+/* Pressure Alert Banner */
+.pressure-critical-card {
+  position: absolute;
+  top: 1220px;
+  left: 120px;
+  width: 840px;
+  padding: 20px 28px;
+  background: rgba(40, 10, 15, 0.85);
+  border: 2px solid var(--c-red);
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transform: scale(0.9);
+  z-index: 700;
+}
+
+.pressure-critical-icon {
+  font-size: 56px;
+  line-height: 1;
+}
+
+.pressure-critical-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pressure-critical-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #f87171;
+  letter-spacing: 1px;
+}
+
+.pressure-critical-desc {
+  font-size: 28px;
+  color: #fecaca;
+  font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   SCENE 5: 6000 - 11000 M (МАРИАНСКАЯ ВПАДИНА, ДНО & МУСОР)
+   ========================================================================== */
+.trench-canyon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+  z-index: 150;
+  opacity: 0;
+}
+
+.trench-seabed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1080px;
+  height: 520px;
+  z-index: 280;
+  opacity: 0;
+}
+
+.snailfish-wrap {
+  position: absolute;
+  top: 820px;
+  left: -350px;
+  width: 380px;
+  height: 180px;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  z-index: 450;
+}
+
+.plastic-bag-wrap {
+  position: absolute;
+  top: 1040px;
+  left: 540px;
+  width: 320px;
+  height: 240px;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  z-index: 400;
+}
+
+.trash-callout {
+  position: absolute;
+  top: 930px;
+  left: 540px;
+  transform: translate(-50%, 0);
+  background: rgba(0, 0, 0, 0.85);
+  border: 2px solid #ffffff;
+  padding: 12px 24px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  text-align: center;
+  opacity: 0;
+  z-index: 750;
+}
+
+.trash-callout-text {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   SCENE 6: ФИНАЛ & CALL TO ACTION
+   ========================================================================== */
+.final-hero-card {
+  position: absolute;
+  top: 600px;
+  left: 90px;
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  z-index: 800;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.final-big-stat {
+  font-size: 108px;
+  font-weight: 950;
+  line-height: 1;
+  background: linear-gradient(135deg, #38bdf8 0%, #06b6d4 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 8px 32px rgba(6, 182, 212, 0.6));
+}
+
+.final-statement {
+  font-size: 44px;
+  font-weight: 900;
+  line-height: 1.25;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+}
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 720px;
+  padding: 24px 32px;
+  background: linear-gradient(90deg, #ef4444, #f97316);
+  border-radius: 100px;
+  box-shadow: 0 12px 40px rgba(239, 68, 68, 0.6), 0 0 30px rgba(249, 115, 22, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-top: 16px;
+}
+
+.cta-icon {
+  font-size: 40px;
+}
+
+.cta-text {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   DYNAMIC KINETIC CAPTIONS
+   Safe Zone: Y: 1420px - 1560px
+   Strict Type Floor: >= 28px (Captions: 38px - 44px)
+   ========================================================================== */
+#captions-host {
+  position: absolute;
+  top: 1420px;
+  left: 60px;
+  width: 960px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 980;
+  pointer-events: none;
+}
+
+.caption-card {
+  padding: 16px 32px;
+  background: rgba(10, 15, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  max-width: 900px;
+}
+
+.caption-line {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.cap-word {
+  display: inline-block;
+  opacity: 0.35;
+  transform: scale(0.96);
+  margin: 0 4px;
+}
+
+.cap-word.active {
+  opacity: 1;
+  transform: scale(1.06);
+  color: #ffffff;
+}
+
+.cap-word.active.hl-cyan {
+  color: #38bdf8;
+  text-shadow: 0 0 16px rgba(56, 189, 248, 0.8);
+}
+
+.cap-word.active.hl-gold {
+  color: #fbbf24;
+  text-shadow: 0 0 16px rgba(251, 191, 36, 0.8);
+}
+
+.cap-word.active.hl-red {
+  color: #f87171;
+  text-shadow: 0 0 16px rgba(248, 113, 113, 0.8);
+}
+
+.cap-word.active.hl-green {
+  color: #34d399;
+  text-shadow: 0 0 16px rgba(52, 211, 153, 0.8);
+}
+
+/* Animations */
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+@keyframes pulse-bulb {
+  0%, 100% { filter: drop-shadow(0 0 15px #38bdf8) drop-shadow(0 0 35px #06b6d4); }
+  50% { filter: drop-shadow(0 0 30px #38bdf8) drop-shadow(0 0 70px #06b6d4); }
+}

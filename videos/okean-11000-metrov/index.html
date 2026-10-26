@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Что скрывается на глубине 11 000 метров?</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="42.5"
+      data-width="1080"
+      data-height="1920"
+      data-motion-blur="on"
+    >
+      <!-- ================= AUDIO TRACKS ================= -->
+      <!-- Voiceovers (Svetlana Neural 42.5s total composition) -->
+      <audio id="vo-1" class="clip" data-start="0.1" data-duration="5.23" data-volume="1.0" src="assets/audio/vo-1.mp3"></audio>
+      <audio id="vo-2" class="clip" data-start="5.5" data-duration="7.32" data-volume="1.0" src="assets/audio/vo-2.mp3"></audio>
+      <audio id="vo-3" class="clip" data-start="13.0" data-duration="8.52" data-volume="1.0" src="assets/audio/vo-3.mp3"></audio>
+      <audio id="vo-4" class="clip" data-start="21.8" data-duration="6.60" data-volume="1.0" src="assets/audio/vo-4.mp3"></audio>
+      <audio id="vo-5" class="clip" data-start="28.6" data-duration="8.33" data-volume="1.0" src="assets/audio/vo-5.mp3"></audio>
+      <audio id="vo-6" class="clip" data-start="37.1" data-duration="5.11" data-volume="1.0" src="assets/audio/vo-6.mp3"></audio>
+
+      <!-- Background Music Bed (seamless 42.5s bed from 4s loop) -->
+      <audio id="bgm-0" class="clip" data-start="0" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-1" class="clip" data-start="4" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-2" class="clip" data-start="8" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-3" class="clip" data-start="12" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-4" class="clip" data-start="16" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-5" class="clip" data-start="20" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-6" class="clip" data-start="24" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-7" class="clip" data-start="28" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-8" class="clip" data-start="32" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-9" class="clip" data-start="36" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-10" class="clip" data-start="40" data-duration="2.5" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+
+      <!-- Deep Sub-Ocean Rumble Bed -->
+      <audio id="amb-rumble" class="clip" data-start="0" data-duration="42.5" data-volume="0.30" src="assets/audio/deep-rumble.mp3"></audio>
+
+      <!-- Sound Effects -->
+      <audio id="sfx-splash-0" class="clip" data-start="0.0" data-duration="1.5" data-volume="0.8" src="assets/audio/splash.mp3"></audio>
+      <audio id="sfx-whoosh-0" class="clip" data-start="0.0" data-duration="1.2" data-volume="0.5" src="assets/audio/whoosh.mp3"></audio>
+      <audio id="sfx-sonar-1" class="clip" data-start="5.5" data-duration="2.5" data-volume="0.7" src="assets/audio/sonar-ping.mp3"></audio>
+      <audio id="sfx-whoosh-2" class="clip" data-start="12.8" data-duration="1.8" data-volume="0.5" src="assets/audio/whoosh-cinematic.mp3"></audio>
+      <audio id="sfx-ping-2" class="clip" data-start="14.5" data-duration="1.5" data-volume="0.6" src="assets/audio/ping.mp3"></audio>
+      <audio id="sfx-chime-titanic" class="clip" data-start="18.2" data-duration="2.0" data-volume="0.6" src="assets/audio/chime.mp3"></audio>
+      <audio id="sfx-groan-3" class="clip" data-start="21.8" data-duration="2.0" data-volume="0.8" src="assets/audio/pressure-groan.mp3"></audio>
+      <audio id="sfx-impact-3" class="clip" data-start="22.2" data-duration="1.8" data-volume="0.6" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-sonar-4" class="clip" data-start="28.6" data-duration="2.5" data-volume="0.7" src="assets/audio/sonar-ping.mp3"></audio>
+      <audio id="sfx-touchdown-4" class="clip" data-start="31.2" data-duration="2.0" data-volume="0.7" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-chime-final" class="clip" data-start="37.1" data-duration="2.0" data-volume="0.7" src="assets/audio/chime.mp3"></audio>
+      <audio id="sfx-sparkle-final" class="clip" data-start="38.2" data-duration="2.0" data-volume="0.6" src="assets/audio/sparkle.mp3"></audio>
+
+      <!-- ================= CAMERA RIG & SCENERY ================= -->
+      <div id="camera-rig" class="clip" data-start="0" data-duration="42.5" data-layout-allow-overflow="true" data-layout-allow-overlap="true">
+        <!-- Background Depth Color Planes -->
+        <div id="bg-sunlight" class="ocean-backdrop"></div>
+        <div id="bg-twilight" class="ocean-backdrop"></div>
+        <div id="bg-midnight" class="ocean-backdrop"></div>
+        <div id="bg-abyss" class="ocean-backdrop"></div>
+        <div id="bg-hadal" class="ocean-backdrop"></div>
+
+        <!-- Global Vignette Overlay -->
+        <div class="vignette-overlay"></div>
+
+        <!-- Twin Volumetric Floodlights (Turns on in Midnight zone 13s+) -->
+        <div id="floodlight-right" class="floodlight-cone"></div>
+        <div id="floodlight-left" class="floodlight-cone-left"></div>
+
+        <!-- ================= SCENE 1: 0–200 M (0.0s – 5.5s) ================= -->
+        <div id="scene-1" class="clip" data-start="0" data-duration="5.5" data-layout-allow-overlap="true">
+          <!-- Surface Water Glitter -->
+          <div class="surface-glitter"></div>
+
+          <!-- God Rays -->
+          <div class="god-rays-container">
+            <div id="ray-1" class="god-ray ray-1"></div>
+            <div id="ray-2" class="god-ray ray-2"></div>
+            <div id="ray-3" class="god-ray ray-3"></div>
+            <div id="ray-4" class="god-ray ray-4"></div>
+          </div>
+
+          <!-- Scene 1 Titles -->
+          <div id="s1-header" class="scene-header">
+            <div class="badge">⚓ 0–200 М • СОЛНЕЧНАЯ ЗОНА</div>
+            <h1 class="scene-title">ЧТО СКРЫВАЕТ<br /><span class="highlight-cyan">БЕЗДНА ОКЕАНА?</span></h1>
+          </div>
+
+          <!-- Dolphin Silhouette -->
+          <div id="s1-dolphin" class="dolphin-wrap">
+            <svg viewBox="0 0 480 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M40 180 C90 150 160 120 260 110 C320 104 380 90 440 60 C420 85 390 120 340 145 C280 175 190 190 120 195 C80 198 40 180 40 180 Z" fill="#0369a1" opacity="0.9"/>
+              <path d="M280 110 C295 70 325 50 345 40 C340 70 320 95 305 108 Z" fill="#0284c7"/>
+              <path d="M200 165 C220 195 240 215 255 225 C245 205 235 185 220 168 Z" fill="#0284c7"/>
+              <path d="M40 180 C20 160 0 150 5 135 C15 155 30 168 40 180 Z" fill="#0369a1"/>
+              <circle cx="410" cy="85" r="4" fill="#ffffff" opacity="0.8"/>
+            </svg>
+          </div>
+
+          <!-- Fish School -->
+          <div id="s1-fish-school" class="fish-school">
+            <svg viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g fill="#38bdf8" opacity="0.85">
+                <path d="M30 40 C50 30 70 40 85 45 C75 52 55 58 30 40 Z"/>
+                <polygon points="20,35 15,45 25,43"/>
+                <path d="M120 20 C140 12 160 20 172 24 C164 30 145 35 120 20 Z"/>
+                <polygon points="112,16 108,24 116,22"/>
+                <path d="M80 90 C100 80 120 90 135 95 C125 102 105 108 80 90 Z"/>
+                <polygon points="70,85 65,95 75,93"/>
+                <path d="M190 70 C210 60 230 70 245 75 C235 82 215 88 190 70 Z"/>
+                <polygon points="180,65 175,75 185,73"/>
+                <path d="M260 120 C280 110 300 120 315 125 C305 132 285 138 260 120 Z"/>
+                <polygon points="250,115 245,125 255,123"/>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Rising Bubbles -->
+          <div id="s1-bubbles" style="position: absolute; width: 1080px; height: 1920px; pointer-events: none;">
+            <div class="snow-flake" style="top: 1400px; left: 200px; width: 18px; height: 18px; opacity: 0.6;"></div>
+            <div class="snow-flake" style="top: 1550px; left: 450px; width: 24px; height: 24px; opacity: 0.8;"></div>
+            <div class="snow-flake" style="top: 1300px; left: 780px; width: 14px; height: 14px; opacity: 0.5;"></div>
+            <div class="snow-flake" style="top: 1650px; left: 620px; width: 20px; height: 20px; opacity: 0.7;"></div>
+            <div class="snow-flake" style="top: 1800px; left: 320px; width: 16px; height: 16px; opacity: 0.6;"></div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 2: 200–1000 M (5.5s – 13.0s) ================= -->
+        <div id="scene-2" class="clip" data-start="5.5" data-duration="7.5" data-layout-allow-overlap="true">
+          <!-- Scene 2 Header -->
+          <div id="s2-header" class="scene-header">
+            <div class="badge badge-gold">👁️ 200–1000 М • СУМЕРЕЧНАЯ ЗОНА</div>
+            <h1 class="scene-title">СВЕТ УГАСАЕТ.<br /><span class="highlight-gold">ОХОТА ГИГАНТСКОГО КАЛЬМАРА</span></h1>
+          </div>
+
+          <!-- Giant Squid SVG -->
+          <div id="s2-squid" class="giant-squid-wrap">
+            <svg viewBox="0 0 720 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Mantle -->
+              <path d="M540 180 C650 170 710 195 720 200 C710 205 650 230 540 220 Z" fill="#991b1b"/>
+              <!-- Fins -->
+              <polygon points="620,150 710,195 620,200" fill="#dc2626"/>
+              <polygon points="620,250 710,205 620,200" fill="#dc2626"/>
+              <!-- Head -->
+              <path d="M420 170 C480 160 540 180 540 220 C540 260 480 280 420 270 Z" fill="#b91c1c"/>
+              <!-- Giant Eye -->
+              <circle cx="460" cy="210" r="28" fill="#fbbf24" stroke="#f59e0b" stroke-width="4"/>
+              <circle cx="460" cy="210" r="14" fill="#000000"/>
+              <circle cx="466" cy="204" r="5" fill="#ffffff"/>
+              <!-- Arms & Tentacles -->
+              <path d="M420 185 C320 150 220 210 100 160 C60 140 20 180 0 190" stroke="#ef4444" stroke-width="18" stroke-linecap="round"/>
+              <path d="M420 200 C340 190 260 170 140 210 C80 230 30 200 10 210" stroke="#dc2626" stroke-width="14" stroke-linecap="round"/>
+              <path d="M420 220 C330 230 250 260 120 240 C50 230 20 270 0 260" stroke="#b91c1c" stroke-width="16" stroke-linecap="round"/>
+              <path d="M420 240 C350 270 270 290 160 300 C80 310 30 330 5 320" stroke="#991b1b" stroke-width="18" stroke-linecap="round"/>
+              <!-- Tentacular Feeding Clubs -->
+              <path d="M420 210 C280 200 180 320 60 380 C10 410 -20 390 -40 400" stroke="#f87171" stroke-width="12" stroke-dasharray="14 4" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Comb Jellies -->
+          <div id="s2-jelly-1" class="comb-jelly jelly-1">
+            <svg viewBox="0 0 140 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="70" cy="70" rx="50" ry="60" fill="rgba(6, 182, 212, 0.25)" stroke="#38bdf8" stroke-width="3"/>
+              <path d="M70 10 C50 40 50 100 70 130" stroke="#a855f7" stroke-width="3" stroke-dasharray="6 4"/>
+              <path d="M70 10 C90 40 90 100 70 130" stroke="#34d399" stroke-width="3" stroke-dasharray="6 4"/>
+              <path d="M50 130 C45 160 55 180 60 190" stroke="#38bdf8" stroke-width="2"/>
+              <path d="M90 130 C95 160 85 180 80 190" stroke="#38bdf8" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div id="s2-jelly-2" class="comb-jelly jelly-2">
+            <svg viewBox="0 0 110 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="55" cy="55" rx="40" ry="50" fill="rgba(168, 85, 247, 0.25)" stroke="#c084fc" stroke-width="2.5"/>
+              <path d="M55 10 C40 35 40 80 55 105" stroke="#38bdf8" stroke-width="2.5" stroke-dasharray="5 3"/>
+              <path d="M55 10 C70 35 70 80 55 105" stroke="#f472b6" stroke-width="2.5" stroke-dasharray="5 3"/>
+            </svg>
+          </div>
+
+          <!-- 1000m Darkness Alert -->
+          <div id="s2-darkness-alert" class="darkness-alert">
+            <div class="darkness-alert-title">⚠️ ОТМЕТКА 1000 МЕТРОВ</div>
+            <div class="darkness-alert-sub">СОЛНЕЧНЫЙ СВЕТ ПОЛНОСТЬЮ ИСЧЕЗАЕТ</div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 3: 1000–4000 M (13.0s – 21.8s) ================= -->
+        <div id="scene-3" class="clip" data-start="13.0" data-duration="8.8" data-layout-allow-overlap="true">
+          <!-- Scene 3 Header -->
+          <div id="s3-header" class="scene-header">
+            <div class="badge badge-purple">🔦 1000–4000 М • БАТИПЕЛАГИАЛЬ</div>
+            <h1 class="scene-title">ВЕЧНАЯ ТЬМА.<br /><span class="highlight-cyan">УДИЛЬЩИКИ И ТИТАНИК</span></h1>
+          </div>
+
+          <!-- Deep-Sea Anglerfish SVG -->
+          <div id="s3-anglerfish" class="anglerfish-wrap">
+            <svg viewBox="0 0 540 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Esca / Glowing Lure Stalk -->
+              <path d="M220 180 C230 110 280 60 380 90 C420 100 440 140 430 170" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" fill="none"/>
+              <!-- Glowing Bulb -->
+              <circle cx="430" cy="180" r="26" fill="#38bdf8" class="angler-bulb-glow"/>
+              <circle cx="430" cy="180" r="14" fill="#ffffff"/>
+              <!-- Fish Body -->
+              <path d="M120 220 C180 160 280 170 340 220 C380 260 360 330 280 340 C180 350 110 300 120 220 Z" fill="#0f172a" stroke="#1e293b" stroke-width="4"/>
+              <!-- Sharp Translucent Needle Teeth -->
+              <path d="M240 240 L250 270 L260 240 L275 275 L290 240 L310 280 L325 240 L335 270" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M250 310 L260 280 L275 315 L290 280 L310 320 L325 285" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <!-- Jaw Outline -->
+              <path d="M230 240 C280 250 340 240 360 270" stroke="#334155" stroke-width="5"/>
+              <path d="M230 300 C280 320 340 320 360 270" stroke="#334155" stroke-width="5"/>
+              <!-- Tiny White Blind Eye -->
+              <circle cx="310" cy="205" r="7" fill="#64748b" stroke="#334155" stroke-width="2"/>
+              <!-- Fins -->
+              <polygon points="120,220 60,190 70,250" fill="#1e293b"/>
+            </svg>
+          </div>
+
+          <!-- RMS Titanic Bow (3821 m) -->
+          <div id="s3-titanic" class="titanic-wrap">
+            <div class="wreck-badge">🚢 3821 М • ОБЛОМКИ ТИТАНИКА</div>
+            <svg viewBox="0 0 880 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ship Prow / Hull -->
+              <path d="M80 420 L440 200 L780 420 Z" fill="#1e293b" stroke="#334155" stroke-width="4"/>
+              <line x1="440" y1="200" x2="440" y2="420" stroke="#475569" stroke-width="6"/>
+              <!-- Railings -->
+              <path d="M140 380 L440 220 L720 380" stroke="#94a3b8" stroke-width="4" stroke-dasharray="10 8"/>
+              <path d="M170 360 L440 235 L690 360" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 8"/>
+              <!-- Hawseholes (Anchor wells) -->
+              <ellipse cx="360" cy="280" rx="18" ry="28" fill="#090d16" stroke="#475569" stroke-width="3"/>
+              <ellipse cx="520" cy="280" rx="18" ry="28" fill="#090d16" stroke="#475569" stroke-width="3"/>
+              <!-- Rusticles / Iron Stalactites -->
+              <path d="M300 320 L295 380 L305 340" stroke="#78350f" stroke-width="4"/>
+              <path d="M370 310 L365 390 L375 350" stroke="#b45309" stroke-width="5"/>
+              <path d="M510 310 L515 390 L505 350" stroke="#b45309" stroke-width="5"/>
+              <path d="M580 330 L585 385 L575 350" stroke="#78350f" stroke-width="4"/>
+              <!-- Sub Searchlight Glow on Hull -->
+              <circle cx="440" cy="280" r="140" fill="radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(0,0,0,0) 70%)" opacity="0.8"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 4: 4000–6000 M (21.8s – 28.6s) ================= -->
+        <div id="scene-4" class="clip" data-start="21.8" data-duration="6.8" data-layout-allow-overlap="true">
+          <!-- Scene 4 Header -->
+          <div id="s4-header" class="scene-header">
+            <div class="badge badge-red">❄️ 4000–6000 М • АБИССАЛЬ</div>
+            <h1 class="scene-title">ЗОНА ВЕЧНОГО ХОЛОДА.<br /><span class="highlight-red">ДАВЛЕНИЕ 600 АТМОСФЕР</span></h1>
+          </div>
+
+          <!-- Marine Snow Flakes -->
+          <div id="s4-marine-snow" class="marine-snow-container">
+            <div class="snow-flake" style="top: 300px; left: 150px; width: 8px; height: 8px; opacity: 0.9;"></div>
+            <div class="snow-flake" style="top: 450px; left: 320px; width: 12px; height: 12px; opacity: 0.8;"></div>
+            <div class="snow-flake" style="top: 600px; left: 740px; width: 10px; height: 10px; opacity: 0.85;"></div>
+            <div class="snow-flake" style="top: 800px; left: 220px; width: 14px; height: 14px; opacity: 0.75;"></div>
+            <div class="snow-flake" style="top: 950px; left: 550px; width: 9px; height: 9px; opacity: 0.9;"></div>
+            <div class="snow-flake" style="top: 1100px; left: 880px; width: 12px; height: 12px; opacity: 0.8;"></div>
+            <div class="snow-flake" style="top: 1300px; left: 400px; width: 15px; height: 15px; opacity: 0.7;"></div>
+            <div class="snow-flake" style="top: 1500px; left: 680px; width: 10px; height: 10px; opacity: 0.85;"></div>
+          </div>
+
+          <!-- Giant Isopod SVG -->
+          <div id="s4-isopod" class="giant-isopod-wrap">
+            <svg viewBox="0 0 480 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Segmented Chitin Carapace -->
+              <ellipse cx="240" cy="160" rx="160" ry="90" fill="#475569" stroke="#64748b" stroke-width="4"/>
+              <path d="M120 130 C180 110 300 110 360 130" stroke="#334155" stroke-width="4"/>
+              <path d="M100 155 C180 135 300 135 380 155" stroke="#334155" stroke-width="4"/>
+              <path d="M100 180 C180 160 300 160 380 180" stroke="#334155" stroke-width="4"/>
+              <path d="M120 205 C180 190 300 190 360 205" stroke="#334155" stroke-width="4"/>
+              <!-- Large Reflective Black Triangular Eyes -->
+              <polygon points="340,145 375,135 365,160" fill="#000000" stroke="#94a3b8" stroke-width="2"/>
+              <polygon points="340,175 375,185 365,160" fill="#000000" stroke="#94a3b8" stroke-width="2"/>
+              <!-- Jointed Walking Legs -->
+              <path d="M140 220 L110 260 L90 280" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+              <path d="M180 230 L160 270 L140 290" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+              <path d="M230 235 L220 280 L200 300" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+              <path d="M280 235 L280 280 L270 300" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+              <path d="M330 225 L340 270 L350 290" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Pressure Critical Warning Banner -->
+          <div id="s4-pressure-card" class="pressure-critical-card">
+            <div class="pressure-critical-icon">⚠️</div>
+            <div class="pressure-critical-info">
+              <div class="pressure-critical-title">КОЛОССАЛЬНОЕ ДАВЛЕНИЕ!</div>
+              <div class="pressure-critical-desc">600 КГ НА САНТИМЕТР² • СТАЛЬ ДЕФОРМИРУЕТСЯ</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 5: 6000–11 000 M (28.6s – 37.1s) ================= -->
+        <div id="scene-5" class="clip" data-start="28.6" data-duration="8.5" data-layout-allow-overlap="true">
+          <!-- Rocky Trench Canyon Walls -->
+          <div id="s5-trench" class="trench-canyon">
+            <svg viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Left Trench Wall -->
+              <polygon points="0,0 240,400 120,900 280,1400 160,1920 0,1920" fill="#090514" stroke="#1c1130" stroke-width="4"/>
+              <!-- Right Trench Wall -->
+              <polygon points="1080,0 860,500 960,1000 820,1500 940,1920 1080,1920" fill="#090514" stroke="#1c1130" stroke-width="4"/>
+            </svg>
+          </div>
+
+          <!-- Trench Seabed (10 994 m) -->
+          <div id="s5-seabed" class="trench-seabed">
+            <svg viewBox="0 0 1080 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Silt Floor -->
+              <path d="M0 240 C300 200 700 260 1080 210 L1080 520 L0 520 Z" fill="#171226"/>
+              <!-- Boulders -->
+              <ellipse cx="260" cy="380" rx="90" ry="45" fill="#0d0918" stroke="#2a1f42" stroke-width="3"/>
+              <ellipse cx="780" cy="360" rx="140" ry="60" fill="#0d0918" stroke="#2a1f42" stroke-width="3"/>
+              <ellipse cx="480" cy="420" rx="70" ry="30" fill="#0a0713"/>
+            </svg>
+          </div>
+
+          <!-- Scene 5 Header -->
+          <div id="s5-header" class="scene-header">
+            <div class="badge badge-red">🌊 10 994 М • БЕЗДНА ЧЕЛЛЕНДЖЕРА</div>
+            <h1 class="scene-title">САМАЯ ГЛУБОКАЯ ТОЧКА.<br /><span class="highlight-cyan">ЖИЗНЬ... И СЛЕД ЧЕЛОВЕКА!</span></h1>
+          </div>
+
+          <!-- Mariana Snailfish (Ghostly Translucent) -->
+          <div id="s5-snailfish" class="snailfish-wrap">
+            <svg viewBox="0 0 380 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Translucent Tadpole Body -->
+              <path d="M40 90 C100 40 220 50 340 85 C360 90 360 100 340 105 C220 140 100 150 40 100 Z" fill="rgba(254, 226, 226, 0.55)" stroke="#fecdd3" stroke-width="3"/>
+              <!-- Bulbous Head -->
+              <ellipse cx="80" cy="95" rx="55" ry="40" fill="rgba(255, 255, 255, 0.7)"/>
+              <!-- Delicate Wing-like Pectoral Fin -->
+              <path d="M90 105 C140 135 180 160 200 165 C180 145 150 120 110 105 Z" fill="rgba(254, 205, 211, 0.6)" stroke="#fda4af" stroke-width="2"/>
+              <!-- Translucent Organ Core -->
+              <ellipse cx="95" cy="95" rx="20" ry="14" fill="#fb7185" opacity="0.4"/>
+              <circle cx="65" cy="85" r="5" fill="#475569"/>
+            </svg>
+          </div>
+
+          <!-- Plastic Bag & Bottle on Seabed -->
+          <div id="s5-trash" class="plastic-bag-wrap">
+            <svg viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Crumpled Plastic Shopping Bag -->
+              <path d="M60 120 C90 80 150 70 190 95 C220 115 250 100 270 135 C290 170 260 210 200 215 C140 220 80 210 50 180 C30 160 40 140 60 120 Z" fill="rgba(255, 255, 255, 0.88)" stroke="#cbd5e1" stroke-width="4"/>
+              <!-- Bag Handles -->
+              <path d="M90 90 C80 50 120 40 135 75" stroke="#94a3b8" stroke-width="6" fill="none"/>
+              <path d="M165 80 C180 45 220 55 210 95" stroke="#94a3b8" stroke-width="6" fill="none"/>
+              <!-- Barcode on Bag -->
+              <g stroke="#334155" stroke-width="3">
+                <line x1="120" y1="135" x2="120" y2="165"/>
+                <line x1="126" y1="135" x2="126" y2="165"/>
+                <line x1="134" y1="135" x2="134" y2="165"/>
+                <line x1="140" y1="135" x2="140" y2="165"/>
+                <line x1="148" y1="135" x2="148" y2="165"/>
+              </g>
+              <!-- Discarded Plastic Bottle -->
+              <rect x="180" y="165" width="90" height="35" rx="8" transform="rotate(-15 180 165)" fill="rgba(6, 182, 212, 0.45)" stroke="#38bdf8" stroke-width="3"/>
+            </svg>
+          </div>
+
+          <!-- Trash Callout -->
+          <div id="s5-trash-callout" class="trash-callout">
+            <div class="trash-callout-text">🚯 ПЛАСТИКОВЫЙ ПАКЕТ НА ДНЕ МАРИАНСКОЙ ВПАДИНЫ</div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 6: ФИНАЛ & CALL TO ACTION (37.1s – 42.5s) ================= -->
+        <div id="scene-6" class="clip" data-start="37.1" data-duration="5.4" data-layout-allow-overlap="true">
+          <div id="s6-hero-card" class="final-hero-card">
+            <div class="badge badge-gold">🌍 ВЕЛИКАЯ ТАЙНА ЗЕМЛИ</div>
+            <div class="final-big-stat">ВСЕГО 5%</div>
+            <div class="final-statement">МИРОВОГО ОКЕАНА ИССЛЕДОВАНО ЧЕЛОВЕКОМ!</div>
+            <div class="cta-button">
+              <div class="cta-icon">🔔</div>
+              <div class="cta-text">ПОДПИШИСЬ НА КАНАЛ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= BATHYSCAPHE HUD OVERLAY ================= -->
+      <div id="hud-host" class="clip" data-start="0" data-duration="42.5" data-layout-allow-overlap="true">
+        <div class="hud-panel">
+          <div class="hud-depth-block">
+            <div class="hud-label">ГЛУБИНА ПОГРУЖЕНИЯ</div>
+            <div class="hud-depth-display">
+              <span id="hud-depth-val" class="hud-depth-number">0</span>
+              <span class="hud-unit">МЕТРОВ</span>
+            </div>
+          </div>
+          <div class="hud-metrics-block">
+            <div class="hud-pressure-badge">
+              <div class="hud-pressure-icon"></div>
+              <span id="hud-pressure-val" class="hud-pressure-text">1 ATM</span>
+            </div>
+            <div id="hud-zone-val" class="hud-zone-pill">СОЛНЕЧНАЯ ЗОНА</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Left Vertical Depth Tape -->
+      <div id="depth-tape" class="depth-tape-host clip" data-start="0" data-duration="42.5" data-layout-allow-overlap="true">
+        <div id="depth-tape-progress" class="depth-tape-fill"></div>
+        <div class="depth-tape-marker" style="top: 0%;">0 М</div>
+        <div class="depth-tape-marker" style="top: 18%;">200 М</div>
+        <div class="depth-tape-marker" style="top: 36%;">1 000 М</div>
+        <div class="depth-tape-marker" style="top: 55%;">4 000 М</div>
+        <div class="depth-tape-marker" style="top: 75%;">6 000 М</div>
+        <div class="depth-tape-marker" style="top: 100%;">10 994 М</div>
+      </div>
+
+      <!-- Top Progress Bar -->
+      <div id="progress-host" class="clip" data-start="0" data-duration="42.5" data-layout-allow-overlap="true">
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- ================= KINETIC CAPTIONS HOST ================= -->
+      <!-- Safe Zone: Y: 1420px - 1560px -->
+      <div id="captions-host" class="clip" data-start="0" data-duration="42.5" data-layout-allow-overlap="true">
+        <!-- Caption Card 1 (0.0s – 5.5s) -->
+        <div id="cap-1" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c1-w0">Что</span>
+            <span class="cap-word c1-w1">скрывает</span>
+            <span class="cap-word c1-w2 hl-cyan">бездна</span>
+            <span class="cap-word c1-w3 hl-cyan">океана?</span>
+            <span class="cap-word c1-w4 hl-gold">Начинаем</span>
+            <span class="cap-word c1-w5 hl-gold">погружение!</span>
+          </div>
+        </div>
+
+        <!-- Caption Card 2 (5.5s – 13.0s) -->
+        <div id="cap-2" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c2-w0 hl-gold">200 метров</span>
+            <span class="cap-word c2-w1">— свет</span>
+            <span class="cap-word c2-w2">меркнет.</span>
+            <span class="cap-word c2-w3">Здесь</span>
+            <span class="cap-word c2-w4">охотится</span>
+            <span class="cap-word c2-w5 hl-red">кальмар,</span>
+            <span class="cap-word c2-w6">а на</span>
+            <span class="cap-word c2-w7 hl-cyan">1000 метров</span>
+            <span class="cap-word c2-w8">царит</span>
+            <span class="cap-word c2-w9 hl-gold">вечная тьма!</span>
+          </div>
+        </div>
+
+        <!-- Caption Card 3 (13.0s – 21.8s) -->
+        <div id="cap-3" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c3-w0 hl-cyan">3800 метров.</span>
+            <span class="cap-word c3-w1">Давление</span>
+            <span class="cap-word c3-w2 hl-red">400 атмосфер.</span>
+            <span class="cap-word c3-w3">Здесь</span>
+            <span class="cap-word c3-w4 hl-cyan">мерцают</span>
+            <span class="cap-word c3-w5 hl-cyan">удильщики</span>
+            <span class="cap-word c3-w6">и спит</span>
+            <span class="cap-word c3-w7 hl-gold">Титаник!</span>
+          </div>
+        </div>
+
+        <!-- Caption Card 4 (21.8s – 28.6s) -->
+        <div id="cap-4" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c4-w0 hl-cyan">6000 метров</span>
+            <span class="cap-word c4-w1">— абиссаль.</span>
+            <span class="cap-word c4-w2">Падает</span>
+            <span class="cap-word c4-w3 hl-cyan">морской снег,</span>
+            <span class="cap-word c4-w4">а вода</span>
+            <span class="cap-word c4-w5">готова</span>
+            <span class="cap-word c4-w6 hl-red">расплющить сталь.</span>
+          </div>
+        </div>
+
+        <!-- Caption Card 5 (28.6s – 37.1s) -->
+        <div id="cap-5" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c5-w0 hl-gold">11 000 метров!</span>
+            <span class="cap-word c5-w1 hl-cyan">Марианская</span>
+            <span class="cap-word c5-w2 hl-cyan">впадина.</span>
+            <span class="cap-word c5-w3 hl-red">1000 атмосфер...</span>
+            <span class="cap-word c5-w4">и брошенный</span>
+            <span class="cap-word c5-w5 hl-gold">пластиковый пакет!</span>
+          </div>
+        </div>
+
+        <!-- Caption Card 6 (37.1s – 42.5s) -->
+        <div id="cap-6" class="caption-card" style="display: none;">
+          <div class="caption-line">
+            <span class="cap-word c6-w0">Океан</span>
+            <span class="cap-word c6-w1">изучен</span>
+            <span class="cap-word c6-w2">лишь на</span>
+            <span class="cap-word c6-w3 hl-cyan">5 процентов.</span>
+            <span class="cap-word c6-w4 hl-gold">Подпишись</span>
+            <span class="cap-word c6-w5 hl-gold">на канал!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= GSAP ANIMATION LOGIC ================= -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const mainTl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = mainTl;
+
+      const DURATION = 42.5;
+
+      // Top Progress Bar
+      mainTl.to("#progress-bar", { width: "100%", duration: DURATION, ease: "none" }, 0);
+
+      // Left Vertical Depth Tape
+      mainTl.to("#depth-tape-progress", { height: "100%", duration: DURATION, ease: "none" }, 0);
+
+      // Live Depth and Pressure Counter
+      const depthData = { depth: 0 };
+      const depthEl = document.getElementById("hud-depth-val");
+      const pressureEl = document.getElementById("hud-pressure-val");
+      const zoneEl = document.getElementById("hud-zone-val");
+
+      function updateHUD(val) {
+        if (!depthEl) return;
+        const d = Math.round(val);
+        depthEl.textContent = d.toLocaleString("ru-RU");
+
+        if (d < 200) {
+          pressureEl.textContent = Math.max(1, Math.round(d / 10)) + " ATM";
+          zoneEl.textContent = "СОЛНЕЧНАЯ ЗОНА";
+          zoneEl.style.borderLeftColor = "#38bdf8";
+        } else if (d < 1000) {
+          pressureEl.textContent = Math.round(20 + ((d - 200) / 800) * 80) + " ATM";
+          zoneEl.textContent = "СУМЕРЕЧНАЯ ЗОНА";
+          zoneEl.style.borderLeftColor = "#fbbf24";
+        } else if (d < 4000) {
+          pressureEl.textContent = Math.round(100 + ((d - 1000) / 3000) * 300) + " ATM";
+          zoneEl.textContent = "БАТИПЕЛАГИАЛЬ";
+          zoneEl.style.borderLeftColor = "#a855f7";
+        } else if (d < 6000) {
+          pressureEl.textContent = Math.round(400 + ((d - 4000) / 2000) * 200) + " ATM";
+          zoneEl.textContent = "АБИССАЛЬ";
+          zoneEl.style.borderLeftColor = "#f87171";
+        } else {
+          pressureEl.textContent = Math.min(1100, Math.round(600 + ((d - 6000) / 4994) * 500)) + " ATM";
+          zoneEl.textContent = "БЕЗДНА ЧЕЛЛЕНДЖЕРА";
+          zoneEl.style.borderLeftColor = "#38bdf8";
+        }
+      }
+
+      // Smooth Depth Steps Matching Scene Narrative
+      mainTl.to(depthData, { depth: 200, duration: 5.5, ease: "power1.inOut", onUpdate: () => updateHUD(depthData.depth) }, 0);
+      mainTl.to(depthData, { depth: 1000, duration: 7.5, ease: "power1.inOut", onUpdate: () => updateHUD(depthData.depth) }, 5.5);
+      mainTl.to(depthData, { depth: 4000, duration: 8.8, ease: "power1.inOut", onUpdate: () => updateHUD(depthData.depth) }, 13.0);
+      mainTl.to(depthData, { depth: 6000, duration: 6.8, ease: "power1.inOut", onUpdate: () => updateHUD(depthData.depth) }, 21.8);
+      mainTl.to(depthData, { depth: 10994, duration: 8.5, ease: "power2.out", onUpdate: () => updateHUD(depthData.depth) }, 28.6);
+
+      // ================= BACKGROUND DEPTH CROSS-FADES =================
+      mainTl.to("#bg-twilight", { opacity: 1, duration: 2.0, ease: "power2.inOut" }, 5.0);
+      mainTl.to("#bg-midnight", { opacity: 1, duration: 2.0, ease: "power2.inOut" }, 12.5);
+      mainTl.to("#bg-abyss", { opacity: 1, duration: 2.0, ease: "power2.inOut" }, 21.0);
+      mainTl.to("#bg-hadal", { opacity: 1, duration: 2.5, ease: "power2.inOut" }, 28.0);
+
+      // Twin Volumetric Floodlights (Turns on at 13.2s)
+      mainTl.to("#floodlight-right", { opacity: 0.85, duration: 0.8, ease: "power2.out" }, 13.2);
+      mainTl.to("#floodlight-left", { opacity: 0.85, duration: 0.8, ease: "power2.out" }, 13.2);
+
+      // ================= SCENE 1 ANIMATIONS (0.0s – 5.5s) =================
+      // God rays soft rotation and opacity pulse
+      mainTl.fromTo("#ray-1", { rotation: 16, opacity: 0.5 }, { rotation: 22, opacity: 0.85, duration: 5.5, ease: "sine.inOut" }, 0);
+      mainTl.fromTo("#ray-2", { rotation: 26, opacity: 0.6 }, { rotation: 20, opacity: 0.9, duration: 5.5, ease: "sine.inOut" }, 0);
+      mainTl.fromTo("#ray-3", { rotation: 28, opacity: 0.4 }, { rotation: 34, opacity: 0.75, duration: 5.5, ease: "sine.inOut" }, 0);
+
+      // Dolphin graceful dive across screen
+      mainTl.fromTo("#s1-dolphin", 
+        { x: 0, y: 0, rotation: 8 }, 
+        { x: -1600, y: 350, rotation: -12, duration: 5.2, ease: "power1.inOut" }, 
+        0.2
+      );
+
+      // Fish school swimming left-to-right
+      mainTl.fromTo("#s1-fish-school", 
+        { x: 0, y: 0 }, 
+        { x: 1500, y: -120, duration: 5.0, ease: "power1.out" }, 
+        0.4
+      );
+
+      // Rising bubbles
+      mainTl.to("#s1-bubbles", { y: -800, duration: 5.5, ease: "none" }, 0);
+
+      // Scene 1 Outro Fade
+      mainTl.to("#scene-1", { opacity: 0, y: -120, duration: 0.8, ease: "power2.in" }, 4.7);
+
+      // ================= SCENE 2 ANIMATIONS (5.5s – 13.0s) =================
+      // Giant Squid Gliding In & Tentacles Undulating
+      mainTl.fromTo("#s2-squid", 
+        { x: 0, y: 150, scale: 0.85 }, 
+        { x: -1500, y: -120, scale: 1.05, duration: 6.8, ease: "power1.inOut" }, 
+        5.6
+      );
+
+      // Comb Jellies Pulsing and Drifting Up
+      mainTl.fromTo("#s2-jelly-1", { y: 200, opacity: 0 }, { y: -250, opacity: 1, duration: 6.5, ease: "sine.inOut" }, 5.8);
+      mainTl.fromTo("#s2-jelly-2", { y: 250, opacity: 0 }, { y: -300, opacity: 1, duration: 6.0, ease: "sine.inOut" }, 6.2);
+
+      // 1000m Darkness Alert Box Pop-in
+      mainTl.to("#s2-darkness-alert", { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, 10.5);
+      mainTl.to("#s2-darkness-alert", { opacity: 0, scale: 0.95, duration: 0.5, ease: "power2.in" }, 12.4);
+
+      // Scene 2 Outro Fade
+      mainTl.to("#scene-2", { opacity: 0, duration: 0.6, ease: "power2.in" }, 12.4);
+
+      // ================= SCENE 3 ANIMATIONS (13.0s – 21.8s) =================
+      // Deep-Sea Anglerfish Enters from Left
+      mainTl.fromTo("#s3-anglerfish", 
+        { x: 0, y: 80, scale: 0.8 }, 
+        { x: 800, y: -40, scale: 1.05, duration: 6.5, ease: "power1.inOut" }, 
+        13.2
+      );
+
+      // Angler Esca Bulb Light Beam Sway
+      mainTl.to(".angler-bulb-glow", { scale: 1.25, duration: 1.2, repeat: 4, yoyo: true, ease: "sine.inOut" }, 13.5);
+
+      // Titanic Bow Emerges from Bottom Darkness in Floodlights
+      mainTl.to("#s3-titanic", { opacity: 1, y: 0, duration: 2.0, ease: "power2.out" }, 17.5);
+      mainTl.to("#s3-titanic", { y: -100, duration: 3.5, ease: "power1.out" }, 19.5);
+
+      // Scene 3 Outro Fade
+      mainTl.to("#scene-3", { opacity: 0, duration: 0.6, ease: "power2.in" }, 21.2);
+
+      // ================= SCENE 4 ANIMATIONS (21.8s – 28.6s) =================
+      // Marine Snow Particles Floating Up
+      mainTl.to("#s4-marine-snow", { opacity: 1, duration: 0.6 }, 21.8);
+      mainTl.to("#s4-marine-snow", { y: -600, duration: 6.8, ease: "none" }, 21.8);
+
+      // Giant Isopod Emerges into View
+      mainTl.to("#s4-isopod", { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" }, 22.2);
+      mainTl.to("#s4-isopod", { y: -80, duration: 4.5, ease: "sine.inOut" }, 23.7);
+
+      // Pressure Critical Banner Pop-in & Micro-shake
+      mainTl.to("#s4-pressure-card", { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }, 22.5);
+      
+      // Tactile Camera Shake on High Pressure Impact
+      mainTl.to("#camera-rig", { x: 8, y: -6, duration: 0.05, yoyo: true, repeat: 7, ease: "rough" }, 22.5);
+      mainTl.to("#camera-rig", { x: 0, y: 0, duration: 0.1 }, 22.9);
+
+      // Scene 4 Outro
+      mainTl.to("#scene-4", { opacity: 0, duration: 0.6, ease: "power2.in" }, 28.0);
+
+      // ================= SCENE 5 ANIMATIONS (28.6s – 37.1s) =================
+      // Canyon Walls and Seabed Emerge into View
+      mainTl.to("#s5-trench", { opacity: 1, duration: 1.5, ease: "power2.out" }, 28.6);
+      mainTl.to("#s5-seabed", { opacity: 1, y: 0, duration: 2.0, ease: "power2.out" }, 29.2);
+
+      // Mariana Snailfish Gliding Gracefully
+      mainTl.fromTo("#s5-snailfish", 
+        { x: 0, y: 50 }, 
+        { x: 1200, y: -60, duration: 7.2, ease: "power1.inOut" }, 
+        29.0
+      );
+
+      // Seabed Touchdown Impact (Camera Shake)
+      mainTl.to("#camera-rig", { y: 12, duration: 0.08, yoyo: true, repeat: 5, ease: "rough" }, 31.2);
+      mainTl.to("#camera-rig", { y: 0, duration: 0.1 }, 31.7);
+      // Plastic Bag on Seabed Revealed
+      mainTl.to("#s5-trash", { opacity: 1, duration: 1.0, ease: "power2.out" }, 31.0);
+      mainTl.to("#s5-trash-callout", { opacity: 1, duration: 0.8, ease: "back.out(1.4)" }, 32.0);
+
+      // Scene 5 Outro
+      mainTl.to("#scene-5", { opacity: 0, duration: 0.6, ease: "power2.in" }, 36.6);
+
+      // ================= SCENE 6 ANIMATIONS (37.1s – 42.5s) =================
+      // Final Hero Card Zoom-in & CTA Sparkle
+      mainTl.to("#s6-hero-card", { opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, 37.2);
+      mainTl.fromTo(".cta-button", { scale: 0.9 }, { scale: 1.04, duration: 1.0, repeat: 4, yoyo: true, ease: "sine.inOut" }, 38.0);
+
+      // ================= KINETIC CAPTIONS SYNCHRONIZATION =================
+      // Helper function to switch active caption card
+      function showCard(id) {
+        document.querySelectorAll(".caption-card").forEach(el => el.style.display = "none");
+        const active = document.getElementById(id);
+        if (active) active.style.display = "block";
+      }
+
+      function highlightWord(className) {
+        const wordEl = document.querySelector("." + className);
+        if (wordEl) {
+          wordEl.classList.add("active");
+        }
+      }
+
+      // Card 1 (0.0s – 5.5s)
+      mainTl.call(() => showCard("cap-1"), null, 0.1);
+      mainTl.call(() => highlightWord("c1-w0"), null, 0.2);  // Что
+      mainTl.call(() => highlightWord("c1-w1"), null, 0.5);  // скрывает
+      mainTl.call(() => highlightWord("c1-w2"), null, 1.0);  // бездна
+      mainTl.call(() => highlightWord("c1-w3"), null, 1.4);  // океана?
+      mainTl.call(() => highlightWord("c1-w4"), null, 2.9);  // Начинаем
+      mainTl.call(() => highlightWord("c1-w5"), null, 3.6);  // погружение!
+
+      // Card 2 (5.5s – 13.0s)
+      mainTl.call(() => showCard("cap-2"), null, 5.5);
+      mainTl.call(() => highlightWord("c2-w0"), null, 5.6);  // 200 метров
+      mainTl.call(() => highlightWord("c2-w1"), null, 6.4);  // свет
+      mainTl.call(() => highlightWord("c2-w2"), null, 6.8);  // меркнет
+      mainTl.call(() => highlightWord("c2-w3"), null, 7.3);  // Здесь
+      mainTl.call(() => highlightWord("c2-w4"), null, 7.7);  // охотится
+      mainTl.call(() => highlightWord("c2-w5"), null, 8.2);  // кальмар
+      mainTl.call(() => highlightWord("c2-w6"), null, 9.4);  // а на
+      mainTl.call(() => highlightWord("c2-w7"), null, 9.8);  // 1000 метров
+      mainTl.call(() => highlightWord("c2-w8"), null, 11.2); // царит
+      mainTl.call(() => highlightWord("c2-w9"), null, 11.7); // вечная тьма!
+
+      // Card 3 (13.0s – 21.8s)
+      mainTl.call(() => showCard("cap-3"), null, 13.0);
+      mainTl.call(() => highlightWord("c3-w0"), null, 13.1); // 3800 метров
+      mainTl.call(() => highlightWord("c3-w1"), null, 14.8); // Давление
+      mainTl.call(() => highlightWord("c3-w2"), null, 15.4); // 400 атмосфер
+      mainTl.call(() => highlightWord("c3-w3"), null, 17.0); // Здесь
+      mainTl.call(() => highlightWord("c3-w4"), null, 17.5); // мерцают
+      mainTl.call(() => highlightWord("c3-w5"), null, 18.2); // удильщики
+      mainTl.call(() => highlightWord("c3-w6"), null, 19.3); // и спит
+      mainTl.call(() => highlightWord("c3-w7"), null, 19.8); // Титаник!
+
+      // Card 4 (21.8s – 28.6s)
+      mainTl.call(() => showCard("cap-4"), null, 21.8);
+      mainTl.call(() => highlightWord("c4-w0"), null, 21.9); // 6000 метров
+      mainTl.call(() => highlightWord("c4-w1"), null, 23.3); // абиссаль
+      mainTl.call(() => highlightWord("c4-w2"), null, 24.2); // Падает
+      mainTl.call(() => highlightWord("c4-w3"), null, 24.7); // морской снег
+      mainTl.call(() => highlightWord("c4-w4"), null, 25.8); // а вода
+      mainTl.call(() => highlightWord("c4-w5"), null, 26.3); // готова
+      mainTl.call(() => highlightWord("c4-w6"), null, 26.8); // расплющить сталь
+
+      // Card 5 (28.6s – 37.1s)
+      mainTl.call(() => showCard("cap-5"), null, 28.6);
+      mainTl.call(() => highlightWord("c5-w0"), null, 28.7); // 11 000 метров!
+      mainTl.call(() => highlightWord("c5-w1"), null, 30.6); // Марианская
+      mainTl.call(() => highlightWord("c5-w2"), null, 31.4); // впадина
+      mainTl.call(() => highlightWord("c5-w3"), null, 32.5); // 1000 атмосфер...
+      mainTl.call(() => highlightWord("c5-w4"), null, 34.2); // и брошенный
+      mainTl.call(() => highlightWord("c5-w5"), null, 35.0); // пластиковый пакет
+
+      // Card 6 (37.1s – 42.5s)
+      mainTl.call(() => showCard("cap-6"), null, 37.1);
+      mainTl.call(() => highlightWord("c6-w0"), null, 37.2); // Океан
+      mainTl.call(() => highlightWord("c6-w1"), null, 37.7); // изучен
+      mainTl.call(() => highlightWord("c6-w2"), null, 38.2); // лишь на
+      mainTl.call(() => highlightWord("c6-w3"), null, 38.6); // 5 процентов
+      mainTl.call(() => highlightWord("c6-w4"), null, 40.0); // Подпишись
+      mainTl.call(() => highlightWord("c6-w5"), null, 40.7); // на канал!
+    </script>
+  </body>
+</html>
