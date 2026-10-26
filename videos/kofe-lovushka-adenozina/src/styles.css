@@ -1,0 +1,428 @@
+/* =========================================================================
+   КОФЕ НЕ ДАЁТ ЭНЕРГИЮ: ЛОВУШКА АДЕНОЗИНА — STYLESHEET
+   Format: 1080x1920 Vertical (Shorts/Reels)
+   ========================================================================= */
+
+:root {
+  --bg-deep: #060911;
+  --bg-card: rgba(18, 22, 38, 0.9);
+  --border-card: rgba(255, 255, 255, 0.14);
+  --cyan: #00F0FF;
+  --cyan-glow: rgba(0, 240, 255, 0.45);
+  --coffee: #D97706;
+  --coffee-glow: rgba(217, 119, 6, 0.45);
+  --amber: #FBBF24;
+  --amber-glow: rgba(251, 191, 36, 0.5);
+  --purple: #8B5CF6;
+  --purple-glow: rgba(139, 92, 246, 0.45);
+  --green: #10B981;
+  --green-glow: rgba(16, 185, 129, 0.45);
+  --red: #EF4444;
+  --red-glow: rgba(239, 68, 68, 0.5);
+  --text-primary: #FFFFFF;
+  --text-muted: #94A3B8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  width: 1080px;
+  height: 1920px;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Root composition viewport */
+#root {
+  width: 1080px;
+  height: 1920px;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+}
+
+/* ================= COLOR SCRIPTING BACKDROPS ================= */
+.scene-backdrop {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+/* Scene 1: Sleepy cold morning slate */
+.bg-scene-1 {
+  background: radial-gradient(circle at 50% 30%, #152238 0%, #0A111E 50%, #03060C 100%);
+  opacity: 1;
+}
+
+/* Scene 2: Warm caramel & rich espresso */
+.bg-scene-2 {
+  background: radial-gradient(circle at 50% 35%, #3A1B0B 0%, #1F0D04 50%, #090301 100%);
+}
+
+/* Scene 3: Electric neon amber overdrive */
+.bg-scene-3 {
+  background: radial-gradient(circle at 50% 30%, #4D2604 0%, #261201 50%, #0E0600 100%);
+}
+
+/* Scene 4: Dark violet crash abyss */
+.bg-scene-4 {
+  background: radial-gradient(circle at 50% 35%, #240B40 0%, #120421 50%, #06010D 100%);
+}
+
+/* Scene 5: Fresh emerald scientific triumph */
+.bg-scene-5 {
+  background: radial-gradient(circle at 50% 35%, #064E3B 0%, #022C22 50%, #01140E 100%);
+}
+
+/* Ambient dynamic glow orbs */
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-1 {
+  width: 600px;
+  height: 600px;
+  background-color: var(--coffee-glow);
+  top: 150px;
+  left: -150px;
+  opacity: 0.55;
+}
+
+.glow-2 {
+  width: 700px;
+  height: 700px;
+  background-color: var(--cyan-glow);
+  top: 450px;
+  right: -200px;
+  opacity: 0.5;
+}
+
+.glow-3 {
+  width: 650px;
+  height: 650px;
+  background-color: var(--purple-glow);
+  bottom: 250px;
+  left: 200px;
+  opacity: 0.4;
+}
+
+/* Studio & HyperFrames clip standard */
+.clip {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  pointer-events: none;
+}
+
+/* ================= TOP PROGRESS BAR ================= */
+#progress-host {
+  height: 12px;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.progress-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #F59E0B 0%, #EF4444 40%, #10B981 100%);
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.7);
+}
+
+/* ================= CAMERA RIG ================= */
+#camera-rig {
+  position: absolute;
+  inset: 0;
+  width: 1080px;
+  height: 1920px;
+  z-index: 10;
+  transform-origin: 540px 960px;
+}
+
+/* ================= SCENE HEADERS ================= */
+.scene-header {
+  position: absolute;
+  top: 180px;
+  left: 60px;
+  right: 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 28px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.badge-coffee {
+  border-color: #F59E0B;
+  color: #FBBF24;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.5);
+}
+
+.badge-blue {
+  border-color: #38BDF8;
+  color: #7DD3FC;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.5);
+}
+
+.badge-red {
+  border-color: #EF4444;
+  color: #FCA5A5;
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.5);
+}
+
+.badge-purple {
+  border-color: #A855F7;
+  color: #D8B4FE;
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.5);
+}
+
+.badge-green {
+  border-color: #10B981;
+  color: #6EE7B7;
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.5);
+}
+
+.scene-title {
+  margin-top: 24px;
+  font-size: 60px;
+  font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.5px;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+}
+
+.hl-coffee { color: #F59E0B; text-shadow: 0 0 24px rgba(245, 158, 11, 0.6); }
+.hl-blue { color: #38BDF8; text-shadow: 0 0 24px rgba(56, 189, 248, 0.6); }
+.hl-red { color: #EF4444; text-shadow: 0 0 24px rgba(239, 68, 68, 0.6); }
+.hl-purple { color: #C084FC; text-shadow: 0 0 24px rgba(192, 132, 252, 0.6); }
+.hl-green { color: #34D399; text-shadow: 0 0 24px rgba(52, 211, 153, 0.6); }
+
+/* ================= RECEPTOR (LOCK & KEY) GRAPHICS ================= */
+.receptor-stage {
+  position: absolute;
+  top: 480px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 480px;
+  height: 260px;
+  z-index: 40;
+}
+
+.receptor-box {
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.88);
+  border: 3px solid rgba(56, 189, 248, 0.4);
+  border-radius: 32px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.2);
+}
+
+.lock-svg {
+  width: 120px;
+  height: 120px;
+}
+
+.lock-keyhole {
+  fill: #0284C7;
+  filter: drop-shadow(0 0 12px #38BDF8);
+}
+
+.receptor-label {
+  margin-top: 12px;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.blocked-badge {
+  position: absolute;
+  top: 90px;
+  background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+  border: 3px solid #FECACA;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-size: 30px;
+  font-weight: 900;
+  color: #FFFFFF;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+}
+
+/* HUD Metrics */
+.hud-card {
+  position: absolute;
+  top: 480px;
+  right: 60px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-card);
+  border-radius: 24px;
+  padding: 18px 28px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  font-size: 30px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 60;
+}
+
+/* ================= 2D CHARACTERS ================= */
+.char-stage {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Brainy Stage */
+#brain-char-stage {
+  width: 440px;
+  height: 440px;
+  position: absolute;
+  transform-origin: 220px 380px;
+  filter: drop-shadow(0 20px 40px rgba(255, 77, 121, 0.35));
+}
+
+/* Adenosine Stage */
+#adenosine-stage {
+  width: 320px;
+  height: 320px;
+  position: absolute;
+  transform-origin: 160px 260px;
+  filter: drop-shadow(0 15px 35px rgba(56, 189, 248, 0.4));
+}
+
+/* Caffeine Stage */
+#caffeine-stage {
+  width: 340px;
+  height: 340px;
+  position: absolute;
+  transform-origin: 170px 270px;
+  filter: drop-shadow(0 15px 35px rgba(245, 158, 11, 0.45));
+}
+
+.svg-char {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Outro card */
+.outro-card {
+  position: absolute;
+  top: 480px;
+  left: 70px;
+  right: 70px;
+  background: linear-gradient(180deg, rgba(6, 78, 59, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 3px solid rgba(52, 211, 153, 0.4);
+  border-radius: 36px;
+  padding: 40px 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(16, 185, 129, 0.3);
+  z-index: 70;
+}
+
+.outro-big-title {
+  font-size: 54px;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.subscribe-btn {
+  margin-top: 20px;
+  padding: 24px 48px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  border: 3px solid #A7F3D0;
+  border-radius: 999px;
+  font-size: 36px;
+  font-weight: 900;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.7);
+}
+
+/* ================= KINETIC CAPTIONS ================= */
+.captions-host {
+  position: absolute;
+  top: 1420px;
+  left: 60px;
+  right: 140px; /* Safe buffer from right action rail */
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 980;
+  text-align: center;
+  pointer-events: none;
+}
+
+.caption-box {
+  background: rgba(10, 15, 28, 0.88);
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+  padding: 20px 36px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  display: inline-block;
+  max-width: 880px;
+}
+
+.caption-text {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+  color: #FFFFFF;
+}

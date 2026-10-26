@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Кофе НЕ даёт энергию! Ловушка Аденозина</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="40.5"
+      data-width="1080"
+      data-height="1920"
+      data-motion-blur="on"
+    >
+      <!-- Dynamic Color Scripting Backdrops -->
+      <div id="backdrop-1" class="scene-backdrop bg-scene-1"></div>
+      <div id="backdrop-2" class="scene-backdrop bg-scene-2"></div>
+      <div id="backdrop-3" class="scene-backdrop bg-scene-3"></div>
+      <div id="backdrop-4" class="scene-backdrop bg-scene-4"></div>
+      <div id="backdrop-5" class="scene-backdrop bg-scene-5"></div>
+
+      <!-- Ambient Dynamic Glow Spots -->
+      <div id="glow-left" class="ambient-glow glow-1" data-layout-allow-overflow></div>
+      <div id="glow-right" class="ambient-glow glow-2" data-layout-allow-overflow></div>
+      <div id="glow-center" class="ambient-glow glow-3" data-layout-allow-overflow></div>
+
+      <!-- Top Progress Bar -->
+      <div id="progress-host" class="clip" data-start="0" data-duration="40.5">
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- ================= AUDIO TRACKS ================= -->
+      <!-- Voiceover -->
+      <audio id="vo-1" class="clip" data-start="0.1" data-duration="6.98" data-volume="1.0" src="assets/audio/vo-1.mp3"></audio>
+      <audio id="vo-2" class="clip" data-start="7.3" data-duration="8.52" data-volume="1.0" src="assets/audio/vo-2.mp3"></audio>
+      <audio id="vo-3" class="clip" data-start="16.1" data-duration="7.41" data-volume="1.0" src="assets/audio/vo-3.mp3"></audio>
+      <audio id="vo-4" class="clip" data-start="23.8" data-duration="8.28" data-volume="1.0" src="assets/audio/vo-4.mp3"></audio>
+      <audio id="vo-5" class="clip" data-start="32.3" data-duration="7.97" data-volume="1.0" src="assets/audio/vo-5.mp3"></audio>
+
+      <!-- Background Music Bed (seamless 40.5s loop) -->
+      <audio id="bgm-0" class="clip" data-start="0" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-1" class="clip" data-start="4" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-2" class="clip" data-start="8" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-3" class="clip" data-start="12" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-4" class="clip" data-start="16" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-5" class="clip" data-start="20" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-6" class="clip" data-start="24" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-7" class="clip" data-start="28" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-8" class="clip" data-start="32" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-9" class="clip" data-start="36" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-10" class="clip" data-start="40" data-duration="0.5" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+
+      <!-- Sound Effects -->
+      <audio id="sfx-whoosh-1" class="clip" data-start="0.0" data-duration="0.57" data-volume="0.4" src="assets/audio/whoosh.mp3"></audio>
+      <audio id="sfx-click-1" class="clip" data-start="1.5" data-duration="0.37" data-volume="0.6" src="assets/audio/click.mp3"></audio>
+      <audio id="sfx-impact-1" class="clip" data-start="3.4" data-duration="2.12" data-volume="0.6" src="assets/audio/impact-bass-1.mp3"></audio>
+
+      <audio id="sfx-whoosh-short-2" class="clip" data-start="7.2" data-duration="0.57" data-volume="0.5" src="assets/audio/whoosh-short.mp3"></audio>
+      <audio id="sfx-click-2" class="clip" data-start="10.8" data-duration="0.37" data-volume="0.7" src="assets/audio/click.mp3"></audio>
+
+      <audio id="sfx-whoosh-3" class="clip" data-start="16.0" data-duration="0.57" data-volume="0.6" src="assets/audio/whoosh.mp3"></audio>
+      <audio id="sfx-ping-3" class="clip" data-start="17.2" data-duration="1.32" data-volume="0.7" src="assets/audio/ping.mp3"></audio>
+      <audio id="sfx-sparkle-3" class="clip" data-start="18.5" data-duration="1.80" data-volume="0.6" src="assets/audio/sparkle.mp3"></audio>
+
+      <audio id="sfx-whoosh-cinematic-4" class="clip" data-start="23.7" data-duration="5.54" data-volume="0.5" src="assets/audio/whoosh-cinematic.mp3"></audio>
+      <audio id="sfx-impact-4" class="clip" data-start="26.8" data-duration="2.12" data-volume="0.7" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-error-4" class="clip" data-start="28.2" data-duration="1.62" data-volume="0.7" src="assets/audio/error.mp3"></audio>
+
+      <audio id="sfx-chime-5" class="clip" data-start="32.3" data-duration="2.50" data-volume="0.7" src="assets/audio/chime.mp3"></audio>
+      <audio id="sfx-pop-5" class="clip" data-start="35.5" data-duration="0.72" data-volume="0.6" src="assets/audio/pop.mp3"></audio>
+
+      <!-- ================= CAMERA RIG ================= -->
+      <div id="camera-rig">
+
+        <!-- ================= SCENE 1: УТРЕННИЙ ЗОМБИ (0.0s – 7.2s) ================= -->
+        <div id="scene-1" class="clip" data-start="0" data-duration="7.2">
+          <div class="scene-header">
+            <div id="s1-badge" class="badge badge-coffee">☕ ГЛАВНЫЙ МИФ О КОФЕ</div>
+            <h1 id="s1-title" class="scene-title">Кофе на самом деле<br /><span class="hl-coffee">НЕ даёт энергию!</span></h1>
+          </div>
+
+          <!-- Myth Busted Stamp -->
+          <div id="s1-stamp" class="hud-card" style="top: 490px; right: 50%; border-color: #EF4444; color: #F87171;">
+            <span>❌</span>
+            <span>ЭТО ИЛЛЮЗИЯ МОЗГА!</span>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 2: МОЛЕКУЛА СНА АДЕНОЗИН (7.2s – 16.0s) ================= -->
+        <div id="scene-2" class="clip" data-start="7.2" data-duration="8.8">
+          <div class="scene-header">
+            <div id="s2-badge" class="badge badge-blue">🧬 ХИМИЯ МОЗГА</div>
+            <h1 id="s2-title" class="scene-title">Аденозин:<br /><span class="hl-blue">Молекула Усталости 💤</span></h1>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 3: ДИВЕРСАНТ КОФЕИН (16.0s – 23.7s) ================= -->
+        <div id="scene-3" class="clip" data-start="16.0" data-duration="7.7">
+          <div class="scene-header">
+            <div id="s3-badge" class="badge badge-coffee">⚡ ДИВЕРСИЯ КОФЕИНА</div>
+            <h1 id="s3-title" class="scene-title">Кофеин затыкает замок —<br /><span class="hl-coffee">и блокирует сон! ⛔</span></h1>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 4: ФАТАЛЬНЫЙ КРАШ (23.7s – 32.2s) ================= -->
+        <div id="scene-4" class="clip" data-start="23.7" data-duration="8.5">
+          <div class="scene-header">
+            <div id="s4-badge" class="badge badge-red">⚠️ КОФЕИНОВЫЙ КРАШ</div>
+            <h1 id="s4-title" class="scene-title">Кофеин вымывается...<br /><span class="hl-red">Лавина усталости! 🪫</span></h1>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 5: НАУЧНЫЙ ЛАЙФХАК (32.2s – 40.5s) ================= -->
+        <div id="scene-5" class="clip" data-start="32.2" data-duration="8.3">
+          <div class="scene-header">
+            <div id="s5-badge" class="badge badge-green">🏆 НАУЧНЫЙ ЛАЙФХАК</div>
+            <h1 id="s5-title" class="scene-title">Пей кофе правильно —<br /><span class="hl-green">через 90 минут! ⏱️</span></h1>
+          </div>
+
+          <!-- Outro Subscription Card -->
+          <div id="s5-outro-card" class="outro-card">
+            <div class="outro-big-title">
+              Дай кортизолу проснуться! 🚀
+            </div>
+            <div style="font-size: 32px; color: #FFFFFF; font-weight: 800; margin-bottom: 20px;">
+              ⏱️ Жди 90 минут после сна
+            </div>
+            <div class="subscribe-btn">
+              <span>🔔</span>
+              <span>ПОДПИШИСЬ НА КАНАЛ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= INTERACTIVE RECEPTOR (LOCK & KEY) ================= -->
+        <div id="receptor-stage" class="receptor-stage">
+          <div class="receptor-box">
+            <svg class="lock-svg" viewBox="0 0 100 100">
+              <!-- Lock Shackle -->
+              <path d="M 28 45 L 28 28 C 28 15 72 15 72 28 L 72 45" fill="none" stroke="#38BDF8" stroke-width="8" stroke-linecap="round" />
+              <!-- Lock Body -->
+              <rect x="20" y="45" width="60" height="48" rx="12" fill="#0F172A" stroke="#38BDF8" stroke-width="4" />
+              <!-- Keyhole -->
+              <circle cx="50" cy="62" r="8" class="lock-keyhole" />
+              <polygon points="46,62 54,62 57,80 43,80" class="lock-keyhole" />
+            </svg>
+            <div id="receptor-status-text" class="receptor-label" style="color: #38BDF8;">
+              РЕЦЕПТОР АДЕНОЗИНА
+            </div>
+          </div>
+          <!-- Blocked Shield Badge -->
+          <div id="receptor-blocked-badge" class="blocked-badge" style="left: 50%;">
+            <span>⛔</span>
+            <span>СИГНАЛ ЗАБЛОКИРОВАН</span>
+          </div>
+        </div>
+
+        <!-- ================= PERSISTENT CHARACTERS ================= -->
+
+        <!-- CHARACTER 1: МОЗГ (BRAINY) — Managed via Modular CharacterRig -->
+        <div id="brain-char-stage" class="char-stage" style="top: 760px; left: 540px;">
+          <!-- SVG Rig populated by CharacterRig class -->
+        </div>
+
+        <!-- CHARACTER 2: АДЕНОЗИН (ADENOSINE) — The Sleep Molecule -->
+        <div id="adenosine-stage" class="char-stage" style="top: 800px; left: 100px;">
+          <svg class="svg-char" viewBox="0 0 300 300">
+            <defs>
+              <linearGradient id="adenosineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#60A5FA" />
+                <stop offset="60%" stop-color="#3B82F6" />
+                <stop offset="100%" stop-color="#1D4ED8" />
+              </linearGradient>
+            </defs>
+            <!-- Soft sleep blob body -->
+            <path d="M 90 140 C 80 80, 220 80, 210 140 C 250 170, 260 240, 210 260 C 180 275, 120 275, 90 260 C 40 240, 50 170, 90 140 Z" fill="url(#adenosineGrad)" />
+            <!-- Sleepy drooping eyes -->
+            <path d="M 115 155 Q 130 170 145 155" stroke="#1E3A8A" stroke-width="6" stroke-linecap="round" fill="none" />
+            <path d="M 165 155 Q 180 170 195 155" stroke="#1E3A8A" stroke-width="6" stroke-linecap="round" fill="none" />
+            <!-- Gentle sleepy smile -->
+            <path d="M 140 190 Q 155 205 170 190" stroke="#1E3A8A" stroke-width="5" stroke-linecap="round" fill="none" />
+            <!-- Soft cheeks -->
+            <circle cx="110" cy="180" r="10" fill="#93C5FD" opacity="0.6" filter="blur(2px)" />
+            <circle cx="200" cy="180" r="10" fill="#93C5FD" opacity="0.6" filter="blur(2px)" />
+            <!-- Brass Sleep Key -->
+            <g id="adenosine-key" transform-origin="155 220">
+              <circle cx="155" cy="220" r="14" fill="#FBBF24" stroke="#D97706" stroke-width="3" />
+              <rect x="151" y="232" width="8" height="32" rx="3" fill="#FBBF24" stroke="#D97706" stroke-width="2" />
+              <rect x="159" y="248" width="10" height="5" rx="1" fill="#FBBF24" />
+              <rect x="159" y="258" width="12" height="5" rx="1" fill="#FBBF24" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- CHARACTER 3: КОФЕИН (CAFFEINE) — The Imposter Molecule -->
+        <div id="caffeine-stage" class="char-stage" style="top: 780px; left: 1200px;"> <!-- Starts off-screen right -->
+          <svg class="svg-char" viewBox="0 0 300 300">
+            <defs>
+              <linearGradient id="caffeineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F59E0B" />
+                <stop offset="60%" stop-color="#D97706" />
+                <stop offset="100%" stop-color="#92400E" />
+              </linearGradient>
+            </defs>
+            <!-- Energetic coffee bean/mug body -->
+            <rect x="85" y="100" width="130" height="150" rx="36" fill="url(#caffeineGrad)" />
+            <!-- Coffee cup handle -->
+            <path d="M 215 130 C 255 130, 255 200, 215 200" fill="none" stroke="#D97706" stroke-width="16" stroke-linecap="round" />
+            <!-- Lightning bolt on chest -->
+            <polygon points="150,170 142,195 152,195 145,225 162,190 152,190" fill="#FEF08A" filter="drop-shadow(0 0 6px #FDE047)" />
+            <!-- Cool Black Sunglasses -->
+            <rect x="98" y="132" width="46" height="28" rx="8" fill="#0F172A" stroke="#000000" stroke-width="3" />
+            <rect x="154" y="132" width="46" height="28" rx="8" fill="#0F172A" stroke="#000000" stroke-width="3" />
+            <line x1="144" y1="142" x2="154" y2="142" stroke="#000000" stroke-width="4" />
+            <!-- Smug smirk mouth -->
+            <path d="M 135 220 Q 155 235 175 225" stroke="#451A03" stroke-width="6" stroke-linecap="round" fill="none" />
+            <!-- Counterfeit Key in Hand -->
+            <g id="caffeine-key" transform-origin="150 250">
+              <circle cx="150" cy="250" r="14" fill="#EF4444" stroke="#991B1B" stroke-width="3" />
+              <rect x="146" y="262" width="8" height="30" rx="3" fill="#EF4444" stroke="#991B1B" stroke-width="2" />
+              <rect x="154" y="278" width="10" height="6" rx="1" fill="#EF4444" />
+            </g>
+          </svg>
+        </div>
+
+      </div> <!-- /#camera-rig -->
+
+      <!-- ================= KINETIC CAPTIONS HOST ================= -->
+      <div id="captions-host" class="captions-host" data-layout-allow-overlap="true">
+        <!-- Scene 1 Captions -->
+        <div id="cap-1-1" class="caption-box" style="display: none;">
+          <span class="caption-text">Думаешь, кофе даёт <span class="hl-coffee">энергию?</span> ☕</span>
+        </div>
+        <div id="cap-1-2" class="caption-box" style="display: none;">
+          <span class="caption-text">Кофеин <span class="hl-red">нагло обманывает</span> твой мозг! 🧠</span>
+        </div>
+
+        <!-- Scene 2 Captions -->
+        <div id="cap-2-1" class="caption-box" style="display: none;">
+          <span class="caption-text">В голове копится <span class="hl-blue">Аденозин</span> — молекула сна 💤</span>
+        </div>
+        <div id="cap-2-2" class="caption-box" style="display: none;">
+          <span class="caption-text">Она садится в замки: <span class="hl-blue">«Пора спать!»</span> 🔒</span>
+        </div>
+
+        <!-- Scene 3 Captions -->
+        <div id="cap-3-1" class="caption-box" style="display: none;">
+          <span class="caption-text">И тут <span class="hl-coffee">влетает кофеин!</span> ⚡</span>
+        </div>
+        <div id="cap-3-2" class="caption-box" style="display: none;">
+          <span class="caption-text">Он <span class="hl-red">затыкает замок собой</span> и глушит сон! ⛔</span>
+        </div>
+
+        <!-- Scene 4 Captions -->
+        <div id="cap-4-1" class="caption-box" style="display: none;">
+          <span class="caption-text">Но аденозин <span class="hl-purple">копился снаружи!</span> ⏳</span>
+        </div>
+        <div id="cap-4-2" class="caption-box" style="display: none;">
+          <span class="caption-text"><span class="hl-red">Лавина усталости</span> рушится на мозг! 🪫</span>
+        </div>
+
+        <!-- Scene 5 Captions -->
+        <div id="cap-5-1" class="caption-box" style="display: none;">
+          <span class="caption-text">Пей кофе через <span class="hl-green">90 минут после сна!</span> ⏱️</span>
+        </div>
+        <div id="cap-5-2" class="caption-box" style="display: none;">
+          <span class="caption-text">Ставь лайк и <span class="hl-green">подпишись на науку!</span> 🔔</span>
+        </div>
+      </div>
+
+    </div> <!-- /#root -->
+
+    <!-- ================= MODULAR CHARACTER RIG & TIMELINE ================= -->
+    <script src="src/character-rig/viseme-definitions.js"></script>
+    <script src="src/character-rig/character-svg.js"></script>
+    <script src="src/character-rig/character-controller.js"></script>
+    <script src="src/speech-visemes.js"></script>
+    <script>
+      // Register paused root timeline on window.__timelines
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+
+      // 1. Initialize Modular Brain Character Rig
+      const brainy = new CharacterRig({
+        id: "coffee-brainy",
+        container: "#brain-char-stage",
+        hasGlasses: true,
+        hasShadow: true
+      });
+
+      // Scale character slightly larger on stage
+      gsap.set("#brain-char-stage", { scale: 1.05, transformOrigin: "center center" });
+      gsap.set("#s1-stamp", { xPercent: 50, scale: 0, opacity: 0 });
+      gsap.set("#receptor-blocked-badge", { xPercent: -50, scale: 0, opacity: 0 });
+
+      // Organic subtle breathing & blinking deterministic timeline passes
+      brainy.addBreathing(tl, 0.0, 40.5);
+      brainy.addBlinkLoop(tl, 0.0, 40.5);
+
+      // Apply Automated Lip-Sync (excluding KO crash beat 26.5s-32.4s)
+      if (window.__speechVisemes && Array.isArray(window.__speechVisemes)) {
+        const activeVisemes = window.__speechVisemes.filter(v => v.time < 26.5 || v.time > 32.4);
+        brainy.applyLipSync(tl, activeVisemes, 0.0);
+      }
+      // Top progress bar fill across 40.5s
+      tl.to("#progress-bar", {
+        width: "100%",
+        duration: 40.5,
+        ease: "none"
+      }, 0);
+
+      // ================= SCENE 1 (0.0s – 7.2s): УТРЕННИЙ ЗОМБИ =================
+      brainy.setEmotion(tl, "idle", 0.0);
+      brainy.setEyeState(tl, "look-center", 0.0);
+
+      // Camera intro
+      tl.fromTo("#camera-rig",
+        { scale: 1.04, y: -15 },
+        { scale: 1.0, y: 0, duration: 1.2, ease: "power2.out" },
+        0
+      );
+
+      // Scene 1 Title
+      tl.fromTo("#s1-badge",
+        { scale: 1.1, y: -10 },
+        { scale: 1.0, y: 0, duration: 0.6, ease: "power2.out" },
+        0
+      );
+      tl.fromTo("#s1-title",
+        { scale: 1.05, y: 15 },
+        { scale: 1.0, y: 0, duration: 0.8, ease: "power2.out" },
+        0
+      );
+
+      // Brain is sleepy & staggering
+      tl.to("#brain-char-stage", {
+        y: 20,
+        rotation: 4,
+        duration: 1.8,
+        repeat: 1,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 0.2);
+
+      // Myth busted stamp slams in
+      tl.fromTo("#s1-stamp",
+        { scale: 0, opacity: 0, xPercent: 50, rotation: -15 },
+        { scale: 1, opacity: 1, xPercent: 50, rotation: 3, duration: 0.5, ease: "back.out(2)" },
+        3.4
+      );
+
+      // Captions 1
+      tl.set("#cap-1-1", { display: "inline-block" }, 0.1);
+      tl.set("#cap-1-1", { display: "none" }, 3.5);
+      tl.set("#cap-1-2", { display: "inline-block" }, 3.5);
+      tl.set("#cap-1-2", { display: "none" }, 7.1);
+
+      // Scene 1 exit
+      tl.to(["#s1-badge", "#s1-title", "#s1-stamp"], {
+        opacity: 0,
+        y: -30,
+        duration: 0.4,
+        ease: "power2.in"
+      }, 6.8);
+
+
+      // ================= SCENE 2 (7.2s – 16.0s): АДЕНОЗИН И ЗАМОК =================
+      // Color Scripting: Transition to warm espresso & caramel
+      tl.to("#backdrop-1", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 7.1);
+      tl.to("#backdrop-2", { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 7.1);
+      tl.to("#glow-left", { backgroundColor: "rgba(217, 119, 6, 0.5)", duration: 0.8 }, 7.2);
+      tl.to("#glow-right", { backgroundColor: "rgba(56, 189, 248, 0.4)", duration: 0.8 }, 7.2);
+
+      // Header 2
+      tl.fromTo("#s2-badge",
+        { opacity: 0, scale: 0.6, y: -30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        7.3
+      );
+      tl.fromTo("#s2-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        7.5
+      );
+
+      // Receptor lock drops in center
+      tl.fromTo("#receptor-stage",
+        { y: -100, opacity: 0, scale: 0.8 },
+        { y: 0, opacity: 1, scale: 1.0, duration: 0.7, ease: "back.out(1.5)" },
+        7.6
+      );
+
+      // Adenosine steps up to receptor on left
+      tl.fromTo("#adenosine-stage",
+        { x: -100, opacity: 0 },
+        { x: 50, opacity: 1, duration: 0.8, ease: "power2.out" },
+        7.8
+      );
+
+      // Adenosine turns key into receptor at 10.8s
+      tl.to("#adenosine-key", {
+        rotation: 90,
+        x: 80,
+        y: -80,
+        duration: 0.5,
+        ease: "power2.inOut"
+      }, 10.6);
+
+      // Receptor lights up sleep lock
+      tl.to(".lock-keyhole", {
+        fill: "#38BDF8",
+        duration: 0.4
+      }, 11.0);
+      tl.set("#receptor-status-text", { textContent: "СИГНАЛ СНА АКТИВЕН 💤", color: "#38BDF8" }, 11.0);
+
+      // Brain gets super sleepy
+      brainy.setEmotion(tl, "idle", 11.0);
+      tl.to("#brain-char-stage", {
+        y: 40,
+        rotation: 8,
+        duration: 1.2,
+        ease: "power2.out"
+      }, 11.2);
+
+      // Captions 2
+      tl.set("#cap-2-1", { display: "inline-block" }, 7.3);
+      tl.set("#cap-2-1", { display: "none" }, 11.5);
+      tl.set("#cap-2-2", { display: "inline-block" }, 11.5);
+      tl.set("#cap-2-2", { display: "none" }, 15.8);
+
+      // Scene 2 exit
+      tl.to(["#s2-badge", "#s2-title"], {
+        opacity: 0,
+        y: -30,
+        duration: 0.4,
+        ease: "power2.in"
+      }, 15.6);
+
+
+      // ================= SCENE 3 (16.0s – 23.7s): КОФЕИН-ДИВЕРСАНТ =================
+      // Color Scripting: Electric Neon Amber Overdrive
+      tl.to("#backdrop-2", { opacity: 0, duration: 0.4, ease: "power2.out" }, 15.9);
+      tl.to("#backdrop-3", { opacity: 1, duration: 0.4, ease: "power2.out" }, 15.9);
+      tl.to("#glow-left", { backgroundColor: "rgba(245, 158, 11, 0.6)", duration: 0.6 }, 16.0);
+      tl.to("#glow-right", { backgroundColor: "rgba(234, 88, 12, 0.5)", duration: 0.6 }, 16.0);
+
+      // Header 3
+      tl.fromTo("#s3-badge",
+        { opacity: 0, scale: 0.6, y: -30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        16.1
+      );
+      tl.fromTo("#s3-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        16.3
+      );
+
+      // Caffeine zooms in fast from right!
+      tl.to("#caffeine-stage", {
+        x: -780, /* Land right in front of receptor */
+        duration: 0.6,
+        ease: "power3.out"
+      }, 16.1);
+
+      // Caffeine knocks Adenosine away!
+      tl.to("#adenosine-stage", {
+        x: -160,
+        rotation: -20,
+        duration: 0.5,
+        ease: "power2.out"
+      }, 16.5);
+      tl.to("#adenosine-key", {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        duration: 0.4
+      }, 16.6);
+
+      // Caffeine wedges counterfeit key into receptor at 17.2s!
+      tl.to("#caffeine-key", {
+        x: -40,
+        y: -90,
+        duration: 0.4,
+        ease: "power2.inOut"
+      }, 17.0);
+
+      // Blocked badge explodes out!
+      tl.to("#receptor-blocked-badge", {
+        scale: 1.0,
+        opacity: 1,
+        duration: 0.4,
+        ease: "back.out(2)"
+      }, 17.2);
+      tl.set("#receptor-status-text", { textContent: "РЕЦЕПТОР ЗАБЛОКИРОВАН ⛔", color: "#EF4444" }, 17.2);
+
+      // Brain instantly flashes with HYPER ENERGY!
+      brainy.setEmotion(tl, "eureka", 18.0);
+      tl.to("#brain-char-stage", {
+        y: -20,
+        rotation: 0,
+        scale: 1.25,
+        duration: 0.4,
+        ease: "back.out(2)"
+      }, 18.0);
+
+      // Brain hyper bounce
+      tl.to("#brain-char-stage", {
+        y: -40,
+        duration: 0.2,
+        repeat: 14,
+        yoyo: true,
+        ease: "power1.inOut"
+      }, 18.5);
+
+      // Captions 3
+      tl.set("#cap-3-1", { display: "inline-block" }, 16.1);
+      tl.set("#cap-3-1", { display: "none" }, 19.5);
+      tl.set("#cap-3-2", { display: "inline-block" }, 19.5);
+      tl.set("#cap-3-2", { display: "none" }, 23.5);
+
+      // Scene 3 exit
+      tl.to(["#s3-badge", "#s3-title"], {
+        opacity: 0,
+        y: -30,
+        duration: 0.4,
+        ease: "power2.in"
+      }, 23.4);
+
+
+      // ================= SCENE 4 (23.7s – 32.2s): КОФЕИНОВЫЙ КРАШ =================
+      // Color Scripting: Deep Dark Violet Crash Abyss
+      tl.to("#backdrop-3", { opacity: 0, duration: 0.5, ease: "power2.out" }, 23.6);
+      tl.to("#backdrop-4", { opacity: 1, duration: 0.5, ease: "power2.out" }, 23.6);
+      tl.to("#glow-left", { backgroundColor: "rgba(139, 92, 246, 0.4)", duration: 0.8 }, 23.7);
+      tl.to("#glow-right", { backgroundColor: "rgba(239, 68, 68, 0.45)", duration: 0.8 }, 23.7);
+
+      // Header 4
+      tl.fromTo("#s4-badge",
+        { opacity: 0, scale: 0.6, y: -30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        23.8
+      );
+      tl.fromTo("#s4-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        24.0
+      );
+
+      // Caffeine fades & dissolves into smoke at 25.5s
+      tl.to("#caffeine-stage", {
+        opacity: 0,
+        scale: 0.4,
+        duration: 0.8,
+        ease: "power2.in"
+      }, 25.0);
+      tl.to("#receptor-blocked-badge", {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3
+      }, 25.5);
+
+      // Adenosine swarm charges in!
+      tl.to("#adenosine-stage", {
+        x: 180,
+        scale: 1.4,
+        opacity: 1,
+        duration: 0.8,
+        ease: "back.out(1.5)"
+      }, 25.8);
+
+      // Brain collapses in utter exhaustion (CRASH!)
+      brainy.setEmotion(tl, "scared", 26.5);
+      tl.to("#brain-char-stage", {
+        y: 120,
+        rotation: -18,
+        scale: 0.85,
+        duration: 0.5,
+        ease: "power3.in"
+      }, 26.5);
+
+      // Camera shake on crash impact!
+      tl.to("#camera-rig", {
+        y: 16,
+        duration: 0.08,
+        repeat: 5,
+        yoyo: true,
+        ease: "rough"
+      }, 26.8);
+      tl.to("#camera-rig", { y: 0, duration: 0.2 }, 27.3);
+
+      // Captions 4
+      tl.set("#cap-4-1", { display: "inline-block" }, 23.8);
+      tl.set("#cap-4-1", { display: "none" }, 27.5);
+      tl.set("#cap-4-2", { display: "inline-block" }, 27.5);
+      tl.set("#cap-4-2", { display: "none" }, 32.0);
+
+      // Scene 4 exit
+      tl.to(["#s4-badge", "#s4-title", "#receptor-stage", "#adenosine-stage"], {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.in"
+      }, 31.8);
+
+
+      // ================= SCENE 5 (32.2s – 40.5s): НАУЧНЫЙ ЛАЙФХАК =================
+      // Color Scripting: Fresh Emerald Scientific Triumph
+      tl.to("#backdrop-4", { opacity: 0, duration: 0.5, ease: "power2.out" }, 32.1);
+      tl.to("#backdrop-5", { opacity: 1, duration: 0.5, ease: "power2.out" }, 32.1);
+      tl.to("#glow-left", { backgroundColor: "rgba(16, 185, 129, 0.5)", duration: 0.6 }, 32.2);
+      tl.to("#glow-right", { backgroundColor: "rgba(52, 211, 153, 0.4)", duration: 0.6 }, 32.2);
+
+      // Header 5
+      tl.fromTo("#s5-badge",
+        { opacity: 0, scale: 0.6, y: -30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "back.out(1.7)" },
+        32.3
+      );
+      tl.fromTo("#s5-title",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" },
+        32.5
+      );
+
+      // Brain springs back up to triumph!
+      brainy.setEmotion(tl, "triumph", 32.5);
+      tl.to("#brain-char-stage", {
+        x: -40, /* centered */
+        y: 140,
+        rotation: 0,
+        scale: 1.1,
+        duration: 0.6,
+        ease: "back.out(2)"
+      }, 32.4);
+
+      // Outro card pops in
+      tl.fromTo("#s5-outro-card",
+        { y: 150, opacity: 0, scale: 0.85 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" },
+        33.5
+      );
+
+      // Pulsing subscribe button
+      tl.to(".subscribe-btn", {
+        scale: 1.06,
+        duration: 0.6,
+        repeat: 9,
+        yoyo: true,
+        ease: "sine.inOut"
+      }, 34.0);
+
+      // Captions 5
+      tl.set("#cap-5-1", { display: "inline-block" }, 32.3);
+      tl.set("#cap-5-1", { display: "none" }, 36.2);
+      tl.set("#cap-5-2", { display: "inline-block" }, 36.2);
+      tl.set("#cap-5-2", { display: "none" }, 40.2);
+
+      // ================= APPLY AUTOMATED LIP-SYNC =================
+      // Load and schedule visemes
+      fetch("src/speech-visemes.json")
+        .then(r => r.json())
+        .then(visemes => {
+          brainy.applyLipSync(tl, visemes, 0.0);
+        })
+        .catch(e => {
+          console.warn("Speech visemes fallback:", e);
+        });
+
+    </script>
+  </body>
+</html>
