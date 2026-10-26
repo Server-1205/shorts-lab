@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>HyperFrames Modular 2D Character Rig Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="15"
+      data-width="1080"
+      data-height="1920"
+      data-motion-blur="on"
+    >
+      <!-- Ambient Background Glows -->
+      <div class="ambient-glow glow-1" data-layout-allow-overflow></div>
+      <div class="ambient-glow glow-2" data-layout-allow-overflow></div>
+      <div class="ambient-glow glow-3" data-layout-allow-overflow></div>
+
+      <!-- Top Timeline Progress Bar -->
+      <div id="progress-host" class="clip" data-start="0" data-duration="15">
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Audio Elements: Looped background music + timed SFX -->
+      <audio id="bgm-0" class="clip" data-start="0" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-1" class="clip" data-start="4" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-2" class="clip" data-start="8" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-3" class="clip" data-start="12" data-duration="3" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+
+      <!-- Sound Effects -->
+      <audio id="sfx-whoosh-in" class="clip" data-start="0.1" data-duration="0.57" data-volume="0.4" src="assets/audio/whoosh-short.mp3"></audio>
+      <audio id="sfx-panic-error" class="clip" data-start="3.0" data-duration="1.62" data-volume="0.5" src="assets/audio/error.mp3"></audio>
+      <audio id="sfx-panic-impact" class="clip" data-start="3.05" data-duration="2.12" data-volume="0.5" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-eureka-ping" class="clip" data-start="6.5" data-duration="1.32" data-volume="0.6" src="assets/audio/ping.mp3"></audio>
+      <audio id="sfx-eureka-sparkle" class="clip" data-start="6.6" data-duration="1.80" data-volume="0.5" src="assets/audio/sparkle.mp3"></audio>
+
+      <!-- Voiceover Speech Track -->
+      <audio id="vo-speech" class="clip" data-start="7.5" data-duration="7.20" data-volume="1.0" src="assets/audio/vo-speech.mp3"></audio>
+
+      <!-- Triumph SFX -->
+      <audio id="sfx-triumph-chime" class="clip" data-start="13.8" data-duration="1.20" data-volume="0.6" src="assets/audio/chime.mp3"></audio>
+      <audio id="sfx-triumph-pop" class="clip" data-start="14.0" data-duration="0.72" data-volume="0.5" src="assets/audio/pop.mp3"></audio>
+
+      <!-- ================= VISUAL CLIPS ================= -->
+
+      <!-- Header Section -->
+      <div id="header-clip" class="clip" data-start="0" data-duration="15">
+        <div class="header-wrapper">
+          <div class="category-tag">
+            <span>🎭</span>
+            <span>HYPERFRAMES CHARACTER RIG</span>
+          </div>
+          <h1 class="main-title">Modular 2D Character</h1>
+          <p class="subtitle">Standardized Rigging • Expressive Emotions • Automated Lip-Sync</p>
+        </div>
+      </div>
+
+      <!-- Real-Time Emotion HUD Status Card -->
+      <div id="hud-clip" class="clip" data-start="0" data-duration="15">
+        <div class="hud-card">
+          <div class="hud-left">
+            <div id="hud-status-dot" class="status-dot"></div>
+            <div>
+              <div class="hud-label">Current Emotion</div>
+              <div id="hud-emotion-title" class="hud-value">IDLE</div>
+            </div>
+          </div>
+          <div id="hud-state-desc" class="hud-state-desc">RELAXED POSTURE</div>
+        </div>
+      </div>
+
+      <!-- Character Stage Container -->
+      <div id="char-stage-clip" class="clip" data-start="0" data-duration="15" data-layout-allow-overflow>
+        <div id="character-stage" class="character-stage">
+          <!-- Injected dynamically by CharacterRig controller -->
+        </div>
+      </div>
+
+      <!-- Real-Time Viseme Visualizer Panel -->
+      <div id="viseme-clip" class="clip" data-start="0" data-duration="15">
+        <div class="viseme-panel">
+          <div class="viseme-panel-title">
+            <span>Syllable Viseme Visualizer</span>
+            <span id="active-viseme-label" style="color: #38bdf8;">[REST]</span>
+          </div>
+          <div class="viseme-chips-row" data-layout-ignore>
+            <div id="chip-rest" class="viseme-chip active">
+              <span class="chip-name">REST</span>
+              <span class="chip-sound">Neutral</span>
+            </div>
+            <div id="chip-A" class="viseme-chip">
+              <span class="chip-name">A</span>
+              <span class="chip-sound">"Ah / Я"</span>
+            </div>
+            <div id="chip-O" class="viseme-chip">
+              <span class="chip-name">O</span>
+              <span class="chip-sound">"Oh / Ё"</span>
+            </div>
+            <div id="chip-E" class="viseme-chip">
+              <span class="chip-name">E</span>
+              <span class="chip-sound">"Ee / И"</span>
+            </div>
+            <div id="chip-U" class="viseme-chip">
+              <span class="chip-name">U</span>
+              <span class="chip-sound">"Oo / Ю"</span>
+            </div>
+            <div id="chip-smile" class="viseme-chip">
+              <span class="chip-name">SMILE</span>
+              <span class="chip-sound">Cheerful</span>
+            </div>
+            <div id="chip-laugh" class="viseme-chip">
+              <span class="chip-name">LAUGH</span>
+              <span class="chip-sound">Open</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Speech Caption Card -->
+      <div id="caption-clip" class="clip" data-start="0" data-duration="15">
+        <div class="caption-card">
+          <div id="caption-label" class="caption-label">Automated Speech Lip-Sync</div>
+          <div id="caption-text" class="caption-text">
+            «Скажи себе: я поработаю ровно две минуты, а потом брошу.»
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Footer Highlights -->
+      <div id="features-clip" class="clip" data-start="0" data-duration="15">
+        <div class="features-grid" data-layout-ignore>
+          <div class="feature-box">
+            <div class="feature-title">Pluggable Emotions</div>
+            <div class="feature-desc">Idle, Scared, Eureka, Happy</div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title">Phonetic Lip-Sync</div>
+            <div class="feature-desc">Automated Syllable Parser</div>
+          </div>
+          <div class="feature-box">
+            <div class="feature-title">Semantic SVG Parts</div>
+            <div class="feature-desc">Brows, Eyes, Cheeks, Limbs</div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /#root -->
+
+    <!-- Character Rig Controller & Definitions -->
+    <script src="src/character-rig/viseme-definitions.js"></script>
+    <script src="src/character-rig/character-svg.js"></script>
+    <script src="src/character-rig/character-controller.js"></script>
+
+    <!-- Master Animation Timeline -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // 1. Instantiate Character Rig
+      const brainy = new CharacterRig({
+        id: "demo-brainy",
+        container: "#character-stage",
+        hasGlasses: true,
+        hasShadow: true
+      });
+
+      // Scale character slightly larger on stage for vertical video framing
+      gsap.set("#character-stage", { scale: 1.35, transformOrigin: "center center" });
+
+      // Progress bar fill across full video duration
+      tl.to("#progress-bar", { width: "100%", duration: 15.0, ease: "none" }, 0);
+
+      // Character fly-in entrance at 0s
+      tl.fromTo("#character-stage",
+        { y: -60, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1.35, duration: 0.8, ease: "back.out(1.4)" },
+        0.1
+      );
+
+      // ================= 1. EMOTION: IDLE (0.0s - 3.0s) =================
+      brainy.setEmotion(tl, "idle", 0.0);
+      brainy.addBreathing(tl, 0.0, 15.0); // Organic subtle breathing throughout
+      brainy.addBlinkLoop(tl, 0.0, 15.0); // Natural blinks
+
+      // Looking around during idle
+      brainy.setEyeState(tl, "look-left", 0.8, { duration: 0.2 });
+      brainy.setEyeState(tl, "look-right", 1.5, { duration: 0.25 });
+      brainy.setEyeState(tl, "look-center", 2.2, { duration: 0.2 });
+
+      // HUD state: Idle
+      tl.set("#hud-emotion-title", { textContent: "IDLE" }, 0.0);
+      tl.set("#hud-state-desc", { textContent: "RELAXED POSTURE", color: "#38bdf8" }, 0.0);
+      tl.set("#hud-status-dot", { backgroundColor: "#06b6d4", boxShadow: "0 0 16px #06b6d4" }, 0.0);
+      tl.set("#caption-label", { textContent: "STATE: OBSERVING", color: "#38bdf8" }, 0.0);
+      tl.set("#caption-text", { textContent: "Character Rig is initialized in relaxed Idle state with organic breathing & blinking." }, 0.0);
+
+      // ================= 2. EMOTION: SCARED (3.0s - 6.5s) =================
+      // Tremor, pupils shrink to pinpoints, glasses slip down nose, scared squiggly mouth!
+      brainy.setEmotion(tl, "scared", 3.0, { duration: 0.4 });
+
+      // Sudden terror recoil & shake
+      tl.to("#character-stage", {
+        scale: 1.25,
+        y: 20,
+        duration: 0.35,
+        ease: "power2.out"
+      }, 3.0);
+
+      // HUD state: Scared
+      tl.set("#hud-emotion-title", { textContent: "SCARED" }, 3.0);
+      tl.set("#hud-state-desc", { textContent: "DEADLINE PANIC", color: "#f43f5e" }, 3.0);
+      tl.set("#hud-status-dot", { backgroundColor: "#f43f5e", boxShadow: "0 0 20px #f43f5e" }, 3.0);
+      tl.set("#caption-label", { textContent: "STATE: REACTION & SQUASH", color: "#f43f5e" }, 3.0);
+      tl.set("#caption-text", { textContent: "Panic triggers tremor shiver, dilated pupils, sliding glasses, and wavy mouth!" }, 3.0);
+
+      // ================= 3. EMOTION: EUREKA (6.5s - 7.5s) =================
+      // Pop lightbulb, snap glasses back, heroic determined brows, triumphant smile!
+      brainy.setEmotion(tl, "eureka", 6.5, { duration: 0.35 });
+
+      // Hop up proudly
+      tl.to("#character-stage", {
+        scale: 1.38,
+        y: -15,
+        duration: 0.3,
+        ease: "back.out(2)"
+      }, 6.5);
+
+      // HUD state: Eureka
+      tl.set("#hud-emotion-title", { textContent: "EUREKA" }, 6.5);
+      tl.set("#hud-state-desc", { textContent: "LIGHTBULB FLASH", color: "#fbbf24" }, 6.5);
+      tl.set("#hud-status-dot", { backgroundColor: "#fbbf24", boxShadow: "0 0 20px #fbbf24" }, 6.5);
+      tl.set("#caption-label", { textContent: "STATE: BREAKTHROUGH", color: "#fbbf24" }, 6.5);
+      tl.set("#caption-text", { textContent: "A breakthrough idea! Glasses snap back, cheeks glow, and right arm points up!" }, 6.5);
+
+      // ================= 4. EMOTION: HAPPY & AUTOMATED LIP-SYNC (7.5s - 14.0s) =================
+      brainy.setEmotion(tl, "talking", 7.5, { duration: 0.25 });
+
+      // HUD state: Happy / Lip-Sync
+      tl.set("#hud-emotion-title", { textContent: "HAPPY & TALKING" }, 7.5);
+      tl.set("#hud-state-desc", { textContent: "SYLLABLE LIP-SYNC", color: "#10b981" }, 7.5);
+      tl.set("#hud-status-dot", { backgroundColor: "#10b981", boxShadow: "0 0 20px #10b981" }, 7.5);
+      tl.set("#caption-label", { textContent: "VOICEOVER LIP-SYNC", color: "#10b981" }, 7.5);
+      tl.set("#caption-text", { textContent: "«Скажи себе: я поработаю ровно две минуты, а потом брошу.»" }, 7.5);
+
+      // High-resolution viseme keyframe sequence generated by scripts/lip-sync.mjs
+      const visemeSequence = [
+        { time: 0.0, mouth: "A", duration: 0.313 },
+        { time: 0.313, mouth: "E", duration: 0.625 },
+        { time: 0.938, mouth: "rest", duration: 0.06 },
+        { time: 0.998, mouth: "E", duration: 0.253 },
+        { time: 1.251, mouth: "rest", duration: 0.22 },
+        { time: 1.471, mouth: "A", duration: 0.313 },
+        { time: 1.784, mouth: "rest", duration: 0.06 },
+        { time: 1.844, mouth: "O", duration: 0.253 },
+        { time: 2.097, mouth: "A", duration: 0.313 },
+        { time: 2.41, mouth: "rest", duration: 0.06 },
+        { time: 2.47, mouth: "O", duration: 0.252 },
+        { time: 2.722, mouth: "A", duration: 0.313 },
+        { time: 3.035, mouth: "U", duration: 0.313 },
+        { time: 3.348, mouth: "O", duration: 0.313 },
+        { time: 3.661, mouth: "E", duration: 0.313 },
+        { time: 3.974, mouth: "rest", duration: 0.06 },
+        { time: 4.034, mouth: "E", duration: 0.252 },
+        { time: 4.286, mouth: "U", duration: 0.313 },
+        { time: 4.599, mouth: "E", duration: 0.313 },
+        { time: 4.912, mouth: "rest", duration: 0.12 },
+        { time: 5.032, mouth: "A", duration: 0.313 },
+        { time: 5.345, mouth: "rest", duration: 0.06 },
+        { time: 5.405, mouth: "O", duration: 0.565 },
+        { time: 5.97, mouth: "rest", duration: 0.06 },
+        { time: 6.03, mouth: "O", duration: 0.253 },
+        { time: 6.283, mouth: "U", duration: 0.313 },
+        { time: 6.596, mouth: "rest", duration: 0.4 }
+      ];
+
+      // Apply lip-sync to Character Rig
+      brainy.applyLipSync(tl, visemeSequence, 7.5, { bounceIntensity: 3.5 });
+
+      // Synchronize Viseme HUD Chip Highlights in real-time
+      const chips = {
+        'rest': '#chip-rest',
+        'A': '#chip-A',
+        'O': '#chip-O',
+        'E': '#chip-E',
+        'U': '#chip-U',
+        'smile': '#chip-smile',
+        'open-laugh': '#chip-laugh'
+      };
+
+      const allChips = Object.values(chips);
+
+      for (const kf of visemeSequence) {
+        const at = 7.5 + kf.time;
+        const targetChip = chips[kf.mouth];
+        if (targetChip) {
+          tl.set(allChips, { className: "viseme-chip" }, at);
+          tl.set(targetChip, { className: "viseme-chip active" }, at);
+          tl.set("#active-viseme-label", { textContent: `[${kf.mouth.toUpperCase()}]` }, at);
+        }
+      }
+
+      // ================= 5. EMOTION: TRIUMPH & FINAL CELEBRATION (14.15s - 15.0s) =================
+      brainy.setEmotion(tl, "triumph", 14.15, { duration: 0.3 });
+      brainy.setEyeState(tl, "wink", 14.3, { duration: 0.25 });
+
+      // High five / victory jump
+      tl.to("#character-stage", {
+        y: -30,
+        rotation: -4,
+        scale: 1.42,
+        duration: 0.35,
+        yoyo: true,
+        repeat: 1,
+        ease: "power2.out"
+      }, 14.15);
+
+      // HUD state: Triumph
+      tl.set("#hud-emotion-title", { textContent: "TRIUMPH" }, 14.15);
+      tl.set("#hud-state-desc", { textContent: "FLOW STATE ACHIEVED", color: "#ec4899" }, 14.15);
+      tl.set("#hud-status-dot", { backgroundColor: "#ec4899", boxShadow: "0 0 24px #ec4899" }, 14.15);
+      tl.set(allChips, { className: "viseme-chip" }, 14.15);
+      tl.set("#chip-laugh", { className: "viseme-chip active" }, 14.15);
+      tl.set("#active-viseme-label", { textContent: "[LAUGH]" }, 14.15);
+      tl.set("#caption-label", { textContent: "GOAL COMPLETED", color: "#ec4899" }, 14.15);
+      tl.set("#caption-text", { textContent: "Modular Rig seamlessly transitions between all emotions and phonemes!" }, 14.15);
+      // Register master timeline with HyperFrames
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

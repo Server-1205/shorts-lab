@@ -1,0 +1,192 @@
+[
+  {
+    "time": 0,
+    "mouth": "O",
+    "duration": 0.243
+  },
+  {
+    "time": 0.243,
+    "mouth": "E",
+    "duration": 0.487
+  },
+  {
+    "time": 0.73,
+    "mouth": "rest",
+    "duration": 0.28
+  },
+  {
+    "time": 1.01,
+    "mouth": "A",
+    "duration": 0.183
+  },
+  {
+    "time": 1.193,
+    "mouth": "E",
+    "duration": 0.243
+  },
+  {
+    "time": 1.437,
+    "mouth": "O",
+    "duration": 0.243
+  },
+  {
+    "time": 1.68,
+    "mouth": "U",
+    "duration": 0.243
+  },
+  {
+    "time": 1.923,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 1.983,
+    "mouth": "E",
+    "duration": 0.183
+  },
+  {
+    "time": 2.167,
+    "mouth": "U",
+    "duration": 0.243
+  },
+  {
+    "time": 2.41,
+    "mouth": "rest",
+    "duration": 0.22
+  },
+  {
+    "time": 2.63,
+    "mouth": "A",
+    "duration": 0.243
+  },
+  {
+    "time": 2.873,
+    "mouth": "E",
+    "duration": 0.487
+  },
+  {
+    "time": 3.36,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 3.42,
+    "mouth": "E",
+    "duration": 0.183
+  },
+  {
+    "time": 3.603,
+    "mouth": "rest",
+    "duration": 0.22
+  },
+  {
+    "time": 3.823,
+    "mouth": "A",
+    "duration": 0.243
+  },
+  {
+    "time": 4.067,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 4.127,
+    "mouth": "O",
+    "duration": 0.183
+  },
+  {
+    "time": 4.31,
+    "mouth": "A",
+    "duration": 0.243
+  },
+  {
+    "time": 4.553,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 4.613,
+    "mouth": "O",
+    "duration": 0.183
+  },
+  {
+    "time": 4.797,
+    "mouth": "A",
+    "duration": 0.243
+  },
+  {
+    "time": 5.04,
+    "mouth": "U",
+    "duration": 0.243
+  },
+  {
+    "time": 5.283,
+    "mouth": "O",
+    "duration": 0.243
+  },
+  {
+    "time": 5.526,
+    "mouth": "E",
+    "duration": 0.243
+  },
+  {
+    "time": 5.77,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 5.83,
+    "mouth": "E",
+    "duration": 0.183
+  },
+  {
+    "time": 6.013,
+    "mouth": "U",
+    "duration": 0.243
+  },
+  {
+    "time": 6.256,
+    "mouth": "E",
+    "duration": 0.243
+  },
+  {
+    "time": 6.5,
+    "mouth": "rest",
+    "duration": 0.12
+  },
+  {
+    "time": 6.62,
+    "mouth": "A",
+    "duration": 0.243
+  },
+  {
+    "time": 6.863,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 6.923,
+    "mouth": "O",
+    "duration": 0.426
+  },
+  {
+    "time": 7.35,
+    "mouth": "rest",
+    "duration": 0.06
+  },
+  {
+    "time": 7.41,
+    "mouth": "O",
+    "duration": 0.183
+  },
+  {
+    "time": 7.593,
+    "mouth": "U",
+    "duration": 0.243
+  },
+  {
+    "time": 7.836,
+    "mouth": "rest",
+    "duration": 0.42
+  }
+]

@@ -14,6 +14,11 @@
       "name": "camera-shake",
       "type": "hyperframes:component",
       "target": "compositions/components/camera-shake.html"
+    },
+    {
+      "name": "character-rig",
+      "type": "hyperframes:component",
+      "target": "compositions/components/character-rig.html"
     }
     },
     {

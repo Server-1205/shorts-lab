@@ -1,0 +1,151 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {
+      "id": "characterType",
+      "type": "enum",
+      "label": "Character type",
+      "default": "brainy",
+      "options": [
+        { "value": "brainy", "label": "Brainy (Intellectual mascot)" },
+        { "value": "mascot", "label": "Mascot (Friendly buddy)" }
+      ]
+    },
+    {
+      "id": "hasGlasses",
+      "type": "boolean",
+      "label": "Has glasses",
+      "default": true
+    }
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Modular 2D Character Rig</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0a0e1a;
+        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        overflow: hidden;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .char-stage {
+        position: relative;
+        width: 480px;
+        height: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .character-rig-svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      .preview-badge {
+        position: absolute;
+        top: 60px;
+        padding: 10px 24px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 999px;
+        font-size: 18px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #38bdf8;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      WIRING (How to use Character Rig in any composition):
+        1. Include the VisemeDefinitions & CharacterRig scripts (or copy src/components/character-rig/)
+        2. Create container: <div id="char-container" class="char-stage"></div>
+        3. Instantiate and drive on your paused GSAP timeline:
+             const char = new CharacterRig({ id: "brainy", container: "#char-container" });
+             char.setEmotion(tl, "idle", 0);
+             char.setEmotion(tl, "scared", 2.0);
+             char.setEmotion(tl, "eureka", 4.0);
+             char.setEmotion(tl, "happy", 6.0);
+             char.applyLipSync(tl, visemes, 6.5);
+    -->
+    <div
+      id="root"
+      data-composition-id="character-rig"
+      data-start="0"
+      data-duration="8"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div class="preview-badge clip" data-start="0" data-duration="8">
+        HyperFrames Modular Character Rig
+      </div>
+
+      <div
+        id="char-preview-stage"
+        class="char-stage clip"
+        data-start="0"
+        data-duration="8"
+        data-track-index="1"
+      >
+        <!-- Injected by CharacterRig controller below -->
+      </div>
+    </div>
+
+    <!-- Rig Scripts -->
+    <script src="../../src/components/character-rig/viseme-definitions.js"></script>
+    <script src="../../src/components/character-rig/character-svg.js"></script>
+    <script src="../../src/components/character-rig/character-controller.js"></script>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Mount Rig
+      const char = new CharacterRig({
+        id: "preview-char",
+        container: "#char-preview-stage",
+        hasGlasses: true
+      });
+
+      // Emotion Sequence
+      char.setEmotion(tl, "idle", 0.0);
+      char.addBreathing(tl, 0.0, 8.0);
+      char.addBlinkLoop(tl, 0.0, 8.0);
+
+      // Look around in idle
+      char.setEyeState(tl, "look-left", 0.8);
+      char.setEyeState(tl, "look-right", 1.4);
+      char.setEyeState(tl, "look-center", 1.9);
+
+      // Scared reaction
+      char.setEmotion(tl, "scared", 2.2);
+
+      // Eureka idea!
+      char.setEmotion(tl, "eureka", 4.2);
+
+      // Happy triumph
+      char.setEmotion(tl, "triumph", 6.0);
+      char.setEyeState(tl, "wink", 6.8);
+
+      window.__timelines["character-rig"] = tl;
+    </script>
+  </body>
+</html>
