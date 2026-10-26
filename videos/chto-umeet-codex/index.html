@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Ты думаешь, Codex просто пишет код? Вот что он умеет!</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="37"
+      data-width="1080"
+      data-height="1920"
+      data-motion-blur="on"
+    >
+      <!-- Background Cyber Grid -->
+      <div class="bg-grid" data-layout-allow-overflow></div>
+
+      <!-- Dynamic Ambient Glow Spots -->
+      <div id="glow-cyan" class="ambient-glow glow-top-cyan" data-layout-allow-overflow></div>
+      <div id="glow-purple" class="ambient-glow glow-mid-purple" data-layout-allow-overflow></div>
+      <div id="glow-emerald" class="ambient-glow glow-bottom-emerald" data-layout-allow-overflow></div>
+
+      <!-- Cinematic Vignette Overlay -->
+      <div class="vignette-overlay" data-layout-allow-overflow data-layout-allow-overlap></div>
+
+      <!-- Impact Flash / Glitch Strobe -->
+      <div id="flash-strobe" data-layout-allow-overflow data-layout-allow-overlap></div>
+
+      <!-- Top Progress Bar (37s) -->
+      <div id="progress-host" class="clip" data-start="0" data-duration="37">
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- ================= AUDIO TRACKS ================= -->
+      <!-- Voiceovers -->
+      <audio id="vo-1" class="clip" data-start="0.2" data-duration="5.52" data-volume="1.0" src="assets/audio/vo-1.mp3"></audio>
+      <audio id="vo-2" class="clip" data-start="5.9" data-duration="5.66" data-volume="1.0" src="assets/audio/vo-2.mp3"></audio>
+      <audio id="vo-3" class="clip" data-start="11.7" data-duration="4.70" data-volume="1.0" src="assets/audio/vo-3.mp3"></audio>
+      <audio id="vo-4" class="clip" data-start="16.8" data-duration="5.35" data-volume="1.0" src="assets/audio/vo-4.mp3"></audio>
+      <audio id="vo-5" class="clip" data-start="22.5" data-duration="5.28" data-volume="1.0" src="assets/audio/vo-5.mp3"></audio>
+      <audio id="vo-6" class="clip" data-start="28.4" data-duration="7.42" data-volume="1.0" src="assets/audio/vo-6.mp3"></audio>
+
+      <!-- Background Music Bed (seamless 37s loop, balanced gain) -->
+      <audio id="bgm-0" class="clip" data-start="0" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-1" class="clip" data-start="4" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-2" class="clip" data-start="8" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-3" class="clip" data-start="12" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-4" class="clip" data-start="16" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-5" class="clip" data-start="20" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-6" class="clip" data-start="24" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-7" class="clip" data-start="28" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-8" class="clip" data-start="32" data-duration="4" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-9" class="clip" data-start="36" data-duration="1" data-volume="0.16" src="assets/audio/bgm.wav"></audio>
+
+      <!-- Sound Effects -->
+      <audio id="sfx-whoosh-1" class="clip" data-start="0.0" data-duration="0.57" data-volume="0.45" src="assets/audio/whoosh.mp3"></audio>
+      <audio id="sfx-click-1" class="clip" data-start="1.4" data-duration="0.37" data-volume="0.75" src="assets/audio/click.mp3"></audio>
+      <audio id="sfx-error-1" class="clip" data-start="1.55" data-duration="1.62" data-volume="0.85" src="assets/audio/error.mp3"></audio>
+      <audio id="sfx-glitch-1" class="clip" data-start="1.58" data-duration="2.64" data-volume="0.6" src="assets/audio/glitch-1.mp3"></audio>
+      <audio id="sfx-impact-1" class="clip" data-start="1.62" data-duration="2.12" data-volume="0.75" src="assets/audio/impact-bass-1.mp3"></audio>
+
+      <audio id="sfx-whoosh-2" class="clip" data-start="5.7" data-duration="0.57" data-volume="0.45" src="assets/audio/whoosh-short.mp3"></audio>
+      <audio id="sfx-scan-2" class="clip" data-start="6.8" data-duration="1.50" data-volume="0.45" src="assets/audio/typing.mp3"></audio>
+      <audio id="sfx-ping-2" class="clip" data-start="8.4" data-duration="1.32" data-volume="0.6" src="assets/audio/ping.mp3"></audio>
+
+      <audio id="sfx-whoosh-3" class="clip" data-start="11.5" data-duration="0.57" data-volume="0.45" src="assets/audio/whoosh-short.mp3"></audio>
+      <audio id="sfx-ping-3" class="clip" data-start="13.2" data-duration="1.32" data-volume="0.65" src="assets/audio/ping.mp3"></audio>
+
+      <audio id="sfx-whoosh-4" class="clip" data-start="16.6" data-duration="0.57" data-volume="0.45" src="assets/audio/whoosh-short.mp3"></audio>
+      <audio id="sfx-typing-4" class="clip" data-start="17.6" data-duration="1.50" data-volume="0.65" src="assets/audio/typing.mp3"></audio>
+      <audio id="sfx-click-4" class="clip" data-start="19.5" data-duration="0.37" data-volume="0.65" src="assets/audio/click-soft.mp3"></audio>
+
+      <audio id="sfx-riser-5" class="clip" data-start="22.3" data-duration="5.8" data-volume="0.35" src="assets/audio/riser.mp3"></audio>
+      <audio id="sfx-pop-5" class="clip" data-start="24.1" data-duration="0.72" data-volume="0.6" src="assets/audio/pop.mp3"></audio>
+      <audio id="sfx-chime-5" class="clip" data-start="25.8" data-duration="2.50" data-volume="0.75" src="assets/audio/chime.mp3"></audio>
+
+      <audio id="sfx-whoosh-6" class="clip" data-start="28.1" data-duration="5.54" data-volume="0.45" src="assets/audio/whoosh-cinematic.mp3"></audio>
+      <audio id="sfx-click-6" class="clip" data-start="29.8" data-duration="0.37" data-volume="0.75" src="assets/audio/click.mp3"></audio>
+      <audio id="sfx-sparkle-6" class="clip" data-start="29.9" data-duration="1.80" data-volume="0.85" src="assets/audio/sparkle.mp3"></audio>
+      <audio id="sfx-chime-6" class="clip" data-start="30.0" data-duration="2.50" data-volume="0.75" src="assets/audio/chime.mp3"></audio>
+      <audio id="sfx-impact-6" class="clip" data-start="30.1" data-duration="2.12" data-volume="0.65" src="assets/audio/impact-bass-1.mp3"></audio>
+
+      <!-- ================= CAMERA RIG CONTAINER ================= -->
+      <div id="camera-rig" data-layout-allow-overflow>
+
+        <!-- ================= SCENE 1: BROKEN UI (0.0s – 5.8s) ================= -->
+        <div id="scene-1" class="clip" data-start="0" data-duration="5.8">
+          <div class="scene-header">
+            <div id="s1-hook-wrap" class="hero-hook-wrap">
+              <div class="hook-line-1">КОДЕКС <span class="hook-highlight">ПРОСТО ПИШЕТ КОД?</span></div>
+            </div>
+            <div id="s1-badge" class="pill-badge alert" style="opacity: 0;">
+              <span class="badge-dot"></span>
+              PROD ALERT • CRITICAL BUG
+            </div>
+            <h1 id="s1-title" class="scene-title" style="opacity: 0;">НА САЙТЕ УПАЛА ОПЛАТА! 🚨</h1>
+          </div>
+
+          <div id="s1-app-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">🔒 store.dev/checkout</div>
+            </div>
+            <div class="app-content">
+              <div class="product-card">
+                <div class="product-img">⚡</div>
+                <div class="product-info">
+                  <div class="product-name">AI Developer Pro License</div>
+                  <div class="product-price">$49.00 / mo</div>
+                </div>
+              </div>
+
+              <div id="s1-btn" class="checkout-btn" style="position: relative; overflow: hidden;">
+                <div id="s1-btn-ripple" class="btn-ripple"></div>
+                <span>💳</span>
+                <span id="s1-btn-text">ОПЛАТИТЬ ЗАКАЗ ($49) →</span>
+              </div>
+
+              <div id="s1-error-popup" class="error-popup" style="opacity: 0;">
+                <div class="error-title">
+                  <span>🔴</span>
+                  <span>FATAL: cart.items is null (reading 'reduce')</span>
+                </div>
+                <div class="error-stack">
+                  at calculateTotal (checkout.ts:42:15)<br/>
+                  at HTMLButtonElement.handlePay (CheckoutButton.tsx:18)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Virtual Mouse Cursor -->
+          <svg id="s1-cursor" class="virtual-cursor" viewBox="0 0 24 24" fill="none">
+            <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z" fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+        <!-- ================= SCENE 2: REPO SCANNING & GRAPH (5.8s – 11.6s) ================= -->
+        <div id="scene-2" class="clip" data-start="5.8" data-duration="5.8">
+          <div class="scene-header">
+            <div class="pill-badge">
+              <span class="badge-dot"></span>
+              CODEX AGENT • REPO DISCOVERY
+            </div>
+            <h1 class="scene-title">СКАНИРОВАНИЕ ПРОЕКТА 📁</h1>
+          </div>
+
+          <div id="s2-repo-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">⚡ Codex Workspace: Repo Inspector</div>
+            </div>
+            <div class="ide-layout">
+              <div class="radar-scan-line" id="s2-radar"></div>
+
+              <div class="repo-stats-bar">
+                <div class="repo-stats-title">
+                  <span>🛰️</span>
+                  <span>DEEP AUDIT ENGINE</span>
+                </div>
+                <div id="s2-files-count" class="repo-stats-progress">1,420 FILES INDEXED</div>
+              </div>
+
+              <div class="file-tree-box">
+                <div class="tree-item folder">📁 src/</div>
+                <div id="s2-file-1" class="tree-item indent-1">📁 components/ ➔ CheckoutButton.tsx</div>
+                <div id="s2-file-2" class="tree-item indent-1">📁 hooks/ ➔ useCart.ts</div>
+                <div id="s2-file-3" class="tree-item indent-1 target-file">⚡ api/checkout.ts [CRITICAL TARGET]</div>
+                <div id="s2-file-4" class="tree-item indent-1">📁 tests/ ➔ checkout.test.ts</div>
+              </div>
+
+              <div class="graph-flow">
+                <div id="s2-node-1" class="graph-node active-trace">
+                  <span>🔘</span>
+                  <span>CheckoutButton</span>
+                </div>
+                <div class="graph-arrow">➔</div>
+                <div id="s2-node-2" class="graph-node active-trace">
+                  <span>🔄</span>
+                  <span>useCart (state)</span>
+                </div>
+                <div class="graph-arrow">➔</div>
+                <div id="s2-node-3" class="graph-node target-trace">
+                  <span>⚡</span>
+                  <span>checkout.ts (ROOT CAUSE)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 3: CODE INSPECTION & BUG FOCUS (11.6s – 16.7s) ================= -->
+        <div id="scene-3" class="clip" data-start="11.6" data-duration="5.1">
+          <div class="scene-header">
+            <div class="pill-badge alert">
+              <span class="badge-dot"></span>
+              DIAGNOSTICS • BUG LOCATED
+            </div>
+            <h1 class="scene-title">ТОЧНЫЙ ПОИСК ОШИБКИ 🎯</h1>
+          </div>
+
+          <div id="s3-code-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">📄 src/api/checkout.ts — TypeScript</div>
+            </div>
+            <div class="code-editor">
+              <div id="s3-line-40" class="code-line">
+                <span class="line-no">40</span>
+                <span><span style="color: #c084fc;">export function</span> <span style="color: #60a5fa;">calculateTotal</span>(cart: <span style="color: #fde047;">Cart</span>) {</span>
+              </div>
+              <div id="s3-line-41" class="code-line">
+                <span class="line-no">41</span>
+                <span style="color: #64748b;">// Вычисление финальной суммы заказа</span>
+              </div>
+              <div id="s3-line-42" class="code-line danger-focus">
+                <span class="line-no">42</span>
+                <span><span style="color: #c084fc;">const</span> total = <span class="laser-bracket">[</span><span style="color: #f87171; font-weight: 800;">cart.items</span><span class="laser-bracket">]</span>.<span style="color: #60a5fa;">reduce</span>((s, i) =&gt; s + i.price, <span style="color: #38bdf8;">0</span>);</span>
+              </div>
+              <div id="s3-line-43" class="code-line">
+                <span class="line-no">43</span>
+                <span><span style="color: #c084fc;">return</span> total;</span>
+              </div>
+              <div id="s3-line-44" class="code-line">
+                <span class="line-no">44</span>
+                <span>}</span>
+              </div>
+            </div>
+
+            <div id="s3-reticle" class="bug-reticle" style="opacity: 0;">
+              <div class="bug-reticle-title">
+                <span>⚠️</span>
+                <span>NULL DEREFERENCE DETECTED</span>
+              </div>
+              <div><code>cart.items</code> не инициализирован до завершения загрузки!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 4: GIT DIFF & SMART PATCH (16.7s – 22.4s) ================= -->
+        <div id="scene-4" class="clip" data-start="16.7" data-duration="5.7">
+          <div class="scene-header">
+            <div class="pill-badge success">
+              <span class="badge-dot"></span>
+              CODEX REFACTORING • CLEAN PATCH
+            </div>
+            <h1 class="scene-title">АВТОНОМНЫЙ ПАТЧ КОДА 🛠️</h1>
+          </div>
+
+          <div id="s4-diff-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">Git Diff: src/api/checkout.ts</div>
+            </div>
+            <div class="diff-header">
+              <span>@@ -42,1 +42,2 @@ calculateTotal</span>
+              <div>
+                <span class="diff-badge-add">+2 additions</span>
+                <span style="margin: 0 10px; color: #64748b;">|</span>
+                <span class="diff-badge-del">-1 deletion</span>
+              </div>
+            </div>
+            <div class="diff-body">
+              <div id="s4-diff-del" class="diff-row del">
+                <span style="user-select: none; font-weight: 800;">-</span>
+                <span>const total = cart.items.reduce((s, i) =&gt; s + i.price, 0);</span>
+              </div>
+              <div id="s4-diff-add-1" class="diff-row add" style="opacity: 0;">
+                <span style="user-select: none; font-weight: 800;">+</span>
+                <span>const items = cart?.items ?? [];</span>
+              </div>
+              <div id="s4-diff-add-2" class="diff-row add" style="opacity: 0;">
+                <span style="user-select: none; font-weight: 800;">+</span>
+                <span>const total = items.reduce((s, i) =&gt; s + i.price, 0);</span>
+              </div>
+
+              <div id="s4-verified" class="patch-verified-banner" style="opacity: 0;">
+                <span style="font-size: 34px;">🛡️</span>
+                <span>Безопасная проверка и дефолтный массив применены!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 5: TERMINAL & TEST RUNNER (22.4s – 28.2s) ================= -->
+        <div id="scene-5" class="clip" data-start="22.4" data-duration="5.8">
+          <div class="scene-header">
+            <div class="pill-badge success">
+              <span class="badge-dot"></span>
+              VERIFICATION • UNIT TESTS
+            </div>
+            <h1 class="scene-title">ПРОВЕРКА И ЗАПУСК ТЕСТОВ 🧪</h1>
+          </div>
+
+          <div id="s5-terminal-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">💻 Terminal: zsh (Codex Test Runner)</div>
+            </div>
+            <div class="terminal-body">
+              <div class="terminal-cmd">
+                <span>➜</span>
+                <span>repo git:(main) $ npm test -- checkout.test.ts</span>
+              </div>
+
+              <div id="s5-test-1" class="test-item" style="opacity: 0;">
+                <span class="test-check">✓</span>
+                <span>renders checkout button without crash (2ms)</span>
+              </div>
+              <div id="s5-test-2" class="test-item" style="opacity: 0;">
+                <span class="test-check">✓</span>
+                <span>handles null or undefined cart items safely (1ms)</span>
+              </div>
+              <div id="s5-test-3" class="test-item" style="opacity: 0;">
+                <span class="test-check">✓</span>
+                <span>calculates order total correctly (3ms)</span>
+              </div>
+
+              <div id="s5-pass-box" class="test-pass-box" style="opacity: 0;">
+                <div class="test-pass-title">
+                  <span class="test-pass-badge">PASS</span>
+                  <span>src/api/checkout.test.ts</span>
+                </div>
+                <div style="color: #a7f3d0; font-size: 27px; line-height: 1.45;">
+                  Tests: <b>3 passed</b>, 3 total • Time: 0.24s<br/>
+                  <b>Result: 100% PASS • 0 REGRESSIONS ✅</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= SCENE 6: TRIUMPH & FINAL CTA (28.2s – 37.0s) ================= -->
+        <div id="scene-6" class="clip" data-start="28.2" data-duration="8.8">
+          <div class="scene-header">
+            <div class="pill-badge success">
+              <span class="badge-dot"></span>
+              PRODUCTION RESTORED • SUCCESS
+            </div>
+            <h1 class="scene-title">КНОПКА РАБОТАЕТ! 🚀</h1>
+          </div>
+
+          <div id="s6-triumph-window" class="window-frame">
+            <div class="window-header">
+              <div class="traffic-light traffic-red"></div>
+              <div class="traffic-light traffic-yellow"></div>
+              <div class="traffic-light traffic-green"></div>
+              <div class="window-url">🔒 store.dev/checkout — 200 OK</div>
+            </div>
+            <div class="app-content">
+              <div class="product-card">
+                <div class="product-img">⚡</div>
+                <div class="product-info">
+                  <div class="product-name">AI Developer Pro License</div>
+                  <div class="product-price" style="color: #00ffa3;">$49.00 / mo</div>
+                </div>
+              </div>
+
+              <div id="s6-sparkles" style="position: relative; width: 100%;">
+                <div id="s6-btn" class="checkout-btn btn-success">
+                  <span>💳</span>
+                  <span id="s6-btn-text">ОПЛАТИТЬ ЗАКАЗ ($49) →</span>
+                </div>
+                <!-- Shockwave Ring and Radial Sparks -->
+                <div id="s6-shockwave" class="shockwave-ring"></div>
+                <div id="spark-1" class="spark-particle spark-emerald" style="top: 50%; left: 50%;"></div>
+                <div id="spark-2" class="spark-particle spark-cyan" style="top: 50%; left: 50%;"></div>
+                <div id="spark-3" class="spark-particle spark-gold" style="top: 50%; left: 50%;"></div>
+                <div id="spark-4" class="spark-particle spark-magenta" style="top: 50%; left: 50%;"></div>
+                <div id="spark-5" class="spark-particle spark-emerald" style="top: 50%; left: 50%;"></div>
+                <div id="spark-6" class="spark-particle spark-cyan" style="top: 50%; left: 50%;"></div>
+                <div id="spark-7" class="spark-particle spark-gold" style="top: 50%; left: 50%;"></div>
+                <div id="spark-8" class="spark-particle spark-magenta" style="top: 50%; left: 50%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final High-Converting CTA Banner -->
+          <div id="s6-cta" class="cta-banner" style="opacity: 0;">
+            <div class="cta-title">CODEX — ТВОЙ AI-ИНЖЕНЕР 🤖</div>
+            <div class="cta-feature-tags">
+              <span class="cta-tag">🔍 Поиск багов</span>
+              <span class="cta-tag">🛠️ Генерация патчей</span>
+              <span class="cta-tag">🧪 Запуск тестов</span>
+            </div>
+            <div class="subscribe-btn">
+              <span id="s6-bell" style="display: inline-block;">🔔</span>
+              <span>ПОДПИШИСЬ НА КАНАЛ!</span>
+            </div>
+          </div>
+
+          <!-- Mouse Cursor for Final Click -->
+          <svg id="s6-cursor" class="virtual-cursor" viewBox="0 0 24 24" fill="none">
+            <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.36z" fill="#ffffff" stroke="#0f172a" stroke-width="1.8"/>
+          </svg>
+        </div>
+
+      </div> <!-- End #camera-rig -->
+
+      <!-- ================= CAPTIONS OVERLAY (0.0s – 37.0s) ================= -->
+      <div id="captions-host" class="clip" data-start="0" data-duration="37">
+        <div class="captions-wrap">
+          <div id="caption-text" class="caption-box">
+            Думаешь, Кодекс <span class="hl-cyan">просто пишет код?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Master Animation Timeline -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Continuous progress bar fill across full 37.0s
+      tl.fromTo("#progress-bar", { width: "0%" }, { width: "100%", duration: 37, ease: "none" }, 0);
+
+      // ========================================================
+      // SCENE 1 TIMELINE (0.0s – 5.8s): THE HOOK & THE CRASH
+      // ========================================================
+      // Dynamic Captions
+      tl.set("#caption-text", { innerHTML: "Думаешь, Кодекс <span class='hl-cyan'>просто пишет код?</span>" }, 0.2);
+      tl.set("#caption-text", { innerHTML: "Смотри, что он умеет <span class='hl-gold'>на самом деле! 🔥</span>" }, 2.8);
+
+      // Opening Hero Hook Entrance
+      tl.fromTo("#s1-hook-wrap",
+        { opacity: 0, scale: 0.85, y: -20 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" },
+        0.1
+      );
+
+      // App Window entrance with smooth perspective settle
+      tl.fromTo("#s1-app-window",
+        { opacity: 0, y: 40, scale: 0.94 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" },
+        0.2
+      );
+
+      // Virtual Cursor glides to the checkout button
+      tl.fromTo("#s1-cursor",
+        { x: 840, y: 1100, opacity: 0 },
+        { x: 540, y: 880, opacity: 1, duration: 0.85, ease: "power2.out" },
+        0.45
+      );
+
+      // Cursor press on button at 1.4s
+      tl.to("#s1-cursor", { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, 1.4);
+      tl.to("#s1-btn", { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, 1.4);
+      tl.fromTo("#s1-btn-ripple", { scale: 0.2, opacity: 0.8 }, { scale: 3.5, opacity: 0, duration: 0.35, ease: "power2.out" }, 1.4);
+
+      // ================= CRASH EVENT at 1.55s =================
+      // 1. Violent Camera Rig Shake
+      const crashShake = gsap.timeline();
+      crashShake.to("#camera-rig", { x: -16, y: 12, rotation: -0.9, duration: 0.04 })
+                .to("#camera-rig", { x: 18, y: -14, rotation: 1.0, duration: 0.04 })
+                .to("#camera-rig", { x: -14, y: 10, rotation: -0.7, duration: 0.04 })
+                .to("#camera-rig", { x: 12, y: -8, rotation: 0.5, duration: 0.05 })
+                .to("#camera-rig", { x: -8, y: 5, rotation: -0.3, duration: 0.05 })
+                .to("#camera-rig", { x: 0, y: 0, rotation: 0, duration: 0.06 });
+      tl.add(crashShake, 1.55);
+
+      // 2. Glitch Red Strobe Flash
+      tl.fromTo("#flash-strobe",
+        { opacity: 0.85 },
+        { opacity: 0, duration: 0.35, ease: "power2.out" },
+        1.55
+      );
+
+      // 3. Button explodes into Error State
+      tl.to("#s1-btn", { className: "checkout-btn btn-error", duration: 0.08 }, 1.55);
+      tl.set("#s1-btn-text", { innerHTML: "❌ 500 SERVER ERROR" }, 1.58);
+
+      // 4. Hero hook transitions to Prod Alert badge & title
+      tl.to("#s1-hook-wrap", { opacity: 0, y: -15, duration: 0.25 }, 1.55);
+      tl.to("#s1-badge", { opacity: 1, duration: 0.3 }, 1.6);
+      tl.to("#s1-title", { opacity: 1, duration: 0.3 }, 1.6);
+
+      // 5. Fatal Error Card slams down
+      tl.fromTo("#s1-error-popup",
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.5)" },
+        1.7
+      );
+
+      // Cursor exits frame
+      tl.to("#s1-cursor", { opacity: 0, duration: 0.3 }, 2.5);
+
+      // 6. Transition into Scene 2: Camera punch-in zoom into error stack
+      tl.to("#camera-rig", {
+        scale: 1.35,
+        y: -180,
+        duration: 0.85,
+        ease: "power3.in"
+      }, 4.95);
+
+      // ========================================================
+      // SCENE 2 TIMELINE (5.8s – 11.6s): REPO SCAN & DEPENDENCIES
+      // ========================================================
+      // Captions
+      tl.set("#caption-text", { innerHTML: "На сайте <span class='hl-red'>сломалась оплата! 🚨</span>" }, 5.9);
+      tl.set("#caption-text", { innerHTML: "Кодекс сам сканирует файлы и <span class='hl-cyan'>строит граф проекта 📁</span>" }, 8.3);
+
+      // Reset camera from zoom transition with a smooth settle
+      tl.fromTo("#camera-rig",
+        { scale: 1.15, y: 60 },
+        { scale: 1, y: 0, duration: 0.55, ease: "power2.out" },
+        5.8
+      );
+
+      // Window entrance
+      tl.fromTo("#s2-repo-window",
+        { opacity: 0, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+        5.8
+      );
+
+      // Radar scan line moves down across the layout
+      tl.fromTo("#s2-radar", { y: 0 }, { y: 650, duration: 2.2, ease: "none", repeat: 1 }, 6.1);
+
+      // File items reveal with stagger
+      tl.fromTo("#s2-file-1", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 6.4);
+      tl.fromTo("#s2-file-2", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 6.8);
+      tl.fromTo("#s2-file-3", { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, 7.2);
+      tl.fromTo("#s2-file-4", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, 7.6);
+
+      // Graph nodes trace the execution chain
+      tl.fromTo("#s2-node-1", { opacity: 0.3, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.35 }, 7.0);
+      tl.fromTo("#s2-node-2", { opacity: 0.3, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.35 }, 7.8);
+      tl.fromTo("#s2-node-3", { opacity: 0.3, scale: 0.95 }, { opacity: 1, scale: 1.06, duration: 0.45, ease: "back.out(1.4)" }, 8.4);
+
+      // Transition to Scene 3: Zoom dive right into target node!
+      tl.to("#camera-rig", {
+        scale: 1.35,
+        x: -40,
+        y: -140,
+        duration: 0.8,
+        ease: "power3.in"
+      }, 10.8);
+
+      // ========================================================
+      // SCENE 3 TIMELINE (11.6s – 16.7s): BUG FOCUS & DIAGNOSTIC
+      // ========================================================
+      // Captions
+      tl.set("#caption-text", { innerHTML: "За секунду агент <span class='hl-gold'>находит скрытый баг 🎯</span>" }, 11.7);
+      tl.set("#caption-text", { innerHTML: "Функция падает из-за <span class='hl-red'>необработанного null ⚠️</span>" }, 14.1);
+
+      // Camera arrives and settles
+      tl.fromTo("#camera-rig",
+        { scale: 1.15, x: -20, y: 40 },
+        { scale: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false },
+        11.6
+      );
+
+      // Code window entrance
+      tl.fromTo("#s3-code-window",
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+        11.6
+      );
+
+      // Depth of Field / Focus Rack: other lines blur and dim, line 42 pops!
+      tl.to("#s3-line-40, #s3-line-41, #s3-line-43, #s3-line-44", {
+        opacity: 0.28,
+        duration: 0.4
+      }, 12.3);
+
+      tl.fromTo("#s3-line-42",
+        { scale: 0.98 },
+        { scale: 1.03, duration: 0.4, ease: "back.out(1.4)" },
+        12.3
+      );
+
+      // Pulsing glow on danger line
+      tl.fromTo("#s3-line-42",
+        { backgroundColor: "rgba(255, 51, 102, 0.15)" },
+        { backgroundColor: "rgba(255, 51, 102, 0.38)", duration: 0.35, yoyo: true, repeat: 3, ease: "power1.inOut" },
+        12.5
+      );
+
+      // Bug Reticle diagnostic card appears with alert ping
+      tl.fromTo("#s3-reticle",
+        { opacity: 0, y: 20, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.6)" },
+        13.2
+      );
+
+      // ========================================================
+      // SCENE 4 TIMELINE (16.7s – 22.4s): GIT DIFF & AUTONOMOUS PATCH
+      // ========================================================
+      // Captions
+      tl.set("#caption-text", { innerHTML: "Кодекс сам генерирует <span class='hl-green'>точный патч 🛠️</span>" }, 16.8);
+      tl.set("#caption-text", { innerHTML: "Добавляет проверку и <span class='hl-cyan'>сохраняет контекст ✓</span>" }, 19.3);
+
+      // Diff window entrance
+      tl.fromTo("#s4-diff-window",
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" },
+        16.7
+      );
+
+      // Strike through faulty line
+      tl.fromTo("#s4-diff-del",
+        { opacity: 0, x: -10 },
+        { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" },
+        16.9
+      );
+
+      // Typing in new lines with mechanical rhythm
+      tl.fromTo("#s4-diff-add-1",
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" },
+        17.6
+      );
+
+      tl.fromTo("#s4-diff-add-2",
+        { opacity: 0, x: -20 },
+        { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" },
+        18.4
+      );
+
+      // Verification Shield stamp with bounce
+      tl.fromTo("#s4-verified",
+        { opacity: 0, scale: 0.9, y: 15 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.6)" },
+        19.3
+      );
+
+      // Camera prepares for terminal riser with smooth upward glide
+      tl.to("#camera-rig", {
+        y: -50,
+        duration: 0.6,
+        ease: "power2.in"
+      }, 21.8);
+
+      // ========================================================
+      // SCENE 5 TIMELINE (22.4s – 28.2s): TERMINAL & TEST RUNNER
+      // ========================================================
+      // Captions
+      tl.set("#caption-text", { innerHTML: "Теперь проверка! Агент <span class='hl-cyan'>запускает тесты 🧪</span>" }, 22.5);
+      tl.set("#caption-text", { innerHTML: "...и сразу видит <span class='hl-green'>зелёный отчёт: PASS ✅</span>" }, 25.1);
+
+      // Reset camera y position
+      tl.fromTo("#camera-rig",
+        { y: 60 },
+        { y: 0, duration: 0.5, ease: "power2.out", immediateRender: false },
+        22.4
+      );
+
+      // Terminal window rises with power
+      tl.fromTo("#s5-terminal-window",
+        { opacity: 0, y: 60, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" },
+        22.4
+      );
+
+      // Tests flash green one by one
+      tl.to("#s5-test-1", { opacity: 1, duration: 0.25 }, 24.1);
+      tl.to("#s5-test-2", { opacity: 1, duration: 0.25 }, 24.8);
+      tl.to("#s5-test-3", { opacity: 1, duration: 0.25 }, 25.5);
+
+      // Big Emerald Pass Card pops in on the victory chime
+      tl.fromTo("#s5-pass-box",
+        { opacity: 0, y: 20, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.5)" },
+        25.8
+      );
+
+      // Punch-in bump on camera on chime
+      tl.to("#camera-rig", { scale: 1.03, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" }, 25.8);
+
+      // ========================================================
+      // SCENE 6 TIMELINE (28.2s – 37.0s): TRIUMPH & FINAL CALL TO ACTION
+      // ========================================================
+      // Captions
+      tl.set("#caption-text", { innerHTML: "Клик — и сайт <span class='hl-green'>ожил! Всё работает! 🎉</span>" }, 28.4);
+      tl.set("#caption-text", { innerHTML: "Кодекс — это <span class='hl-cyan'>настоящий AI-инженер</span> в команде 🤖" }, 31.0);
+      tl.set("#caption-text", { innerHTML: "Поставь лайк и <span class='hl-gold'>подпишись на канал! 🔔</span>" }, 34.0);
+
+      // Background emerald glow fades in to celebrate victory
+      tl.to("#glow-emerald", { opacity: 0.4, duration: 0.8 }, 28.2);
+
+      // Triumph window arrives
+      tl.fromTo("#s6-triumph-window",
+        { opacity: 0, scale: 0.94, y: 30 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "power3.out" },
+        28.2
+      );
+
+      // Cursor movement for final click
+      tl.fromTo("#s6-cursor",
+        { x: 840, y: 1100, opacity: 0 },
+        { x: 540, y: 880, opacity: 1, duration: 0.8, ease: "power2.out" },
+        28.8
+      );
+
+      // Final click at 29.8s
+      tl.to("#s6-cursor", { scale: 0.82, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, 29.8);
+      tl.to("#s6-btn", { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1, ease: "power1.inOut" }, 29.8);
+
+      tl.set("#s6-btn-text", { innerHTML: "✓ ОПЛАЧЕНО УСПЕШНО! ($49)" }, 29.92);
+
+      // Shockwave ring explosion on victory click
+      tl.fromTo("#s6-shockwave", { scale: 0.3, opacity: 0.95 }, { scale: 7.0, opacity: 0, duration: 0.75, ease: "power2.out" }, 29.8);
+      tl.to("#camera-rig", { scale: 1.025, duration: 0.12, yoyo: true, repeat: 1, ease: "power1.out" }, 29.8);
+
+      // Radial Sparkle Burst (8 directions)
+      tl.fromTo("#spark-1", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: -220, y: -90, opacity: 0, scale: 2.2, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-2", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: 220, y: -100, opacity: 0, scale: 2.2, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-3", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: -240, y: 70, opacity: 0, scale: 1.8, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-4", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: 240, y: 80, opacity: 0, scale: 1.8, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-5", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: 0, y: -140, opacity: 0, scale: 2.4, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-6", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: 0, y: 130, opacity: 0, scale: 2.4, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-7", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: -140, y: -120, opacity: 0, scale: 2.0, duration: 0.85, ease: "power2.out" }, 29.85);
+      tl.fromTo("#spark-8", { x: 0, y: 0, opacity: 1, scale: 0 }, { x: 140, y: 120, opacity: 0, scale: 2.0, duration: 0.85, ease: "power2.out" }, 29.85);
+
+      // Cursor leaves
+      tl.to("#s6-cursor", { opacity: 0, duration: 0.3 }, 30.5);
+
+      // Final CTA Banner scales in with high energy
+      tl.fromTo("#s6-cta",
+        { opacity: 0, y: 40, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: "back.out(1.5)" },
+        31.2
+      );
+
+      // Ringing bell animation
+      tl.to("#s6-bell", {
+        rotation: 20,
+        duration: 0.12,
+        yoyo: true,
+        repeat: 7,
+        ease: "power1.inOut"
+      }, 32.0);
+
+      // Register timeline for HyperFrames deterministic seeking
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

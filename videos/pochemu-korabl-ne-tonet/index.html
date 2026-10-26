@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="ru" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Почему огромный стальной корабль не тонет?</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="37"
+      data-width="1080"
+      data-height="1920"
+    >
+      <!-- Background Ambient Glows -->
+      <div class="glow-spot glow-cyan"></div>
+      <div class="glow-spot glow-blue"></div>
+
+      <!-- Top Progress Bar -->
+      <div id="progress-host" class="clip" data-start="0" data-duration="37">
+        <div class="progress-track">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- ================= AUDIO TRACKS ================= -->
+      <!-- Voiceover -->
+      <audio id="vo-1" class="clip" data-start="0.1" data-duration="6.32" data-volume="1.0" src="assets/audio/vo-1.mp3"></audio>
+      <audio id="vo-2" class="clip" data-start="6.6" data-duration="8.38" data-volume="1.0" src="assets/audio/vo-2.mp3"></audio>
+      <audio id="vo-3" class="clip" data-start="15.1" data-duration="8.59" data-volume="1.0" src="assets/audio/vo-3.mp3"></audio>
+      <audio id="vo-4" class="clip" data-start="23.9" data-duration="8.05" data-volume="1.0" src="assets/audio/vo-4.mp3"></audio>
+      <audio id="vo-5" class="clip" data-start="32.1" data-duration="4.71" data-volume="1.0" src="assets/audio/vo-5.mp3"></audio>
+
+      <!-- Background Music Bed (seamless 37s bed from 4s loop) -->
+      <audio id="bgm-0" class="clip" data-start="0" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-1" class="clip" data-start="4" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-2" class="clip" data-start="8" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-3" class="clip" data-start="12" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-4" class="clip" data-start="16" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-5" class="clip" data-start="20" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-6" class="clip" data-start="24" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-7" class="clip" data-start="28" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-8" class="clip" data-start="32" data-duration="4" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+      <audio id="bgm-9" class="clip" data-start="36" data-duration="1" data-volume="0.18" src="assets/audio/bgm.wav"></audio>
+
+      <!-- Sound Effects -->
+      <audio id="sfx-whoosh-0" class="clip" data-start="0.0" data-duration="1.5" data-volume="0.4" src="assets/audio/whoosh.mp3"></audio>
+      <audio id="sfx-splash-1" class="clip" data-start="1.8" data-duration="1.2" data-volume="0.8" src="assets/audio/splash.mp3"></audio>
+      <audio id="sfx-impact-1" class="clip" data-start="2.6" data-duration="1.5" data-volume="0.5" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-foghorn-1" class="clip" data-start="3.5" data-duration="2.5" data-volume="0.6" src="assets/audio/foghorn.mp3"></audio>
+
+      <audio id="sfx-whoosh-2" class="clip" data-start="6.5" data-duration="1.5" data-volume="0.4" src="assets/audio/whoosh-cinematic.mp3"></audio>
+      <audio id="sfx-sparkle-2" class="clip" data-start="9.0" data-duration="1.5" data-volume="0.5" src="assets/audio/sparkle.mp3"></audio>
+
+      <audio id="sfx-riser-3" class="clip" data-start="15.0" data-duration="2.5" data-volume="0.4" src="assets/audio/riser.mp3"></audio>
+      <audio id="sfx-chime-3" class="clip" data-start="18.8" data-duration="2.0" data-volume="0.7" src="assets/audio/chime.mp3"></audio>
+
+      <audio id="sfx-pop-4-1" class="clip" data-start="24.4" data-duration="0.5" data-volume="0.6" src="assets/audio/pop.mp3"></audio>
+      <audio id="sfx-impact-4-1" class="clip" data-start="24.4" data-duration="1.5" data-volume="0.5" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-pop-4-2" class="clip" data-start="25.6" data-duration="0.5" data-volume="0.6" src="assets/audio/pop.mp3"></audio>
+      <audio id="sfx-impact-4-2" class="clip" data-start="25.6" data-duration="1.5" data-volume="0.5" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-pop-4-3" class="clip" data-start="26.8" data-duration="0.5" data-volume="0.6" src="assets/audio/pop.mp3"></audio>
+      <audio id="sfx-impact-4-3" class="clip" data-start="26.8" data-duration="1.5" data-volume="0.5" src="assets/audio/impact-bass-1.mp3"></audio>
+      <audio id="sfx-chime-4" class="clip" data-start="28.8" data-duration="2.0" data-volume="0.6" src="assets/audio/chime.mp3"></audio>
+
+      <audio id="sfx-sparkle-5" class="clip" data-start="32.2" data-duration="2.0" data-volume="0.6" src="assets/audio/sparkle.mp3"></audio>
+
+      <!-- ================= SCENE 1: ПАРАДОКС СТАЛИ (0.0s – 6.5s) ================= -->
+      <div id="scene-1" class="clip" data-start="0" data-duration="6.5">
+        <div class="scene-header">
+          <div id="s1-badge" class="badge">⚓ ФИЗИКА ВОДЫ</div>
+          <h1 id="s1-title" class="scene-title">Почему стальной гигант<br /><span class="highlight-cyan">не идёт ко дну?</span></h1>
+        </div>
+
+        <!-- Ocean environment -->
+        <div class="ocean-world">
+          <div class="sky-bg">
+            <div class="sun-orb"></div>
+          </div>
+          <div class="water-body">
+            <div class="water-surface-line"></div>
+            <!-- Wave layer -->
+            <svg class="wave-svg" viewBox="0 0 1120 80" preserveAspectRatio="none">
+              <path id="s1-wave-path" d="M0 40 Q 140 10, 280 40 T 560 40 T 840 40 T 1120 40 V 80 H 0 Z" fill="#0284c7" opacity="0.6"></path>
+            </svg>
+            <div class="seabed"></div>
+          </div>
+        </div>
+
+        <!-- Steel Bar (Sinks fast) -->
+        <div id="s1-steel-bar" style="position: absolute; top: 600px; left: 160px; z-index: 220; display: flex; flex-direction: column; align-items: center;">
+          <svg width="180" height="130" viewBox="0 0 180 130">
+            <defs>
+              <linearGradient id="metal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#94a3b8" />
+                <stop offset="50%" stop-color="#475569" />
+                <stop offset="100%" stop-color="#1e293b" />
+              </linearGradient>
+            </defs>
+            <!-- 3D Beveled Steel Ingot -->
+            <polygon points="20,40 140,40 170,15 50,15" fill="#64748b" />
+            <polygon points="140,40 170,15 170,85 140,110" fill="#334155" />
+            <polygon points="20,40 140,40 140,110 20,110" fill="url(#metal-grad)" stroke="#94a3b8" stroke-width="2" />
+            <text x="80" y="80" fill="#f8fafc" font-size="20" font-weight="900" text-anchor="middle" letter-spacing="1">СТАЛЬ 100 кг</text>
+          </svg>
+          <div id="s1-bar-tag" class="force-tag tag-red" style="margin-top: 10px; font-size: 22px;">
+            Плотность: 7800 кг/м³ ❌
+          </div>
+        </div>
+
+        <!-- Splash Particles -->
+        <div id="s1-splash" style="position: absolute; top: 970px; left: 180px; z-index: 240; opacity: 0;">
+          <svg width="140" height="80" viewBox="0 0 140 80">
+            <circle cx="70" cy="40" r="12" fill="#7dd3fc" />
+            <circle cx="40" cy="25" r="8" fill="#bae6fd" />
+            <circle cx="100" cy="25" r="8" fill="#bae6fd" />
+            <circle cx="20" cy="45" r="6" fill="#38bdf8" />
+            <circle cx="120" cy="45" r="6" fill="#38bdf8" />
+          </svg>
+        </div>
+
+        <!-- Ship (Floats majestically on right) -->
+        <div id="s1-ship-wrap" style="position: absolute; top: 780px; left: 320px; z-index: 210;">
+          <svg id="s1-ship-svg" width="700" height="340" viewBox="0 0 700 340">
+            <defs>
+              <linearGradient id="s1-hull-top" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#334155" />
+                <stop offset="100%" stop-color="#0f172a" />
+              </linearGradient>
+              <linearGradient id="s1-hull-bot" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#dc2626" />
+                <stop offset="100%" stop-color="#7f1d1d" />
+              </linearGradient>
+            </defs>
+
+            <!-- Funnel & Mast -->
+            <rect x="480" y="50" width="36" height="70" rx="4" fill="#ef4444" stroke="#ffffff" stroke-width="2" />
+            <rect x="480" y="45" width="36" height="12" fill="#1e293b" />
+            <!-- Smoke Puff -->
+            <circle id="s1-smoke" cx="498" cy="30" r="14" fill="#ffffff" opacity="0.4" />
+
+            <!-- Superstructure / Bridge -->
+            <polygon points="430,120 560,120 540,50 450,50" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2" />
+            <rect x="450" y="65" width="75" height="18" rx="3" fill="#0284c7" />
+
+            <!-- Main Upper Hull -->
+            <path d="M 60 170 L 140 230 L 620 230 L 650 170 Z" fill="url(#s1-hull-top)" />
+            <!-- Waterline White Stripe -->
+            <line x1="140" y1="230" x2="620" y2="230" stroke="#f8fafc" stroke-width="5" />
+            <!-- Underwater Hull (Red with Bulbous Bow) -->
+            <path d="M 140 230 Q 110 270, 160 300 L 600 300 Q 625 270, 620 230 Z" fill="url(#s1-hull-bot)" />
+            <!-- Anchor Hawsehole -->
+            <circle cx="160" cy="200" r="9" fill="#0f172a" stroke="#64748b" stroke-width="2" />
+            <path d="M 160 200 L 160 235" stroke="#94a3b8" stroke-width="3" stroke-dasharray="3,3" />
+          </svg>
+          <div id="s1-ship-tag" class="force-tag tag-green" style="position: absolute; top: 120px; right: 180px; font-size: 26px;">
+            100 000 ТОНН СТАЛИ ✅
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SCENE 2: СЕКРЕТ В ФОРМЕ — РЕНТГЕН И ВОЗДУХ (6.5s – 15.0s) ================= -->
+      <div id="scene-2" class="clip" data-start="6.5" data-duration="8.5">
+        <div class="scene-header">
+          <div id="s2-badge" class="badge">🔍 АНАТОМИЯ СУДНА</div>
+          <h1 id="s2-title" class="scene-title">Секрет внутри —<br /><span class="highlight-cyan">ОГРОМНЫЙ ОБЪЁМ ВОЗДУХА!</span></h1>
+        </div>
+
+        <div class="ocean-world">
+          <div class="sky-bg"></div>
+          <div class="water-body">
+            <div class="water-surface-line"></div>
+          </div>
+        </div>
+
+        <!-- Central Zoomed Ship Container with X-Ray Cutaway -->
+        <div id="s2-ship-center" style="position: absolute; top: 620px; left: 70px; width: 940px; height: 500px; z-index: 220;">
+          <svg width="940" height="500" viewBox="0 0 940 500">
+            <defs>
+              <linearGradient id="xray-air-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.45)" />
+                <stop offset="100%" stop-color="rgba(14, 165, 233, 0.15)" />
+              </linearGradient>
+              <filter id="cyan-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="6" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+
+            <!-- Base Outer Hull Contour -->
+            <path id="s2-hull-outline" d="M 120 180 L 220 280 L 820 280 L 870 180 Z" fill="#1e293b" stroke="#38bdf8" stroke-width="4" />
+            <path d="M 220 280 Q 180 340, 240 380 L 800 380 Q 840 340, 820 280 Z" fill="#991b1b" stroke="#ef4444" stroke-width="3" />
+
+            <!-- Superstructure -->
+            <polygon points="650,180 800,180 780,90 680,90" fill="#f8fafc" stroke="#38bdf8" stroke-width="2" />
+            <rect x="680" y="110" width="85" height="20" rx="3" fill="#0284c7" />
+
+            <!-- ================= X-RAY INTERNAL COMPARTMENTS ================= -->
+            <g id="s2-xray-group" opacity="0">
+              <!-- Internal Empty Air Holds -->
+              <rect x="250" y="200" width="130" height="150" rx="8" fill="url(#xray-air-grad)" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" />
+              <rect x="400" y="200" width="130" height="150" rx="8" fill="url(#xray-air-grad)" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" />
+              <rect x="550" y="200" width="130" height="150" rx="8" fill="url(#xray-air-grad)" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" />
+
+              <!-- Watertight Bulkheads -->
+              <line x1="390" y1="190" x2="390" y2="360" stroke="#f59e0b" stroke-width="4" />
+              <line x1="540" y1="190" x2="540" y2="360" stroke="#f59e0b" stroke-width="4" />
+
+              <!-- Air Labels & Icons -->
+              <text x="315" y="275" fill="#e0f2fe" font-size="24" font-weight="900" text-anchor="middle" filter="url(#cyan-glow)">💨 ВОЗДУХ</text>
+              <text x="465" y="275" fill="#e0f2fe" font-size="24" font-weight="900" text-anchor="middle" filter="url(#cyan-glow)">💨 ВОЗДУХ</text>
+              <text x="615" y="275" fill="#e0f2fe" font-size="24" font-weight="900" text-anchor="middle" filter="url(#cyan-glow)">💨 ВОЗДУХ</text>
+
+              <!-- Steel Shell Callout -->
+              <path d="M 220 380 L 160 440" stroke="#f87171" stroke-width="3" />
+              <circle cx="220" cy="380" r="5" fill="#f87171" />
+            </g>
+
+            <!-- Holographic X-Ray Scanner Laser Line -->
+            <line id="s2-scan-line" x1="100" y1="160" x2="100" y2="400" stroke="#38bdf8" stroke-width="6" opacity="0" filter="url(#cyan-glow)" />
+          </svg>
+        </div>
+
+        <!-- Density Comparison Glass Card -->
+        <div id="s2-density-card" class="glass-panel" style="position: absolute; top: 1140px; left: 80px; width: 920px; z-index: 260; opacity: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <div style="font-size: 32px; font-weight: 800; color: #94a3b8;">РАСЧЁТ ПЛОТНОСТИ:</div>
+            <div class="force-tag tag-green" style="font-size: 24px;">ЛЕГЧЕ ВОДЫ! 🪶</div>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.7); border-radius: 18px; padding: 22px 28px; border: 1px solid rgba(56, 189, 248, 0.2); margin-bottom: 20px;">
+            <div style="font-size: 32px; font-weight: 900; color: #f8fafc; line-height: 1.4;">
+              Средняя плотность = <span style="color: #38bdf8;">(Сталь + 85% Воздуха)</span> / Объём
+            </div>
+            <div style="font-size: 36px; font-weight: 900; color: #34d399; margin-top: 10px;">
+              ≈ 600 кг/м³ <span style="color: #94a3b8; font-size: 28px; font-weight: 700;">&lt; 1000 кг/м³ (Вода)</span>
+            </div>
+          </div>
+          <p style="font-size: 26px; color: #cbd5e1; font-weight: 600;">
+            Форма чаши превращает тяжёлую сталь в лёгкую полую конструкцию!
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= SCENE 3: ЗАКОН АРХИМЕДА И БАЛАНС СИЛ (15.0s – 23.8s) ================= -->
+      <div id="scene-3" class="clip" data-start="15.0" data-duration="8.8">
+        <div class="scene-header">
+          <div id="s3-badge" class="badge">⚖️ ЗАКОН АРХИМЕДА</div>
+          <h1 id="s3-title" class="scene-title">Вода давит снизу:<br /><span class="highlight-green">ВЫТАЛКИВАЮЩАЯ СИЛА!</span></h1>
+        </div>
+
+        <div class="ocean-world">
+          <div class="sky-bg"></div>
+          <div class="water-body">
+            <div class="water-surface-line"></div>
+          </div>
+        </div>
+
+        <!-- Ship at Waterline -->
+        <div id="s3-ship-wrap" style="position: absolute; top: 760px; left: 160px; z-index: 220;">
+          <svg width="760" height="380" viewBox="0 0 760 380">
+            <defs>
+              <linearGradient id="displaced-water-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(56, 189, 248, 0.6)" />
+                <stop offset="100%" stop-color="rgba(14, 165, 233, 0.2)" />
+              </linearGradient>
+            </defs>
+
+            <!-- Displaced Water Glow Volume Under Hull -->
+            <path id="s3-displaced-glow" d="M 170 240 Q 130 300, 190 340 L 610 340 Q 650 300, 630 240 Z" fill="url(#displaced-water-grad)" stroke="#38bdf8" stroke-width="4" stroke-dasharray="8,6" opacity="0" />
+
+            <!-- Hull -->
+            <path d="M 100 180 L 170 240 L 630 240 L 670 180 Z" fill="#1e293b" stroke="#475569" stroke-width="2" />
+            <path d="M 170 240 Q 130 300, 190 340 L 610 340 Q 650 300, 630 240 Z" fill="#b91c1c" />
+
+            <!-- Superstructure -->
+            <polygon points="500,180 620,180 600,100 520,100" fill="#f8fafc" />
+            <rect x="525" y="115" width="65" height="16" fill="#0284c7" />
+
+            <!-- Water pressure arrows pushing upward on hull bottom -->
+            <g id="s3-water-arrows" opacity="0">
+              <path d="M 260 370 L 260 345 M 255 352 L 260 345 L 265 352" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              <path d="M 330 370 L 330 345 M 325 352 L 330 345 L 335 352" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              <path d="M 400 370 L 400 345 M 395 352 L 400 345 L 405 352" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              <path d="M 470 370 L 470 345 M 465 352 L 470 345 L 475 352" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+              <path d="M 540 370 L 540 345 M 535 352 L 540 345 L 545 352" stroke="#38bdf8" stroke-width="4" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- ================= FORCE VECTORS ================= -->
+        <!-- Gravity Vector (F_тяж Downwards) -->
+        <div id="s3-gravity-vector" class="force-arrow-wrap" style="top: 590px; left: 450px; opacity: 0;">
+          <div class="force-tag tag-red" style="font-size: 26px; margin-bottom: 8px;">
+            F_тяж (ВЕС КОРАБЛЯ) ⬇️
+          </div>
+          <svg width="60" height="150" viewBox="0 0 60 150">
+            <line x1="30" y1="0" x2="30" y2="130" stroke="#ef4444" stroke-width="8" stroke-linecap="round" />
+            <polygon points="30,150 15,120 45,120" fill="#ef4444" />
+          </svg>
+        </div>
+
+        <!-- Archimedes Vector (F_арх Upwards) -->
+        <div id="s3-archimedes-vector" class="force-arrow-wrap" style="top: 1050px; left: 450px; opacity: 0;">
+          <svg width="60" height="150" viewBox="0 0 60 150">
+            <polygon points="30,0 15,30 45,30" fill="#10b981" />
+            <line x1="30" y1="20" x2="30" y2="150" stroke="#10b981" stroke-width="8" stroke-linecap="round" />
+          </svg>
+          <div class="force-tag tag-green" style="font-size: 26px; margin-top: 8px;">
+            F_арх (СИЛА АРХИМЕДА) ⬆️
+          </div>
+        </div>
+
+        <!-- Equilibrium Locked Banner -->
+        <div id="s3-lock-card" class="glass-panel" style="position: absolute; top: 1260px; left: 100px; width: 880px; text-align: center; opacity: 0; z-index: 280;">
+          <div style="font-size: 42px; font-weight: 900; color: #f8fafc; letter-spacing: 0.04em;">
+            <span style="color: #ef4444;">F_тяж</span> = <span style="color: #34d399;">F_арх</span>
+          </div>
+          <div style="font-size: 32px; font-weight: 800; color: #38bdf8; margin-top: 12px;">
+            РАВНОВЕСИЕ: СУДНО ВСПЛЫВАЕТ И ОСТАНАВЛИВАЕТСЯ! ⚖️
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= SCENE 4: ЗАГРУЗКА КОНТЕЙНЕРОВ — ДИНАМИКА ОСАДКИ (23.8s – 32.0s) ================= -->
+      <div id="scene-4" class="clip" data-start="23.8" data-duration="8.2">
+        <div class="scene-header">
+          <div id="s4-badge" class="badge">📦 ДОБАВЛЯЕМ ГРУЗ</div>
+          <h1 id="s4-title" class="scene-title">Корабль тяжелеет:<br /><span class="highlight-amber">КАК МЕНЯЕТСЯ ОСАДКА?</span></h1>
+        </div>
+
+        <div class="ocean-world">
+          <div class="sky-bg"></div>
+          <div class="water-body">
+            <div class="water-surface-line"></div>
+          </div>
+        </div>
+
+        <!-- Ship Wrapper (Will sink lower dynamically) -->
+        <div id="s4-ship-carrier" style="position: absolute; top: 760px; left: 140px; z-index: 220;">
+          <svg width="800" height="420" viewBox="0 0 800 420" style="overflow: visible;">
+            <!-- Ship Hull -->
+            <path d="M 80 180 L 160 250 L 680 250 L 730 180 Z" fill="#1e293b" stroke="#475569" stroke-width="2" />
+            <path d="M 160 250 Q 120 310, 180 360 L 660 360 Q 700 310, 680 250 Z" fill="#b91c1c" />
+
+            <!-- Superstructure -->
+            <polygon points="560,180 670,180 650,90 580,90" fill="#f8fafc" />
+            <rect x="585" y="105" width="55" height="15" fill="#0284c7" />
+
+            <!-- ================= FALLING CARGO CONTAINERS ================= -->
+            <!-- Container 1 (Blue) -->
+            <g id="s4-cont-1" transform="translate(200, -200)">
+              <rect x="0" y="0" width="100" height="60" rx="4" fill="#0284c7" stroke="#ffffff" stroke-width="2" />
+              <line x1="20" y1="0" x2="20" y2="60" stroke="#0369a1" stroke-width="2" />
+              <line x1="40" y1="0" x2="40" y2="60" stroke="#0369a1" stroke-width="2" />
+              <line x1="60" y1="0" x2="60" y2="60" stroke="#0369a1" stroke-width="2" />
+              <line x1="80" y1="0" x2="80" y2="60" stroke="#0369a1" stroke-width="2" />
+              <text x="50" y="38" fill="#ffffff" font-size="18" font-weight="900" text-anchor="middle">+10 000 т</text>
+            </g>
+
+            <!-- Container 2 (Orange) -->
+            <g id="s4-cont-2" transform="translate(320, -200)">
+              <rect x="0" y="0" width="100" height="60" rx="4" fill="#f97316" stroke="#ffffff" stroke-width="2" />
+              <line x1="20" y1="0" x2="20" y2="60" stroke="#c2410c" stroke-width="2" />
+              <line x1="40" y1="0" x2="40" y2="60" stroke="#c2410c" stroke-width="2" />
+              <line x1="60" y1="0" x2="60" y2="60" stroke="#c2410c" stroke-width="2" />
+              <line x1="80" y1="0" x2="80" y2="60" stroke="#c2410c" stroke-width="2" />
+              <text x="50" y="38" fill="#ffffff" font-size="18" font-weight="900" text-anchor="middle">+15 000 т</text>
+            </g>
+
+            <!-- Container 3 (Emerald Green) -->
+            <g id="s4-cont-3" transform="translate(440, -200)">
+              <rect x="0" y="0" width="100" height="60" rx="4" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+              <line x1="20" y1="0" x2="20" y2="60" stroke="#047857" stroke-width="2" />
+              <line x1="40" y1="0" x2="40" y2="60" stroke="#047857" stroke-width="2" />
+              <line x1="60" y1="0" x2="60" y2="60" stroke="#047857" stroke-width="2" />
+              <line x1="80" y1="0" x2="80" y2="60" stroke="#047857" stroke-width="2" />
+              <text x="50" y="38" fill="#ffffff" font-size="18" font-weight="900" text-anchor="middle">+15 000 т</text>
+            </g>
+            <!-- Draft Waterline Marks on Bow (Painted on Top) -->
+            <g id="s4-plimsoll" transform="translate(100, 180)">
+              <!-- 12m line -->
+              <line x1="0" y1="30" x2="40" y2="30" stroke="#f87171" stroke-width="4" />
+              <text x="48" y="36" fill="#f87171" font-size="20" font-weight="900">12м (ПОЛНЫЙ ГРУЗ)</text>
+              <!-- 8m line -->
+              <line x1="20" y1="65" x2="60" y2="65" stroke="#38bdf8" stroke-width="4" />
+              <text x="68" y="71" fill="#38bdf8" font-size="20" font-weight="900">8м (ПУСТОЙ)</text>
+              <!-- Waterline indicator arrow -->
+              <path d="M 12 60 L 12 35 M 6 43 L 12 35 L 18 43" stroke="#f8fafc" stroke-width="4" stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+        <!-- Sinking / Draft Increase Alert Badge -->
+        <div id="s4-draft-badge" class="force-tag tag-blue" style="position: absolute; top: 670px; left: 540px; transform: translateX(-50%); z-index: 280; opacity: 0; font-size: 26px;">
+          ⬆️ ОСАДКА ВЫРОСЛА НА 4 МЕТРА!
+        </div>
+
+        <!-- Sinking / Draft Increase Alert Card -->
+        <div id="s4-draft-card" class="glass-panel" style="position: absolute; top: 1220px; left: 90px; width: 900px; z-index: 260; opacity: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div class="force-tag tag-red" style="font-size: 26px;">ВЕС УВЕЛИЧЕН: +40 000 ТОНН! 💥</div>
+            <div class="force-tag tag-blue" style="font-size: 24px;">ОСАДКА +4 МЕТРА ⚓</div>
+          </div>
+          <p style="font-size: 30px; font-weight: 800; color: #f8fafc; line-height: 1.35;">
+            Корпус уходит глубже → вытесняет больше воды → выталкивающая сила растёт и <span style="color: #34d399;">снова уравновешивает вес!</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= SCENE 5: ФИНАЛ И ПРИЗЫВ К ДЕЙСТВИЮ (32.0s – 37.0s) ================= -->
+      <div id="scene-5" class="clip" data-start="32.0" data-duration="5.0">
+        <div class="scene-header">
+          <div id="s5-badge" class="badge">💡 ВЫВОД ЭКСПЕРИМЕНТА</div>
+          <h1 id="s5-title" class="scene-title">Корабль держит не сталь,<br /><span class="highlight-cyan">А ВЫТЕСНЕННАЯ ВОДА!</span></h1>
+        </div>
+
+        <div class="ocean-world">
+          <div class="sky-bg" style="background: linear-gradient(180deg, #091a33 0%, #17325c 50%, #b45309 100%);">
+            <div class="sun-orb" style="top: 450px; background: radial-gradient(circle, rgba(251, 146, 60, 0.6) 0%, rgba(245, 158, 11, 0.2) 50%, transparent 80%);"></div>
+          </div>
+          <div class="water-body">
+            <div class="water-surface-line" style="background: linear-gradient(90deg, #f59e0b 0%, #38bdf8 50%, #f59e0b 100%);"></div>
+          </div>
+        </div>
+
+        <!-- Sailing Ship to Horizon -->
+        <div id="s5-ship" style="position: absolute; top: 820px; left: 160px; z-index: 220;">
+          <svg width="760" height="260" viewBox="0 0 760 260">
+            <path d="M 120 120 L 180 180 L 620 180 L 660 120 Z" fill="#0f172a" />
+            <path d="M 180 180 L 620 180 L 590 220 L 220 220 Z" fill="#991b1b" />
+            <polygon points="500,120 600,120 580,60 520,60" fill="#f8fafc" />
+            <!-- Containers on deck -->
+            <rect x="220" y="80" width="70" height="40" rx="3" fill="#0284c7" />
+            <rect x="300" y="80" width="70" height="40" rx="3" fill="#f97316" />
+            <rect x="380" y="80" width="70" height="40" rx="3" fill="#10b981" />
+          </svg>
+        </div>
+
+        <!-- Epic CTA Card -->
+        <div id="s5-cta-wrap" style="position: absolute; top: 1120px; left: 90px; width: 900px; display: flex; flex-direction: column; align-items: center; gap: 30px; z-index: 300;">
+          <div class="glass-panel" style="width: 100%; text-align: center; border-color: rgba(56, 189, 248, 0.45); box-shadow: 0 0 45px rgba(56, 189, 248, 0.3);">
+            <div style="font-size: 34px; font-weight: 900; color: #f8fafc; line-height: 1.3;">
+              «Плотность формы меньше плотности воды» — вот главный закон мореплавания! ⚓
+            </div>
+          </div>
+
+          <!-- Pulsing Subscribe Button -->
+          <div id="s5-subscribe-btn" style="display: flex; align-items: center; gap: 20px; padding: 26px 64px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 9999px; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.6), 0 0 50px rgba(239, 68, 68, 0.4); border: 3px solid #fca5a5;">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span style="font-size: 38px; font-weight: 900; letter-spacing: 0.05em; color: #ffffff;">ПОДПИШИСЬ НА КАНАЛ!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= CAPTIONS OVERLAY (0.0s – 37.0s) ================= -->
+      <div id="captions-host" class="clip" data-start="0" data-duration="37">
+        <div class="captions-wrap">
+          <div id="caption-text" class="caption-box">
+            <!-- Dynamic subtitles text set by GSAP timeline -->
+            Стальной брусок сразу идёт ко дну...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= GSAP TIMELINE SCRIPT ================= -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Progress Bar (0 to 37s)
+      tl.to("#progress-bar", { width: "100%", duration: 37, ease: "none" }, 0);
+
+      // ================= SCENE 1 (0.0s – 6.5s) =================
+      tl.fromTo("#s1-badge", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 0.1);
+      tl.fromTo("#s1-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 0.2);
+
+      // Subtitles Scene 1
+      tl.set("#caption-text", { innerHTML: "Стальной брусок <span class='active'>сразу идёт ко дну</span>..." }, 0.1);
+      tl.set("#caption-text", { innerHTML: "Но почему огромный <span class='active'>корабль из стали</span>..." }, 2.8);
+      tl.set("#caption-text", { innerHTML: "...спокойно <span class='active'>держится на плаву?</span> 🚢" }, 4.5);
+
+      // Steel Bar drops into water
+      tl.fromTo("#s1-steel-bar", 
+        { y: -300, rotation: -10 }, 
+        { y: 350, rotation: 0, duration: 1.8, ease: "power2.in" }, 
+        0.2
+      );
+
+      // Splash on water entry at 2.0s
+      tl.fromTo("#s1-splash", 
+        { scale: 0.3, opacity: 1 }, 
+        { scale: 2.2, opacity: 0, duration: 0.6, ease: "power2.out" }, 
+        2.0
+      );
+
+      // Steel bar sinks slowly to bottom with bubble trail
+      tl.to("#s1-steel-bar", 
+        { y: 650, rotation: 8, duration: 2.0, ease: "power1.out" }, 
+        2.0
+      );
+
+      // Ship enters from right, bobbing on waves
+      tl.fromTo("#s1-ship-wrap", 
+        { x: 300, opacity: 0 }, 
+        { x: 0, opacity: 1, duration: 2.2, ease: "power2.out" }, 
+        2.5
+      );
+      // Gentle ship bobbing
+      tl.to("#s1-ship-wrap", { y: "+=18", rotation: 1.5, duration: 1.8, ease: "sine.inOut", yoyo: true, repeat: 1 }, 2.8);
+      tl.fromTo("#s1-ship-tag", { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 4.0);
+
+      // Smoke puff animation
+      tl.to("#s1-smoke", { y: -25, scale: 2.0, opacity: 0, duration: 1.8, ease: "power1.out" }, 3.5);
+
+      // ================= SCENE 2 (6.5s – 15.0s) =================
+      tl.fromTo("#s2-badge", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 6.6);
+      tl.fromTo("#s2-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 6.7);
+
+      // Subtitles Scene 2
+      tl.set("#caption-text", { innerHTML: "Секрет в форме! <span class='active'>Корпус не сплошной:</span>" }, 6.6);
+      tl.set("#caption-text", { innerHTML: "Внутри огромного корпуса — <span class='active'>пустота и воздух! 💨</span>" }, 9.2);
+      tl.set("#caption-text", { innerHTML: "Поэтому средняя плотность судна <span class='active'>меньше плотности воды!</span>" }, 12.0);
+
+      // Holographic Scan line sweeps across ship
+      tl.fromTo("#s2-scan-line", 
+        { x: 0, opacity: 1 }, 
+        { x: 750, opacity: 1, duration: 2.0, ease: "power1.inOut" }, 
+        7.2
+      );
+      tl.to("#s2-scan-line", { opacity: 0, duration: 0.3 }, 9.2);
+
+      // X-Ray internal compartments reveal
+      tl.to("#s2-xray-group", { opacity: 1, duration: 0.8, ease: "power2.out" }, 8.0);
+
+      // Density calculation card appears
+      tl.fromTo("#s2-density-card", 
+        { y: 80, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.4)" }, 
+        10.5
+      );
+
+      // ================= SCENE 3 (15.0s – 23.8s) =================
+      tl.fromTo("#s3-badge", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 15.1);
+      tl.fromTo("#s3-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 15.2);
+
+      // Subtitles Scene 3
+      tl.set("#caption-text", { innerHTML: "Погружаясь, корпус <span class='active'>вытесняет воду...</span>" }, 15.1);
+      tl.set("#caption-text", { innerHTML: "А вода давит на дно и <span class='active'>толкает его вверх! 🌊</span>" }, 17.5);
+      tl.set("#caption-text", { innerHTML: "Сила Архимеда <span class='active'>в точности держит вес корабля! ⚖️</span>" }, 20.2);
+
+      // Displaced water glow turns on
+      tl.to("#s3-displaced-glow", { opacity: 1, duration: 0.7, ease: "power2.out" }, 15.8);
+      tl.to("#s3-water-arrows", { opacity: 1, duration: 0.5 }, 16.5);
+
+      // Gravity force arrow enters from top
+      tl.fromTo("#s3-gravity-vector", 
+        { y: -40, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 
+        17.0
+      );
+
+      // Archimedes force arrow enters from bottom
+      tl.fromTo("#s3-archimedes-vector", 
+        { y: 40, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.6)" }, 
+        17.8
+      );
+
+      // Vectors pulse and lock at equilibrium
+      tl.to(["#s3-gravity-vector", "#s3-archimedes-vector"], { scale: 1.1, duration: 0.3, yoyo: true, repeat: 1 }, 18.8);
+      tl.fromTo("#s3-lock-card", 
+        { scale: 0.75, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.8)" }, 
+        19.0
+      );
+
+      // ================= SCENE 4 (23.8s – 32.0s) =================
+      tl.fromTo("#s4-badge", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 23.9);
+      tl.fromTo("#s4-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 24.0);
+
+      // Subtitles Scene 4
+      tl.set("#caption-text", { innerHTML: "А если <span class='active'>загрузить контейнеры?</span> 📦" }, 23.9);
+      tl.set("#caption-text", { innerHTML: "Вес растёт — судно <span class='active'>садится глубже в воду...</span>" }, 26.5);
+      tl.set("#caption-text", { innerHTML: "...вытесняет больше воды — и <span class='active'>баланс восстановлен! ⚓</span>" }, 29.2);
+
+      // Drop Container 1
+      tl.to("#s4-cont-1", { y: 120, duration: 0.42, ease: "bounce.out" }, 24.4);
+      tl.to("#s4-ship-carrier", { y: "+=25", duration: 0.35, ease: "power1.out" }, 24.45);
+
+      // Drop Container 2
+      tl.to("#s4-cont-2", { y: 120, duration: 0.42, ease: "bounce.out" }, 25.5);
+      tl.to("#s4-ship-carrier", { y: "+=25", duration: 0.35, ease: "power1.out" }, 25.55);
+
+      // Drop Container 3
+      tl.to("#s4-cont-3", { y: 120, duration: 0.42, ease: "bounce.out" }, 26.6);
+      tl.to("#s4-ship-carrier", { y: "+=30", duration: 0.4, ease: "power1.out" }, 26.65);
+
+      // Waterline badge lights up
+      tl.to("#s4-draft-badge", { opacity: 1, duration: 0.4 }, 26.8);
+      // Sinking explanation card
+      tl.fromTo("#s4-draft-card", 
+        { y: 50, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, 
+        27.0
+      );
+
+      // Plimsoll mark highlights
+      tl.to("#s4-plimsoll", { scale: 1.25, transformOrigin: "center center", duration: 0.4, yoyo: true, repeat: 1 }, 28.0);
+
+      // ================= SCENE 5 (32.0s – 37.0s) =================
+      tl.fromTo("#s5-badge", { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "back.out(1.6)" }, 32.1);
+      tl.fromTo("#s5-title", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, 32.2);
+
+      // Subtitles Scene 5
+      tl.set("#caption-text", { innerHTML: "Корабль держит <span class='active'>не сталь, а вытесненная вода!</span>" }, 32.1);
+      tl.set("#caption-text", { innerHTML: "Ставь лайк и <span class='active'>подпишись на канал! 🔔</span>" }, 34.4);
+
+      // Ship sails forward smoothly
+      tl.fromTo("#s5-ship", { x: -80 }, { x: 80, duration: 4.8, ease: "none" }, 32.0);
+
+      // Outro CTA card and Subscribe Button
+      tl.fromTo("#s5-cta-wrap", 
+        { scale: 0.85, opacity: 0 }, 
+        { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.5)" }, 
+        32.8
+      );
+      // Pulsing subscribe button
+      tl.to("#s5-subscribe-btn", { scale: 1.06, duration: 0.5, repeat: 3, yoyo: true, ease: "sine.inOut" }, 33.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

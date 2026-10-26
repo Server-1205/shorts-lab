@@ -1,0 +1,740 @@
+:root {
+  --bg-deep: #060913;
+  --bg-card: rgba(15, 23, 42, 0.85);
+  --bg-glass: rgba(13, 20, 38, 0.72);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-cyan: rgba(6, 182, 212, 0.45);
+  --border-red: rgba(239, 68, 68, 0.5);
+  --border-green: rgba(16, 185, 129, 0.45);
+
+  --cyan: #06b6d4;
+  --cyan-bright: #22d3ee;
+  --blue: #3b82f6;
+  --purple: #8b5cf6;
+  --green: #10b981;
+  --green-bright: #34d399;
+  --red: #ef4444;
+  --red-bright: #f87171;
+  --amber: #f59e0b;
+  --yellow: #fbbf24;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --font-ui: "Inter", "Roboto", system-ui, -apple-system, sans-serif;
+  --font-code: "JetBrains Mono", "Source Code Pro", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--bg-deep);
+  font-family: var(--font-ui);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #0f1c3f 0%, #060913 65%);
+}
+
+.clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+}
+
+/* Ambient glow orbs */
+.glow-spot {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.28;
+}
+
+.glow-cyan {
+  width: 800px;
+  height: 800px;
+  background: #0284c7;
+  top: 150px;
+  left: 140px;
+}
+
+.glow-purple {
+  width: 900px;
+  height: 900px;
+  background: #6366f1;
+  bottom: 250px;
+  right: -100px;
+}
+
+/* Top Progress Bar */
+#progress-host {
+  height: 12px;
+  z-index: 999;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #06b6d4, #8b5cf6, #10b981);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.8);
+}
+
+/* Persistent Header / Badge Host */
+.scene-header {
+  position: absolute;
+  top: 180px;
+  left: 60px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 100;
+  text-align: center;
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 26px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--border-cyan);
+  font-family: var(--font-code);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--cyan-bright);
+  box-shadow: 0 0 28px rgba(6, 182, 212, 0.25);
+}
+
+.pill-badge.alert {
+  border-color: var(--border-red);
+  color: var(--red-bright);
+  box-shadow: 0 0 28px rgba(239, 68, 68, 0.35);
+}
+
+.pill-badge.success {
+  border-color: var(--border-green);
+  color: var(--green-bright);
+  box-shadow: 0 0 28px rgba(16, 185, 129, 0.35);
+}
+
+.badge-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.scene-title {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1.15;
+  background: linear-gradient(180deg, #ffffff 30%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  letter-spacing: -0.5px;
+}
+
+/* Window Frame / Card Component */
+.window-frame {
+  position: absolute;
+  left: 60px;
+  width: 960px;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 32px 70px -15px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.window-header {
+  height: 72px;
+  background: rgba(10, 15, 30, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 14px;
+}
+
+.traffic-light {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.traffic-red { background: #ef4444; }
+.traffic-yellow { background: #f59e0b; }
+.traffic-green { background: #10b981; }
+
+.window-url {
+  flex: 1;
+  margin-left: 18px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  font-family: var(--font-code);
+  font-size: 22px;
+  color: var(--text-muted);
+  gap: 10px;
+}
+
+/* ======================================================== */
+/* SCENE 1: BROKEN UI                                       */
+/* ======================================================== */
+#s1-app-window {
+  top: 360px;
+  height: 940px;
+}
+
+.app-content {
+  padding: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.product-card {
+  display: flex;
+  gap: 28px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  align-items: center;
+}
+
+.product-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-name {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.product-price {
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--cyan-bright);
+  font-family: var(--font-code);
+}
+
+.checkout-btn {
+  height: 110px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 16px 36px rgba(6, 182, 212, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  cursor: pointer;
+  transform-origin: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkout-btn.btn-error {
+  background: linear-gradient(135deg, #b91c1c, #ef4444);
+  border-color: #f87171;
+  box-shadow: 0 16px 44px rgba(239, 68, 68, 0.65);
+}
+
+.checkout-btn.btn-success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  border-color: #34d399;
+  box-shadow: 0 16px 44px rgba(16, 185, 129, 0.65);
+}
+
+/* Mouse pointer */
+.virtual-cursor {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  z-index: 500;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7));
+}
+
+/* Console error popup */
+.error-popup {
+  padding: 26px;
+  background: rgba(45, 10, 15, 0.95);
+  border: 2px solid var(--border-red);
+  border-radius: 20px;
+  font-family: var(--font-code);
+  color: #fecaca;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 20px 48px rgba(239, 68, 68, 0.3);
+}
+
+.error-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #f87171;
+}
+
+.error-stack {
+  font-size: 22px;
+  line-height: 1.45;
+  color: #e2e8f0;
+}
+
+/* ======================================================== */
+/* SCENE 2: REPO SCANNING & FILE TREE                       */
+/* ======================================================== */
+#s2-repo-window {
+  top: 360px;
+  height: 940px;
+}
+
+.ide-layout {
+  display: flex;
+  height: calc(100% - 72px);
+}
+
+.file-tree {
+  width: 450px;
+  background: rgba(10, 15, 28, 0.92);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 32px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--font-code);
+  font-size: 22px;
+}
+
+.tree-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--text-muted);
+}
+
+.tree-item.folder {
+  color: #93c5fd;
+  font-weight: 700;
+}
+
+.tree-item.indent-1 { margin-left: 24px; }
+.tree-item.indent-2 { margin-left: 48px; }
+
+.tree-item.target-file {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+.graph-view {
+  flex: 1;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.graph-node {
+  width: 410px;
+  padding: 16px 18px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-code);
+  font-size: 24px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+
+.graph-node.active-trace {
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px rgba(6, 182, 212, 0.4);
+}
+
+.graph-node.target-trace {
+  border-color: var(--red-bright);
+  background: rgba(69, 10, 10, 0.7);
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.5);
+}
+
+.graph-arrow {
+  width: 4px;
+  height: 48px;
+  background: linear-gradient(180deg, var(--cyan), var(--purple));
+  border-radius: 2px;
+  position: relative;
+}
+
+.radar-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+  box-shadow: 0 0 20px #22d3ee;
+  opacity: 0.8;
+}
+
+/* ======================================================== */
+/* SCENE 3: CODE INSPECTION & BUG RETICLE                   */
+/* ======================================================== */
+#s3-code-window {
+  top: 360px;
+  height: 940px;
+}
+
+.code-editor {
+  padding: 40px;
+  font-family: var(--font-code);
+  font-size: 26px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.code-line {
+  display: flex;
+  gap: 24px;
+  padding: 6px 16px;
+  border-radius: 10px;
+  align-items: center;
+}
+
+.line-no {
+  width: 42px;
+  color: var(--text-dim);
+  text-align: right;
+  user-select: none;
+}
+
+.code-line.danger-focus {
+  background: rgba(239, 68, 68, 0.2);
+  border-left: 4px solid var(--red-bright);
+  box-shadow: 0 0 28px rgba(239, 68, 68, 0.25);
+}
+
+.bug-reticle {
+  position: absolute;
+  right: 60px;
+  top: 540px;
+  width: 480px;
+  padding: 22px;
+  background: rgba(30, 10, 15, 0.95);
+  border: 2px solid var(--red-bright);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(239, 68, 68, 0.45);
+  font-family: var(--font-code);
+  font-size: 22px;
+  color: #fca5a5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ======================================================== */
+/* SCENE 4: GIT DIFF & SMART PATCH                          */
+/* ======================================================== */
+#s4-diff-window {
+  top: 360px;
+  height: 940px;
+}
+
+.diff-header {
+  padding: 18px 36px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-code);
+  font-size: 22px;
+}
+
+.diff-badge-add {
+  color: var(--green-bright);
+  font-weight: 700;
+}
+.diff-badge-del {
+  color: var(--red-bright);
+  font-weight: 700;
+}
+
+.diff-body {
+  padding: 36px;
+  font-family: var(--font-code);
+  font-size: 26px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diff-row {
+  display: flex;
+  gap: 20px;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.diff-row.del {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  border-left: 4px solid var(--red);
+  text-decoration: line-through;
+}
+
+.diff-row.add {
+  background: rgba(16, 185, 129, 0.2);
+  color: #86efac;
+  border-left: 4px solid var(--green);
+}
+
+.patch-verified-banner {
+  margin-top: 36px;
+  padding: 24px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid var(--border-green);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--green-bright);
+}
+
+/* ======================================================== */
+/* SCENE 5: TERMINAL & TEST RUNNER                          */
+/* ======================================================== */
+#s5-terminal-window {
+  top: 360px;
+  height: 940px;
+  background: #090d16;
+}
+
+.terminal-body {
+  padding: 36px;
+  font-family: var(--font-code);
+  font-size: 25px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.terminal-cmd {
+  color: #38bdf8;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-weight: 700;
+}
+
+.test-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #cbd5e1;
+}
+
+.test-check {
+  color: var(--green-bright);
+  font-weight: 900;
+  font-size: 28px;
+}
+
+.test-pass-box {
+  margin-top: 28px;
+  padding: 26px;
+  background: rgba(6, 78, 59, 0.4);
+  border: 2px solid var(--green);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 0 36px rgba(16, 185, 129, 0.25);
+}
+
+.test-pass-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ======================================================== */
+/* SCENE 6: TRIUMPH & FINAL CALL TO ACTION                  */
+/* ======================================================== */
+#s6-triumph-window {
+  top: 360px;
+  height: 940px;
+}
+
+.cta-banner {
+  position: absolute;
+  top: 960px;
+  left: 60px;
+  right: 60px;
+  padding: 36px;
+  background: linear-gradient(135deg, rgba(30, 27, 75, 0.95), rgba(15, 23, 42, 0.95));
+  border: 2px solid var(--cyan);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(6, 182, 212, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  z-index: 120;
+}
+
+.cta-title {
+  font-size: 44px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #22d3ee, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 48px;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  border-radius: 9999px;
+  font-size: 32px;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(239, 68, 68, 0.5);
+  letter-spacing: 0.5px;
+}
+
+/* ======================================================== */
+/* CAPTIONS HOST & BOX (Y = 1380px, Title-Safe)             */
+/* ======================================================== */
+#captions-host {
+  top: 1360px;
+  height: 220px;
+  z-index: 800;
+  pointer-events: none;
+}
+
+.captions-wrap {
+  position: absolute;
+  left: 60px;
+  right: 60px;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caption-box {
+  width: 100%;
+  max-width: 960px;
+  padding: 20px 32px;
+  background: rgba(4, 8, 20, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 22px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(6, 182, 212, 0.15);
+  font-family: var(--font-ui);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  color: #f8fafc;
+}
+
+.caption-box .active {
+  color: var(--yellow);
+  font-weight: 900;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+}
+
+.spark-particle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 20px #34d399, 0 0 40px #10b981;
+  pointer-events: none;
+  opacity: 0;
+}

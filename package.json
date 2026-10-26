@@ -1,0 +1,15 @@
+{
+  "name": "shorts-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "HYPERFRAMES_BROWSER_PATH=${HYPERFRAMES_BROWSER_PATH:-/usr/bin/google-chrome-stable} hyperframes preview",
+    "check": "HYPERFRAMES_BROWSER_PATH=${HYPERFRAMES_BROWSER_PATH:-/usr/bin/google-chrome-stable} hyperframes check",
+    "render": "HYPERFRAMES_BROWSER_PATH=${HYPERFRAMES_BROWSER_PATH:-/usr/bin/google-chrome-stable} hyperframes render",
+    "snapshot": "HYPERFRAMES_BROWSER_PATH=${HYPERFRAMES_BROWSER_PATH:-/usr/bin/google-chrome-stable} hyperframes snapshot",
+    "publish": "hyperframes publish"
+  },
+  "devDependencies": {
+    "hyperframes": "^0.8.198"
+  }
+}

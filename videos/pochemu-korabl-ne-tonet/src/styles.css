@@ -1,0 +1,322 @@
+:root {
+  --bg-deep: #050b14;
+  --bg-navy: #0a1728;
+  --bg-water: #0d2744;
+  --water-surface: #0ea5e9;
+  --water-deep: #032038;
+  --primary: #38bdf8;
+  --secondary: #818cf8;
+  --accent: #f59e0b;
+  --danger: #ef4444;
+  --success: #10b981;
+  --white: #ffffff;
+  --muted: #94a3b8;
+  --card-bg: rgba(13, 23, 42, 0.88);
+  --card-border: rgba(56, 189, 248, 0.25);
+  --font: "Roboto", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--bg-deep);
+  font-family: var(--font);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+.clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+}
+
+/* Ambient glow spheres */
+.glow-spot {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.glow-cyan {
+  width: 800px;
+  height: 800px;
+  background: #0284c7;
+  top: 200px;
+  left: 140px;
+}
+
+.glow-blue {
+  width: 900px;
+  height: 900px;
+  background: #1e3a8a;
+  bottom: 100px;
+  right: -100px;
+}
+
+/* Progress bar at very top */
+.progress-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8 0%, #818cf8 50%, #10b981 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+}
+
+/* Common Scene Header */
+.scene-header {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  z-index: 300;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 34px;
+  border-radius: 9999px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 2px solid rgba(56, 189, 248, 0.45);
+  color: #bae6fd;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+}
+
+.scene-title {
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, #ffffff 20%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
+}
+
+.highlight-cyan {
+  color: #38bdf8;
+  -webkit-text-fill-color: #38bdf8;
+}
+
+.highlight-amber {
+  color: #fbbf24;
+  -webkit-text-fill-color: #fbbf24;
+}
+
+.highlight-green {
+  color: #34d399;
+  -webkit-text-fill-color: #34d399;
+}
+
+.highlight-red {
+  color: #f87171;
+  -webkit-text-fill-color: #f87171;
+}
+
+/* Captions Box (Bottom safe zone) */
+.captions-wrap {
+  position: absolute;
+  bottom: 120px;
+  left: 60px;
+  width: 960px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 500;
+  pointer-events: none;
+}
+
+.caption-box {
+  background: rgba(8, 17, 34, 0.92);
+  border: 2px solid rgba(56, 189, 248, 0.4);
+  border-radius: 28px;
+  padding: 24px 44px;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: #f8fafc;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.2);
+  backdrop-filter: blur(12px);
+}
+
+.caption-box span.active {
+  color: #38bdf8;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+}
+
+/* Universal Ocean Base Container */
+.ocean-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+}
+
+.sky-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1050px;
+  background: linear-gradient(180deg, #050c18 0%, #0d2038 60%, #153255 100%);
+}
+
+.sun-orb {
+  position: absolute;
+  top: 280px;
+  left: 540px;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 243, 199, 0.45) 0%, rgba(251, 191, 36, 0.15) 50%, transparent 75%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.water-body {
+  position: absolute;
+  top: 1000px;
+  left: 0;
+  width: 1080px;
+  height: 920px;
+  background: linear-gradient(180deg, #0284c7 0%, #0369a1 15%, #075985 35%, #0c4a6e 60%, #082f49 100%);
+  z-index: 100;
+}
+
+.water-surface-line {
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 1080px;
+  height: 16px;
+  background: linear-gradient(90deg, #38bdf8 0%, #7dd3fc 50%, #38bdf8 100%);
+  opacity: 0.85;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.9);
+}
+
+.underwater-depth {
+  position: absolute;
+  top: 1000px;
+  left: 0;
+  width: 1080px;
+  height: 920px;
+  z-index: 102;
+  pointer-events: none;
+}
+
+/* Waves SVG layer */
+.wave-svg {
+  position: absolute;
+  top: -60px;
+  left: -20px;
+  width: 1120px;
+  height: 80px;
+}
+
+/* Floor of water */
+.seabed {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1080px;
+  height: 180px;
+  background: linear-gradient(180deg, transparent 0%, #031322 70%, #020b14 100%);
+  border-top: 3px solid rgba(14, 165, 233, 0.2);
+  z-index: 105;
+}
+
+/* Cards & Badges */
+.glass-panel {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(16px);
+  padding: 32px 40px;
+}
+
+/* Vectors & Indicators */
+.force-arrow-wrap {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 250;
+  pointer-events: none;
+}
+
+.force-tag {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  padding: 10px 24px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.tag-red {
+  background: rgba(239, 68, 68, 0.9);
+  color: #ffffff;
+  border: 2px solid #fca5a5;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+}
+
+.tag-green {
+  background: rgba(16, 185, 129, 0.9);
+  color: #ffffff;
+  border: 2px solid #6ee7b7;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+}
+
+.tag-blue {
+  background: rgba(14, 165, 233, 0.9);
+  color: #ffffff;
+  border: 2px solid #7dd3fc;
+  box-shadow: 0 0 25px rgba(14, 165, 233, 0.6);
+}
